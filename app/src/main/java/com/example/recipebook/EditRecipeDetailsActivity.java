@@ -1,11 +1,10 @@
 package com.example.recipebook;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.app.AlertDialog;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.recipebook.util.DBHandler;
 import com.example.recipebook.util.ToastHandler;
@@ -16,12 +15,7 @@ public class EditRecipeDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_recipe_details);
-        // Get submit button
-        Button submitBtn = findViewById(R.id.editRecipeSubmitButton);
-        // Get delete button
-        Button deleteBtn = findViewById(R.id.editRecipeDeleteButton);
-        // Get cancel button
-        ImageButton cancelBtn = findViewById(R.id.editRecipeCancelButton);
+
         // Get DBHandler instance
         DBHandler dbHandler = new DBHandler(this);
         // Get recipe info
@@ -35,27 +29,39 @@ public class EditRecipeDetailsActivity extends AppCompatActivity {
         descriptionInput.setText(recipeInfo[1]);
 
         // Add click listener to submit button
-        submitBtn.setOnClickListener(click -> {
+        findViewById(R.id.editRecipeSubmitButton).setOnClickListener(click -> {
             // Update recipe
             dbHandler.updateCollection(getIntent().getExtras().getInt("recipeId"), titleInput.getText().toString(), descriptionInput.getText().toString());
             // Send toast
-            new ToastHandler().showLongToast(this, "Recipe Updated");
+            new ToastHandler().showLongToast(this, "Changes Saved");
             // Go back to main activity
             finish();
         });
+
         // Add click listener to cancel button
-        cancelBtn.setOnClickListener(click -> {
+        findViewById(R.id.editRecipeCancelButton).setOnClickListener(click -> {
             // Go back to main activity
             finish();
         });
+
         // Add click listener to delete button
-        deleteBtn.setOnClickListener(click -> {
-            // Delete recipe
-            dbHandler.removeCollectionById(getIntent().getExtras().getInt("recipeId"));
-            // Send toast
-            new ToastHandler().showLongToast(this, "Recipe Deleted");
-            // Go back to main activity
-            finish();
+        findViewById(R.id.editRecipeDeleteButton).setOnClickListener(click -> {
+            new AlertDialog.Builder(this)
+                    .setTitle("Delete Recipe")
+                    .setMessage("Are you sure you want to delete this recipe?")
+                    .setPositiveButton("Yes", (dialog, which) -> {
+                        // Delete recipe
+                        dbHandler.removeCollectionById(getIntent().getExtras().getInt("recipeId"));
+                        // Send toast
+                        new ToastHandler().showLongToast(this, "Recipe Deleted");
+                        // Go back to main activity
+                        finish();
+                    })
+                    .setNegativeButton("No", (dialog, which) -> {
+                        // Do nothing
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
         });
     }
 }

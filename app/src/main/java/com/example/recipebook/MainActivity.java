@@ -2,7 +2,6 @@ package com.example.recipebook;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,15 +18,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // Get Add new recipe button
-        Button button = findViewById(R.id.newRecipeButton);
+
         // Get Recycler view
-        RecyclerView recyclerView = findViewById(R.id.RecipeRecycler);
+        RecyclerView recyclerView = findViewById(R.id.mainRecipeRecycler);
         // Set layout manager
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new RecipeAdapter(getApplicationContext(),dbHandler.readCollections()));
 
-        button.setOnClickListener(click -> {
+        findViewById(R.id.mainNewRecipeButton).setOnClickListener(click -> {
             Intent Intent = new Intent(this, CreateNewRecipeActivity.class);
             startActivity(Intent);
 
@@ -37,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        RecyclerView recyclerView = findViewById(R.id.RecipeRecycler);
+        RecyclerView recyclerView = findViewById(R.id.mainRecipeRecycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new RecipeAdapter(getApplicationContext(),dbHandler.readCollections()));
     }
