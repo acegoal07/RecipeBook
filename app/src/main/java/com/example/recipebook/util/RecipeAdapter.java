@@ -7,10 +7,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.recipebook.CreateNewRecipeActivity;
 import com.example.recipebook.EditRecipeDetailsActivity;
 import com.example.recipebook.R;
 

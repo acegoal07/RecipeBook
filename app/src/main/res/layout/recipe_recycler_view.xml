@@ -23,7 +23,7 @@
             android:layout_weight="1"
             android:padding="5dp"
             android:textColor="@color/primaryTextColor"
-            android:textSize="20sp" />
+            android:textSize="24sp" />
 
         <ImageButton
             android:id="@+id/EditRecyclerRecipeButton"
@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:padding="5dp"
         android:textColor="@color/primaryTextColorMuted"
-        android:textSize="20sp" />
+        android:textSize="24sp" />
 
 
 </LinearLayout>
