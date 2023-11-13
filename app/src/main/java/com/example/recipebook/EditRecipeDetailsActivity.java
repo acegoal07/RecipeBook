@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.example.recipebook.util.DBHandler;
+import com.example.recipebook.util.ToastHandler;
 
 public class EditRecipeDetailsActivity extends AppCompatActivity {
 
@@ -37,6 +38,8 @@ public class EditRecipeDetailsActivity extends AppCompatActivity {
         submitBtn.setOnClickListener(click -> {
             // Update recipe
             dbHandler.updateCollection(getIntent().getExtras().getInt("recipeId"), titleInput.getText().toString(), descriptionInput.getText().toString());
+            // Send toast
+            new ToastHandler().showLongToast(this, "Recipe Updated");
             // Go back to main activity
             finish();
         });
@@ -49,6 +52,8 @@ public class EditRecipeDetailsActivity extends AppCompatActivity {
         deleteBtn.setOnClickListener(click -> {
             // Delete recipe
             dbHandler.removeCollectionById(getIntent().getExtras().getInt("recipeId"));
+            // Send toast
+            new ToastHandler().showLongToast(this, "Recipe Deleted");
             // Go back to main activity
             finish();
         });

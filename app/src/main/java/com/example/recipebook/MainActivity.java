@@ -21,8 +21,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         // Get Add new recipe button
         Button button = findViewById(R.id.newRecipeButton);
-        // Get Remove recipe button
-        Button button2 = findViewById(R.id.removeRecipesButton);
         // Get Recycler view
         RecyclerView recyclerView = findViewById(R.id.RecipeRecycler);
         // Set layout manager
@@ -34,11 +32,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(Intent);
 
         });
-
-        button2.setOnClickListener(click -> {
-            RemoveWholeCollectionTest();
-        });
-
     }
 
     @Override
@@ -47,12 +40,5 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.RecipeRecycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new RecipeAdapter(getApplicationContext(),dbHandler.readCollections()));
-    }
-    private void RemoveWholeCollectionTest() {
-        DBHandler db = new DBHandler(this);
-        db.emptyDatabase();
-        RecyclerView recyclerView = findViewById(R.id.RecipeRecycler);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new RecipeAdapter(getApplicationContext(),db.readCollections()));
     }
 }

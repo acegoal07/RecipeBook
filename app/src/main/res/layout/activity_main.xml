@@ -26,16 +26,6 @@
             app:icon="@android:drawable/ic_menu_add"
             app:iconTint="@color/primaryTextColor" />
 
-        <Button
-            android:id="@+id/removeRecipesButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorSecondary"
-            android:text="Remove All Test"
-            android:textColor="@color/primaryTextColor"
-            android:visibility="invisible"
-            app:icon="@android:drawable/ic_notification_clear_all"
-            app:iconTint="@color/primaryTextColor" />
     </androidx.appcompat.widget.Toolbar>
 
 
