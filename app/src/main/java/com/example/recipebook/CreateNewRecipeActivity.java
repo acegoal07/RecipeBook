@@ -22,9 +22,9 @@ public class CreateNewRecipeActivity extends AppCompatActivity {
 
         // Add click listener to create button
         findViewById(R.id.CreateNewRecipeSubmitButton).setOnClickListener(click -> {
-            if (titleInput.getText().toString().isEmpty() || descriptionInput.getText().toString().isEmpty()) {
+            if (titleInput.getText().toString().isEmpty()) {
                 // Send Toast message
-                new ToastHandler().showLongToast(this, "Please fill in all fields");
+                new ToastHandler().showLongToast(this, "Please fill in the title field");
                 return;
             }
             // Get DBHandler instance

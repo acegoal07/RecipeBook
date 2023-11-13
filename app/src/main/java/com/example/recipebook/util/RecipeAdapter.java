@@ -52,7 +52,11 @@ public class RecipeAdapter extends RecyclerView.Adapter<ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         // Set data for recipe collection
         holder.Title.setText(RecipeInfo.get(position).getTitle());
-        holder.Description.setText(RecipeInfo.get(position).getDescription());
+        if (RecipeInfo.get(position).getDescription().isEmpty()) {
+            holder.Description.setVisibility(RecyclerView.GONE);
+        } else {
+            holder.Description.setText(RecipeInfo.get(position).getDescription());
+        }
         // Set click listener for delete button
         holder.DeleteButton.setOnClickListener(v -> {
             Intent Intent = new Intent(v.getContext(), EditRecipeDetailsActivity.class);

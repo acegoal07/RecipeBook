@@ -30,9 +30,9 @@ public class EditRecipeDetailsActivity extends AppCompatActivity {
 
         // Add click listener to save button
         findViewById(R.id.editRecipeSubmitButton).setOnClickListener(click -> {
-            if (titleInput.getText().toString().isEmpty() || descriptionInput.getText().toString().isEmpty()) {
+            if (titleInput.getText().toString().isEmpty()) {
                 // Send Toast message
-                new ToastHandler().showLongToast(this, "Please fill in all fields");
+                new ToastHandler().showLongToast(this, "Please fill in the title field");
                 return;
             }
             // Update recipe

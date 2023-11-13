@@ -23,7 +23,9 @@
             android:backgroundTint="@color/colorSecondary"
             android:text="Create new"
             android:textColor="@color/primaryTextColor"
+            android:textSize="20sp"
             app:icon="@android:drawable/ic_menu_add"
+            app:iconSize="20dp"
             app:iconTint="@color/primaryTextColor" />
 
     </androidx.appcompat.widget.Toolbar>
