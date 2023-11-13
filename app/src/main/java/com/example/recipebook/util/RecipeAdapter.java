@@ -2,6 +2,7 @@ package com.example.recipebook.util;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -9,6 +10,8 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.recipebook.CreateNewRecipeActivity;
+import com.example.recipebook.EditRecipeDetailsActivity;
 import com.example.recipebook.R;
 
 import java.util.ArrayList;
@@ -54,12 +57,10 @@ public class RecipeAdapter extends RecyclerView.Adapter<ViewHolder> {
         holder.Description.setText(RecipeInfo.get(position).getDescription());
         // Set click listener for delete button
         holder.DeleteButton.setOnClickListener(v -> {
-            DBHandler db = new DBHandler(v.getContext());
-            db.removeCollectionById(RecipeInfo.get(position).getId());
-            RecyclerView recyclerView = holder.DeleteButton.getRootView().findViewById(R.id.RecipeRecycler);
-            recyclerView.setLayoutManager(new LinearLayoutManager(v.getContext()));
-            recyclerView.setAdapter(new RecipeAdapter(context.getApplicationContext(),db.readCollections()));
-            new ToastHandler().showLongToast(v.getContext(), "Recipe Deleted");
+            Intent Intent = new Intent(v.getContext(), EditRecipeDetailsActivity.class);
+            Intent.putExtra("recipeId", RecipeInfo.get(position).getId());
+            Intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            v.getContext().startActivity(Intent);
         });
         // Set click listener for recipe item
         holder.itemView.setOnClickListener(v -> Log.d(TAG, "onClick: clicked on: "+ RecipeInfo.get(position).returnAllInfo()));

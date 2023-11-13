@@ -85,6 +85,39 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     /**
+     * Reads a collection from the database by id
+     * @param id
+     * @return
+     */
+    public String[] readCollection(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + DB_INFO.TABLE_NAME + " WHERE " + DB_INFO.KEY_ID + " = ?", new String[] { String.valueOf(id) });
+        cursor.moveToFirst();
+        String[] recipeInfo = new String[] {
+                cursor.getString(1),
+                cursor.getString(2)
+        };
+        cursor.close();
+        db.close();
+        return recipeInfo;
+    }
+
+    /**
+     * Updates a collection in the database
+     * @param id The id of the collection to update
+     * @param title The new title
+     * @param description The new description
+     */
+    public void updateCollection(int id, String title, String description) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(DB_INFO.KEY_NAME, title);
+        values.put(DB_INFO.KEY_DESCRIPTION, description);
+        db.update(DB_INFO.TABLE_NAME, values, DB_INFO.KEY_ID + " = ?", new String[] { String.valueOf(id) });
+        db.close();
+    }
+
+    /**
      * Empties the database
      */
     public void emptyDatabase() {

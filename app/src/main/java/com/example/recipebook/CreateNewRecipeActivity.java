@@ -19,7 +19,7 @@ public class CreateNewRecipeActivity extends AppCompatActivity {
         // Get Submit button
         Button submitBtn = findViewById(R.id.CreateNewRecipeSubmitButton);
         // Get Cancel button
-        ImageButton cancelBtn = findViewById(R.id.CreateNewRecipeCancelButton);
+        ImageButton cancelBtn = findViewById(R.id.createNewRecipeCancelButton);
         // Get title input
         EditText titleInput = findViewById(R.id.CreateNewRecipeTitleInput);
         // Get description input

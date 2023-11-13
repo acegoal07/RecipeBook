@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".CreateNewRecipeActivity">
+    tools:context=".EditRecipeDetailsActivity">
 
     <ImageButton
-        android:id="@+id/createNewRecipeCancelButton"
+        android:id="@+id/editRecipeCancelButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
@@ -22,11 +22,11 @@
         android:paddingRight="20dp">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Create new recipe"
+            android:text="Edit recipe info"
             android:textAlignment="center"
             android:textSize="34sp" />
 
@@ -35,7 +35,7 @@
             android:layout_height="10dp" />
 
         <EditText
-            android:id="@+id/CreateNewRecipeTitleInput"
+            android:id="@+id/editRecipeTitleInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -48,7 +48,7 @@
             android:layout_height="20dp" />
 
         <EditText
-            android:id="@+id/CreateNewRecipeDesciptionInput"
+            android:id="@+id/editRecipeDesciptionInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -61,14 +61,38 @@
             android:layout_width="match_parent"
             android:layout_height="20dp" />
 
-        <Button
-            android:id="@+id/CreateNewRecipeSubmitButton"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:backgroundTint="@color/colorPrimary"
-            android:text="Submit"
-            android:textColor="@color/primaryTextColor" />
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/editRecipeDeleteButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:backgroundTint="@android:color/holo_red_dark"
+                android:text="Delete"
+                android:textColor="@color/primaryTextColor" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/editRecipeSubmitButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="Submit"
+                android:textColor="@color/primaryTextColor" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>
