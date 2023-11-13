@@ -7,9 +7,9 @@ public class RecipeInfo {
 
     /**
      * Constructor for RecipeCollection
-     * @param id
-     * @param title
-     * @param description
+     * @param id The id of the recipe collection
+     * @param title The title of the recipe collection
+     * @param description The description of the recipe collection
      */
     public RecipeInfo(int id, String title, String description) {
         this.id = id;
@@ -19,7 +19,7 @@ public class RecipeInfo {
 
     /**
      * Gets the id of the recipe collection
-     * @return
+     * @return The id
      */
     public int getId() {
         return this.id;
@@ -27,7 +27,7 @@ public class RecipeInfo {
 
     /**
      * Gets the title of the recipe collection
-     * @return
+     * @return The title
      */
     public String getTitle() {
         return this.title;
@@ -35,37 +35,17 @@ public class RecipeInfo {
 
     /**
      * Gets the description of the recipe collection
-     * @return
+     * @return The description
      */
     public String getDescription() {
         return this.description;
     }
 
+    /**
+     * Returns all the info of the recipe collection
+     * @return A string containing all the info
+     */
     public String returnAllInfo() {
         return "\nID: " + this.id + "\nTitle: " + this.title + "\nDescription: " + this.description;
-    }
-
-    /**
-     * Sets the id of the recipe collection
-     * @param id
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    /**
-     * Sets the title of the recipe collection
-     * @param title
-     */
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    /**
-     * Sets the description of the recipe collection
-     * @param description
-     */
-    public void setDescription(String description) {
-        this.description = description;
     }
 }

@@ -24,8 +24,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     /**
      * Constructor for RecipeAdapter
-     * @param applicationContext
-     * @param collections
+     * @param applicationContext The application context
+     * @param collections An ArrayList of RecipeInfo objects
      */
     public RecipeAdapter(Context applicationContext, ArrayList<RecipeInfo> collections) {
         this.context = applicationContext;
@@ -34,11 +34,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     /**
      * Creates a new ViewHolder object whenever the RecyclerView needs a new one.
-     * @param parent The ViewGroup into which the new View will be added after it is bound to
-     *               an adapter position.
+     * @param parent The ViewGroup into which the new View will be added after it is bound to an adapter position.
      * @param viewType The view type of the new View.
-     *
-     * @return
+     * @return ViewHolder
      */
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -47,8 +45,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     /**
      * Sets the data for the recycler view
-     * @param holder
-     * @param position
+     * @param holder The ViewHolder which should be updated to represent the contents of the item
+     * @param position The position of the item within the adapter's data set.
      */
     @Override
     public void onBindViewHolder(ViewHolder holder, @SuppressLint("RecyclerView") int position) {

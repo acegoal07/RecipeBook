@@ -23,7 +23,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
     /**
      * Creates the database
-     * @param db
+     * @param db The database
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -32,8 +32,8 @@ public class DBHandler extends SQLiteOpenHelper {
 
     /**
      * Adds a new collection to the database
-     * @param title
-     * @param description
+     * @param title The title of the collection
+     * @param description The description of the collection
      */
     public void addNewCollection(String title, String description) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -45,18 +45,8 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     /**
-     * Removes a collection from the database by title
-     * @param title
-     */
-    public void removeCollectionByTitle(String title) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(DB_INFO.TABLE_NAME, DB_INFO.KEY_NAME + " = ?", new String[] { String.valueOf(title) });
-        db.close();
-    }
-
-    /**
      * Removes a collection from the database by id
-     * @param id
+     * @param id The id of the collection to remove
      */
     public void removeCollectionById(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -66,7 +56,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
     /**
      * Reads all the collections from the database
-     * @return
+     * @return An ArrayList of RecipeInfo objects
      */
     public ArrayList<RecipeInfo> readCollections() {
         ArrayList<RecipeInfo> recipeInfoArrayList = new ArrayList<>();
@@ -86,8 +76,8 @@ public class DBHandler extends SQLiteOpenHelper {
 
     /**
      * Reads a collection from the database by id
-     * @param id
-     * @return
+     * @param id The id of the collection to read
+     * @return The collection
      */
     public String[] readCollection(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -118,18 +108,10 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     /**
-     * Empties the database
-     */
-    public void emptyDatabase() {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("DELETE FROM " + DB_INFO.TABLE_NAME);
-        db.close();
-    }
-
-
-    /**
-     * Gets the number of collections in the database
-     * @return
+     * Called when the database needs to be upgraded.
+     * @param db The database.
+     * @param oldVersion The old database version.
+     * @param newVersion The new database version.
      */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
