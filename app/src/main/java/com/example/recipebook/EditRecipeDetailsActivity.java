@@ -28,8 +28,13 @@ public class EditRecipeDetailsActivity extends AppCompatActivity {
         EditText descriptionInput = findViewById(R.id.editRecipeDesciptionInput);
         descriptionInput.setText(recipeInfo[1]);
 
-        // Add click listener to submit button
+        // Add click listener to save button
         findViewById(R.id.editRecipeSubmitButton).setOnClickListener(click -> {
+            if (titleInput.getText().toString().isEmpty() || descriptionInput.getText().toString().isEmpty()) {
+                // Send Toast message
+                new ToastHandler().showLongToast(this, "Please fill in all fields");
+                return;
+            }
             // Update recipe
             dbHandler.updateCollection(getIntent().getExtras().getInt("recipeId"), titleInput.getText().toString(), descriptionInput.getText().toString());
             // Send toast

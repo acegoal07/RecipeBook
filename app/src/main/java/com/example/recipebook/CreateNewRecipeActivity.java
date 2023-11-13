@@ -20,8 +20,13 @@ public class CreateNewRecipeActivity extends AppCompatActivity {
         // Get description input
         EditText descriptionInput = findViewById(R.id.CreateNewRecipeDesciptionInput);
 
-        // Add click listener to submit button
+        // Add click listener to create button
         findViewById(R.id.CreateNewRecipeSubmitButton).setOnClickListener(click -> {
+            if (titleInput.getText().toString().isEmpty() || descriptionInput.getText().toString().isEmpty()) {
+                // Send Toast message
+                new ToastHandler().showLongToast(this, "Please fill in all fields");
+                return;
+            }
             // Get DBHandler instance
             DBHandler dbHandler = new DBHandler(this);
             // Add new recipe
