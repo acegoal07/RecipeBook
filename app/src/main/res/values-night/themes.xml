@@ -1,0 +1,15 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.RecipeBook" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your dark theme here. -->
+    </style>
+
+    <color name="primaryTextColor">#FFFFFF</color>
+    <color name="primaryTextColorMuted">#BFBFBF</color>
+    <color name="secondaryTextColor">#FFFFFF</color>
+    <color name="colorPrimary">#343a40</color>
+    <color name="colorSecondary">#2b3035</color>
+    <color name="backgroundColor">#212529</color>
+
+    <style name="Theme.RecipeBook" parent="Base.Theme.RecipeBook" />
+</resources>
