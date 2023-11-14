@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.recipebook.util.DBHandler;
-import com.example.recipebook.util.RecipeAdapter;
+import com.example.recipebook.util.recycleViewers.mainView.RecipeAdapterMain;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.mainRecipeRecycler);
         // Set layout manager
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new RecipeAdapter(getApplicationContext(),dbHandler.readCollections()));
+        recyclerView.setAdapter(new RecipeAdapterMain(getApplicationContext(),dbHandler.readCollections()));
 
         findViewById(R.id.mainNewRecipeButton).setOnClickListener(click -> {
             Intent Intent = new Intent(this, CreateNewRecipeActivity.class);
@@ -37,6 +37,6 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         RecyclerView recyclerView = findViewById(R.id.mainRecipeRecycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new RecipeAdapter(getApplicationContext(),dbHandler.readCollections()));
+        recyclerView.setAdapter(new RecipeAdapterMain(getApplicationContext(),dbHandler.readCollections()));
     }
 }

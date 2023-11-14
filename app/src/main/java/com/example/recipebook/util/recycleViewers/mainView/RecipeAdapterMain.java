@@ -1,4 +1,4 @@
-package com.example.recipebook.util;
+package com.example.recipebook.util.recycleViewers.mainView;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -11,21 +11,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.recipebook.EditRecipeDetailsActivity;
 import com.example.recipebook.R;
+import com.example.recipebook.RecipeViewActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecipeAdapter extends RecyclerView.Adapter<ViewHolder> {
+public class RecipeAdapterMain extends RecyclerView.Adapter<ViewHolderMain> {
     private Context context;
     private static final String TAG = "RecipeAdaptor";
-    public List<RecipeInfo> RecipeInfo;
+    public List<RecipeInfoMain> RecipeInfo;
 
     /**
      * Constructor for RecipeAdapter
      * @param applicationContext The application context
      * @param collections An ArrayList of RecipeInfo objects
      */
-    public RecipeAdapter(Context applicationContext, ArrayList<RecipeInfo> collections) {
+    public RecipeAdapterMain(Context applicationContext, ArrayList<RecipeInfoMain> collections) {
         this.context = applicationContext;
         RecipeInfo = collections;
     }
@@ -37,8 +38,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<ViewHolder> {
      * @return ViewHolder
      */
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.recipe_recycler_view,parent,false));
+    public ViewHolderMain onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new ViewHolderMain(LayoutInflater.from(context).inflate(R.layout.recipe_recycler_view,parent,false));
     }
 
     /**
@@ -47,7 +48,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<ViewHolder> {
      * @param position The position of the item within the adapter's data set.
      */
     @Override
-    public void onBindViewHolder(ViewHolder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(ViewHolderMain holder, @SuppressLint("RecyclerView") int position) {
         // Set data for recipe collection
         holder.Title.setText(RecipeInfo.get(position).getTitle());
         if (RecipeInfo.get(position).getDescription().isEmpty()) {
@@ -63,7 +64,12 @@ public class RecipeAdapter extends RecyclerView.Adapter<ViewHolder> {
             v.getContext().startActivity(Intent);
         });
         // Set click listener for recipe item
-        holder.itemView.setOnClickListener(v -> Log.d(TAG, "onClick: clicked on: "+ RecipeInfo.get(position).returnAllInfo()));
+        holder.itemView.setOnClickListener(v -> {
+            Intent Intent = new Intent(v.getContext(), RecipeViewActivity.class);
+            Intent.putExtra("recipeId", RecipeInfo.get(position).getId());
+            Intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            v.getContext().startActivity(Intent);
+        });
     }
 
     /**

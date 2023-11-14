@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.recipebook.util.recycleViewers.mainView.RecipeInfoMain;
+
 import java.util.ArrayList;
 
 public class DBHandler extends SQLiteOpenHelper {
@@ -58,20 +60,20 @@ public class DBHandler extends SQLiteOpenHelper {
      * Reads all the collections from the database
      * @return An ArrayList of RecipeInfo objects
      */
-    public ArrayList<RecipeInfo> readCollections() {
-        ArrayList<RecipeInfo> recipeInfoArrayList = new ArrayList<>();
+    public ArrayList<RecipeInfoMain> readCollections() {
+        ArrayList<RecipeInfoMain> recipeInfoMainArrayList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + DB_INFO.TABLE_NAME, null);
         while (cursor.moveToNext()) {
             int id = cursor.getInt(0);
             String title = cursor.getString(1);
             String description = cursor.getString(2);
-            RecipeInfo collection = new RecipeInfo(id, title, description);
-            recipeInfoArrayList.add(collection);
+            RecipeInfoMain collection = new RecipeInfoMain(id, title, description);
+            recipeInfoMainArrayList.add(collection);
         }
         cursor.close();
         db.close();
-        return recipeInfoArrayList;
+        return recipeInfoMainArrayList;
     }
 
     /**

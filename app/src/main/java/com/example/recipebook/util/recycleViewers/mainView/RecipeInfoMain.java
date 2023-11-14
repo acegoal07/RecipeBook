@@ -1,6 +1,6 @@
-package com.example.recipebook.util;
+package com.example.recipebook.util.recycleViewers.mainView;
 
-public class RecipeInfo {
+public class RecipeInfoMain {
     private int id;
     private String title;
     private String description;
@@ -11,7 +11,7 @@ public class RecipeInfo {
      * @param title The title of the recipe collection
      * @param description The description of the recipe collection
      */
-    public RecipeInfo(int id, String title, String description) {
+    public RecipeInfoMain(int id, String title, String description) {
         this.id = id;
         this.title = title;
         this.description = description;
