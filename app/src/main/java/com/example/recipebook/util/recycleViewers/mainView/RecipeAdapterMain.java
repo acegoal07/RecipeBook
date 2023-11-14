@@ -3,7 +3,6 @@ package com.example.recipebook.util.recycleViewers.mainView;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -39,7 +38,7 @@ public class RecipeAdapterMain extends RecyclerView.Adapter<ViewHolderMain> {
      */
     @Override
     public ViewHolderMain onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolderMain(LayoutInflater.from(context).inflate(R.layout.recipe_recycler_view,parent,false));
+        return new ViewHolderMain(LayoutInflater.from(context).inflate(R.layout.recipe_recycler_view, parent, false));
     }
 
     /**
