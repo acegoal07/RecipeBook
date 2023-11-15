@@ -90,7 +90,8 @@ public class DBHandler extends SQLiteOpenHelper {
                 return stepInfoArrayList;
             }
             for (String step : recipeInfo[2].split("!!")) {
-                StepInfo stepinfo = new StepInfo(step);
+                String[] stepInfoBreakdown = step.split("--");
+                StepInfo stepinfo = new StepInfo(stepInfoBreakdown[1], StepInfo.convertIntToType(Integer.parseInt(stepInfoBreakdown[0])));
                 stepInfoArrayList.add(stepinfo);
             }
         }

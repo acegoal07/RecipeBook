@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.EditText;
 
 import com.example.recipebook.util.DBHandler;
+import com.example.recipebook.util.StepInfo;
 
 public class CreateNewStepActivity extends AppCompatActivity {
 
@@ -23,10 +24,10 @@ public class CreateNewStepActivity extends AppCompatActivity {
 
             String info = dbHandler.readCollection(getIntent().getExtras().getInt("recipeId"))[2];
             if (info == null) {
-                info = stepInput.getText().toString();
+                info = "0--"+stepInput.getText().toString();
             } else {
                 StringBuilder stringBuilder = new StringBuilder(info);
-                stringBuilder.append("!!"+stepInput.getText().toString());
+                stringBuilder.append("!!0--"+stepInput.getText().toString());
                 info = stringBuilder.toString();
             }
 

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:paddingTop="10dp">
+        android:orientation="horizontal">
 
         <Space
             android:layout_width="20dp"
@@ -20,13 +20,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            android:textColor="@color/primaryTextColor" />
+            android:textColor="@color/primaryTextColor"
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/recipeRecyclerViewStepInfo"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingLeft="15dp"
-            android:textColor="@color/primaryTextColor" />
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="24sp" />
     </LinearLayout>
 </LinearLayout>
