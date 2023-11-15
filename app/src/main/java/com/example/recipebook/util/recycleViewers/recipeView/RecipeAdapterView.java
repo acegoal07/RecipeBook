@@ -46,8 +46,19 @@ public class RecipeAdapterView extends RecyclerView.Adapter<ViewHolderView> {
      */
     @Override
     public void onBindViewHolder(ViewHolderView holder, @SuppressLint("RecyclerView") int position) {
-        holder.StepCounter.setText("Step " + (position + 1)+ ":");
-        holder.Step.setText(RecipeSteps.get(position).getStep());
+        switch (RecipeSteps.get(position).getStepType()) {
+            case NORMAL:
+                holder.NormalStep.setVisibility(RecyclerView.VISIBLE);
+                holder.StepCounter.setText("Step " + (position + 1)+ ":");
+                holder.Step.setText(RecipeSteps.get(position).getStep());
+                break;
+            case COOK:
+                break;
+            case COOL:
+                break;
+            default:
+                break;
+        }
     }
 
     /**

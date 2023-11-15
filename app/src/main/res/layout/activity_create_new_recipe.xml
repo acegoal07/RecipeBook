@@ -7,6 +7,27 @@
     android:orientation="vertical"
     tools:context=".CreateNewRecipeActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/createNewRecipeToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:paddingEnd="10dp"
+        android:theme="?attr/actionBarTheme">
+
+        <Button
+            android:id="@+id/createNewRecipeCancelButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_weight="1"
+            android:backgroundTint="@color/colorSecondary"
+            android:text="Cancel"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="24sp" />
+    </androidx.appcompat.widget.Toolbar>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -57,37 +78,15 @@
             android:layout_width="match_parent"
             android:layout_height="40dp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/CreateNewRecipeSubmitButton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/createNewRecipeCancelButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:backgroundTint="@color/colorPrimary"
-                android:text="Cancel"
-                android:textColor="@color/primaryTextColor"
-                android:textSize="24sp" />
-
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <Button
-                android:id="@+id/CreateNewRecipeSubmitButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:backgroundTint="@color/colorPrimary"
-                android:text="Create"
-                android:textColor="@color/primaryTextColor"
-                android:textSize="24sp" />
-        </LinearLayout>
+            android:layout_gravity="center"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="Create"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="24sp" />
 
     </LinearLayout>
 

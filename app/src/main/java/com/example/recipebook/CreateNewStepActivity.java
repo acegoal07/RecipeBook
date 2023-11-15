@@ -7,6 +7,7 @@ import android.widget.EditText;
 
 import com.example.recipebook.util.DBHandler;
 import com.example.recipebook.util.StepInfo;
+import com.example.recipebook.util.ToastHandler;
 
 public class CreateNewStepActivity extends AppCompatActivity {
 
@@ -20,6 +21,14 @@ public class CreateNewStepActivity extends AppCompatActivity {
 
         // Get save button
         findViewById(R.id.createNewStepSaveButton).setOnClickListener(click -> {
+            if (stepInput.getText().toString().isEmpty()) {
+                new ToastHandler().showLongToast(this, "Please enter a step");
+                return;
+            }
+            if (stepInput.getText().toString().contains("!!") || stepInput.getText().toString().contains("--")) {
+                new ToastHandler().showLongToast(this, "Step contains special characters which are not allowed");
+                return;
+            }
             DBHandler dbHandler = new DBHandler(this);
 
             String info = dbHandler.readCollection(getIntent().getExtras().getInt("recipeId"))[2];

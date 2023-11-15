@@ -9,17 +9,19 @@
     tools:context=".MainActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar2"
+        android:id="@+id/mainToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:minHeight="?attr/actionBarSize"
+        android:paddingEnd="10dp"
         android:theme="?attr/actionBarTheme">
 
         <Button
             android:id="@+id/mainNewRecipeButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="right"
             android:backgroundTint="@color/colorSecondary"
             android:text="Create new"
             android:textColor="@color/primaryTextColor"
@@ -30,6 +32,10 @@
 
     </androidx.appcompat.widget.Toolbar>
 
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mainRecipeRecycler"

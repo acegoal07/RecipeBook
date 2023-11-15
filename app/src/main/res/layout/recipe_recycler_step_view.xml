@@ -6,9 +6,11 @@
     android:paddingBottom="10dp">
 
     <LinearLayout
+        android:id="@+id/recipeRecyclerViewNormalView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <Space
             android:layout_width="20dp"

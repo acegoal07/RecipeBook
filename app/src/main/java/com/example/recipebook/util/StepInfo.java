@@ -3,7 +3,7 @@ package com.example.recipebook.util;
 public class StepInfo {
     private static StepType StepType = null;
     String step;
-    enum StepType {
+    public enum StepType {
         NORMAL,
         COOK,
         COOL

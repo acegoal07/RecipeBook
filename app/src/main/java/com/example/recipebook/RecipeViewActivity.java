@@ -9,12 +9,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.example.recipebook.util.DBHandler;
-import com.example.recipebook.util.StepInfo;
-import com.example.recipebook.util.recycleViewers.mainView.RecipeAdapterMain;
 import com.example.recipebook.util.recycleViewers.recipeView.RecipeAdapterView;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class RecipeViewActivity extends AppCompatActivity {
 
@@ -50,7 +45,7 @@ public class RecipeViewActivity extends AppCompatActivity {
         recyclerView.setAdapter(new RecipeAdapterView(getApplicationContext(), dbHandler.readCollectionsStepInfo(id)));
 
         // Get create new step button
-        findViewById(R.id.recipeViewAddNewItemButton).setOnClickListener(click -> {
+        findViewById(R.id.recipeViewAddNewStepButton).setOnClickListener(click -> {
             Intent intent = new Intent(this, CreateNewStepActivity.class);
             intent.putExtra("recipeId", id);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
