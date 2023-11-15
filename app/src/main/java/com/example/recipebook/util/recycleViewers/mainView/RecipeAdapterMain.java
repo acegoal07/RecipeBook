@@ -11,21 +11,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.recipebook.EditRecipeDetailsActivity;
 import com.example.recipebook.R;
 import com.example.recipebook.RecipeViewActivity;
+import com.example.recipebook.util.RecipeInfo;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RecipeAdapterMain extends RecyclerView.Adapter<ViewHolderMain> {
     private Context context;
-    private static final String TAG = "RecipeAdaptor";
-    public List<RecipeInfoMain> RecipeInfo;
+    private static final String TAG = "RecipeAdaptorMain";
+    public List<RecipeInfo> RecipeInfo;
 
     /**
      * Constructor for RecipeAdapter
      * @param applicationContext The application context
      * @param collections An ArrayList of RecipeInfo objects
      */
-    public RecipeAdapterMain(Context applicationContext, ArrayList<RecipeInfoMain> collections) {
+    public RecipeAdapterMain(Context applicationContext, ArrayList<RecipeInfo> collections) {
         this.context = applicationContext;
         RecipeInfo = collections;
     }
@@ -38,7 +39,7 @@ public class RecipeAdapterMain extends RecyclerView.Adapter<ViewHolderMain> {
      */
     @Override
     public ViewHolderMain onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolderMain(LayoutInflater.from(context).inflate(R.layout.recipe_recycler_view, parent, false));
+        return new ViewHolderMain(LayoutInflater.from(context).inflate(R.layout.recipe_recycler_main, parent, false));
     }
 
     /**
@@ -66,6 +67,7 @@ public class RecipeAdapterMain extends RecyclerView.Adapter<ViewHolderMain> {
         holder.itemView.setOnClickListener(v -> {
             Intent Intent = new Intent(v.getContext(), RecipeViewActivity.class);
             Intent.putExtra("recipeId", RecipeInfo.get(position).getId());
+            System.out.println(RecipeInfo.get(position).getId());
             Intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             v.getContext().startActivity(Intent);
         });

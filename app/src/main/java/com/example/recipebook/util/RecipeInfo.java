@@ -1,20 +1,23 @@
-package com.example.recipebook.util.recycleViewers.mainView;
+package com.example.recipebook.util;
 
-public class RecipeInfoMain {
+public class RecipeInfo {
     private int id;
     private String title;
     private String description;
+    private String recipe;
 
     /**
      * Constructor for RecipeCollection
      * @param id The id of the recipe collection
      * @param title The title of the recipe collection
      * @param description The description of the recipe collection
+     * @param recipe The recipe of the recipe collection
      */
-    public RecipeInfoMain(int id, String title, String description) {
+    public RecipeInfo(int id, String title, String description, String recipe) {
         this.id = id;
         this.title = title;
         this.description = description;
+        this.recipe = recipe;
     }
 
     /**
@@ -42,10 +45,10 @@ public class RecipeInfoMain {
     }
 
     /**
-     * Returns all the info of the recipe collection
-     * @return A string containing all the info
+     * Gets the recipe of the recipe collection
+     * @return The recipe
      */
-    public String returnAllInfo() {
-        return "\nID: " + this.id + "\nTitle: " + this.title + "\nDescription: " + this.description;
+    public String getRecipe() {
+        return this.recipe;
     }
 }

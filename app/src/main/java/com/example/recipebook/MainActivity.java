@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.mainNewRecipeButton).setOnClickListener(click -> {
             Intent Intent = new Intent(this, CreateNewRecipeActivity.class);
             startActivity(Intent);
-
         });
     }
 

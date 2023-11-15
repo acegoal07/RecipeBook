@@ -6,8 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.recipebook.util.recycleViewers.mainView.RecipeInfoMain;
-
 import java.util.ArrayList;
 
 public class DBHandler extends SQLiteOpenHelper {
@@ -18,6 +16,7 @@ public class DBHandler extends SQLiteOpenHelper {
         private static final String KEY_ID = "id";
         private static final String KEY_NAME = "name";
         private static final String KEY_DESCRIPTION = "description";
+        private static final String KEY_RECIPE = "recipe";
     }
     public DBHandler(Context context) {
         super(context, DB_INFO.DB_NAME, null, DB_INFO.DB_VERSION);
@@ -29,7 +28,7 @@ public class DBHandler extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + DB_INFO.TABLE_NAME + "(" + DB_INFO.KEY_ID + " INTEGER PRIMARY KEY," + DB_INFO.KEY_NAME + " TEXT," + DB_INFO.KEY_DESCRIPTION + " TEXT" + ")");
+        db.execSQL("CREATE TABLE " + DB_INFO.TABLE_NAME + "(" + DB_INFO.KEY_ID + " INTEGER PRIMARY KEY," + DB_INFO.KEY_NAME + " TEXT," + DB_INFO.KEY_DESCRIPTION + " TEXT, " + DB_INFO.KEY_RECIPE + " TEXT" + ")");
     }
 
     /**
@@ -60,20 +59,42 @@ public class DBHandler extends SQLiteOpenHelper {
      * Reads all the collections from the database
      * @return An ArrayList of RecipeInfo objects
      */
-    public ArrayList<RecipeInfoMain> readCollections() {
-        ArrayList<RecipeInfoMain> recipeInfoMainArrayList = new ArrayList<>();
+    public ArrayList<RecipeInfo> readCollections() {
+        ArrayList<RecipeInfo> recipeInfoArrayList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + DB_INFO.TABLE_NAME, null);
         while (cursor.moveToNext()) {
             int id = cursor.getInt(0);
             String title = cursor.getString(1);
             String description = cursor.getString(2);
-            RecipeInfoMain collection = new RecipeInfoMain(id, title, description);
-            recipeInfoMainArrayList.add(collection);
+            String recipe = cursor.getString(3);
+            RecipeInfo collection = new RecipeInfo(id, title, description, recipe);
+            recipeInfoArrayList.add(collection);
         }
         cursor.close();
         db.close();
-        return recipeInfoMainArrayList;
+
+        return recipeInfoArrayList;
+    }
+
+    /**
+     * Reads a collection from the database by id
+     * @param id The id of the collection to read
+     * @return An ArrayList of StepInfo objects
+     */
+    public ArrayList<StepInfo> readCollectionsStepInfo(int id) {
+        ArrayList<StepInfo> stepInfoArrayList = new ArrayList<>();
+        String[] recipeInfo = readCollection(id);
+        if (recipeInfo != null) {
+            if (recipeInfo[2] == null) {
+                return stepInfoArrayList;
+            }
+            for (String step : recipeInfo[2].split("!!")) {
+                StepInfo stepinfo = new StepInfo(step);
+                stepInfoArrayList.add(stepinfo);
+            }
+        }
+        return stepInfoArrayList;
     }
 
     /**
@@ -85,9 +106,13 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + DB_INFO.TABLE_NAME + " WHERE " + DB_INFO.KEY_ID + " = ?", new String[] { String.valueOf(id) });
         cursor.moveToFirst();
+        if (cursor.getCount() == 0) {
+            return null;
+        }
         String[] recipeInfo = new String[] {
                 cursor.getString(1),
-                cursor.getString(2)
+                cursor.getString(2),
+                cursor.getString(3)
         };
         cursor.close();
         db.close();
@@ -105,6 +130,19 @@ public class DBHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(DB_INFO.KEY_NAME, title);
         values.put(DB_INFO.KEY_DESCRIPTION, description);
+        db.update(DB_INFO.TABLE_NAME, values, DB_INFO.KEY_ID + " = ?", new String[] { String.valueOf(id) });
+        db.close();
+    }
+
+    /**
+     * Adds a new step to a collection
+     * @param id The id of the collection to add the step to
+     * @param step The step to add
+     */
+    public void addNewStep(int id, String step) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(DB_INFO.KEY_RECIPE, step);
         db.update(DB_INFO.TABLE_NAME, values, DB_INFO.KEY_ID + " = ?", new String[] { String.valueOf(id) });
         db.close();
     }
