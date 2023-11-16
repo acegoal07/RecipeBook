@@ -50,7 +50,7 @@
             android:layout_height="20dp" />
 
         <EditText
-            android:id="@+id/CreateNewRecipeTitleInput"
+            android:id="@+id/createNewRecipeTitleInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -64,7 +64,7 @@
             android:layout_height="20dp" />
 
         <EditText
-            android:id="@+id/CreateNewRecipeDesciptionInput"
+            android:id="@+id/createNewRecipeDesciptionInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -79,7 +79,7 @@
             android:layout_height="40dp" />
 
         <Button
-            android:id="@+id/CreateNewRecipeSubmitButton"
+            android:id="@+id/createNewRecipeCreateButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

@@ -20,7 +20,7 @@ public class ViewHolderMain extends RecyclerView.ViewHolder {
         super(view);
         Title = view.findViewById(R.id.Title);
         Description = view.findViewById(R.id.Description);
-        DeleteButton = view.findViewById(R.id.EditRecyclerRecipeButton);
+        DeleteButton = view.findViewById(R.id.editRecyclerRecipeButton);
         context = view.getContext();
     }
 }

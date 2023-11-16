@@ -12,15 +12,15 @@ import com.example.recipebook.R;
 
 public class ViewHolderView extends RecyclerView.ViewHolder {
     private final Context context;
-    LinearLayout NormalStep;
-    TextView StepCounter;
-    TextView Step;
+    LinearLayout NormalStepView;
+    TextView NormalStepCounter;
+    TextView NormalStep;
 
     public ViewHolderView(@NonNull View view) {
         super(view);
-        NormalStep = view.findViewById(R.id.recipeRecyclerViewNormalView);
-        StepCounter = view.findViewById(R.id.recipeRecyclerViewStepCounter);
-        Step = view.findViewById(R.id.recipeRecyclerViewStepInfo);
+        NormalStepView = view.findViewById(R.id.recipeRecyclerViewNormalView);
+        NormalStepCounter = view.findViewById(R.id.recipeRecyclerViewStepCounter);
+        NormalStep = view.findViewById(R.id.recipeRecyclerViewStepInfo);
         context = view.getContext();
     }
 }

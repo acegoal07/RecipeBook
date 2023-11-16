@@ -16,12 +16,12 @@ public class CreateNewRecipeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_new_recipe);
 
         // Get title input
-        EditText titleInput = findViewById(R.id.CreateNewRecipeTitleInput);
+        EditText titleInput = findViewById(R.id.createNewRecipeTitleInput);
         // Get description input
-        EditText descriptionInput = findViewById(R.id.CreateNewRecipeDesciptionInput);
+        EditText descriptionInput = findViewById(R.id.createNewRecipeDesciptionInput);
 
         // Add click listener to create button
-        findViewById(R.id.CreateNewRecipeSubmitButton).setOnClickListener(click -> {
+        findViewById(R.id.createNewRecipeCreateButton).setOnClickListener(click -> {
             // Make sure title is not empty
             if (titleInput.getText().toString().isEmpty()) {
                 // Send Toast message

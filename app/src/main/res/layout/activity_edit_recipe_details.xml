@@ -100,7 +100,7 @@
                 android:layout_weight="1" />
 
             <Button
-                android:id="@+id/editRecipeSubmitButton"
+                android:id="@+id/editRecipeSaveButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

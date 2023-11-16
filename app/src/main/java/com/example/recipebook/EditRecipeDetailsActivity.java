@@ -29,7 +29,7 @@ public class EditRecipeDetailsActivity extends AppCompatActivity {
         descriptionInput.setText(recipeInfo[1]);
 
         // Add click listener to save button
-        findViewById(R.id.editRecipeSubmitButton).setOnClickListener(click -> {
+        findViewById(R.id.editRecipeSaveButton).setOnClickListener(click -> {
             // Make sure title is not empty
             if (titleInput.getText().toString().isEmpty()) {
                 // Send Toast message

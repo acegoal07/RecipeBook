@@ -26,7 +26,7 @@
             android:textSize="24sp" />
 
         <ImageButton
-            android:id="@+id/EditRecyclerRecipeButton"
+            android:id="@+id/editRecyclerRecipeButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
