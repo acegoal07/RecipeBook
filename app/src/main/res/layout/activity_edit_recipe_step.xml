@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".EditStepActivity">
+    tools:context=".EditRecipeStepActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/editRecipeStepToolBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
@@ -17,7 +17,7 @@
         android:theme="?attr/actionBarTheme">
 
         <Button
-            android:id="@+id/editStepCancelButton"
+            android:id="@+id/editRecipeStepCancelButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
@@ -36,7 +36,7 @@
         android:paddingRight="20dp">
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/editRecipeStepTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Edit step"
@@ -47,7 +47,7 @@
             android:layout_height="20dp" />
 
         <Spinner
-            android:id="@+id/editStepSpinner"
+            android:id="@+id/editRecipeStepSpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>

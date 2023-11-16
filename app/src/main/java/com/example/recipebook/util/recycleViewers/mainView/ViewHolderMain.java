@@ -18,9 +18,9 @@ public class ViewHolderMain extends RecyclerView.ViewHolder {
 
     public ViewHolderMain(@NonNull View view) {
         super(view);
-        Title = view.findViewById(R.id.Title);
-        Description = view.findViewById(R.id.Description);
-        DeleteButton = view.findViewById(R.id.editRecyclerRecipeButton);
+        Title = view.findViewById(R.id.recipeRecyclerMainTitle);
+        Description = view.findViewById(R.id.recipeRecyclerMainDescription);
+        DeleteButton = view.findViewById(R.id.recipeRecyclerMainEditButton);
         context = view.getContext();
     }
 }

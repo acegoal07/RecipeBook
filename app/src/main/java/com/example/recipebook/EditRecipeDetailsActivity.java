@@ -22,14 +22,14 @@ public class EditRecipeDetailsActivity extends AppCompatActivity {
         String[] recipeInfo = dbHandler.readCollection(getIntent().getExtras().getInt("recipeId"));
 
         // Get title input
-        EditText titleInput = findViewById(R.id.editRecipeTitleInput);
+        EditText titleInput = findViewById(R.id.editRecipeDetailsTitleInput);
         titleInput.setText(recipeInfo[0]);
         // Get description input
-        EditText descriptionInput = findViewById(R.id.editRecipeDesciptionInput);
+        EditText descriptionInput = findViewById(R.id.editRecipeDetailsDesciptionInput);
         descriptionInput.setText(recipeInfo[1]);
 
         // Add click listener to save button
-        findViewById(R.id.editRecipeSaveButton).setOnClickListener(click -> {
+        findViewById(R.id.editRecipeDetailsSaveButton).setOnClickListener(click -> {
             // Make sure title is not empty
             if (titleInput.getText().toString().isEmpty()) {
                 // Send Toast message
@@ -57,13 +57,13 @@ public class EditRecipeDetailsActivity extends AppCompatActivity {
         });
 
         // Add click listener to cancel button
-        findViewById(R.id.editRecipeCancelButton).setOnClickListener(click -> {
+        findViewById(R.id.editRecipeDetailsCancelButton).setOnClickListener(click -> {
             // Go back to main activity
             finish();
         });
 
         // Add click listener to delete button
-        findViewById(R.id.editRecipeDeleteButton).setOnClickListener(click -> {
+        findViewById(R.id.editRecipeDetailsDeleteButton).setOnClickListener(click -> {
             new AlertDialog.Builder(this)
                     .setTitle("Delete Recipe")
                     .setMessage("Are you sure you want to delete this recipe?")

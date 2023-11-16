@@ -17,7 +17,7 @@
         android:theme="?attr/actionBarTheme">
 
         <Button
-            android:id="@+id/editRecipeCancelButton"
+            android:id="@+id/editRecipeDetailsCancelButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
@@ -37,7 +37,7 @@
         android:paddingRight="20dp">
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/editRecipeDetailsTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -50,7 +50,7 @@
             android:layout_height="20dp" />
 
         <EditText
-            android:id="@+id/editRecipeTitleInput"
+            android:id="@+id/editRecipeDetailsTitleInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -64,7 +64,7 @@
             android:layout_height="20dp" />
 
         <EditText
-            android:id="@+id/editRecipeDesciptionInput"
+            android:id="@+id/editRecipeDetailsDesciptionInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -84,7 +84,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/editRecipeDeleteButton"
+                android:id="@+id/editRecipeDetailsDeleteButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -100,7 +100,7 @@
                 android:layout_weight="1" />
 
             <Button
-                android:id="@+id/editRecipeSaveButton"
+                android:id="@+id/editRecipeDetailsSaveButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
