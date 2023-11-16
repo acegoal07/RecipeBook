@@ -1,9 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:paddingBottom="10dp">
+
+    <LinearLayout
+        android:id="@+id/recipeRecyclerViewCookView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/recipeRecyclerViewCookStepCounter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text="TextView"
+                android:textSize="24sp" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:paddingLeft="10dp"
+                android:src="@tools:sample/avatars"
+                android:tint="@color/primaryTextColor"
+                app:srcCompat="@android:drawable/ic_menu_recent_history" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/recipeRecyclerViewCookTextView1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0"
+                        android:text="Cook for "
+                        android:textSize="24sp" />
+
+                    <TextView
+                        android:id="@+id/recipeRecyclerViewCookTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="TextView"
+                        android:textSize="24sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/recipeRecyclerViewCookTextView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0"
+                        android:text="at tempreture "
+                        android:textSize="24sp" />
+
+                    <TextView
+                        android:id="@+id/recipeRecyclerViewCookTempreture"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="TextView"
+                        android:textSize="24sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/recipeRecyclerViewNormalView"
@@ -12,13 +100,8 @@
         android:orientation="horizontal"
         android:visibility="gone">
 
-        <Space
-            android:layout_width="20dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0" />
-
         <TextView
-            android:id="@+id/recipeRecyclerViewStepCounter"
+            android:id="@+id/recipeRecyclerViewNormalStepCounter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
@@ -26,7 +109,7 @@
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/recipeRecyclerViewStepInfo"
+            android:id="@+id/recipeRecyclerViewNormalStepInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="5dp"

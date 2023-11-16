@@ -16,11 +16,23 @@ public class ViewHolderView extends RecyclerView.ViewHolder {
     TextView NormalStepCounter;
     TextView NormalStep;
 
+    LinearLayout CookStepView;
+    TextView CookStepCounter;
+    TextView CookTime;
+    TextView CookTempreture;
+
     public ViewHolderView(@NonNull View view) {
         super(view);
+        // Set normal step view
         NormalStepView = view.findViewById(R.id.recipeRecyclerViewNormalView);
-        NormalStepCounter = view.findViewById(R.id.recipeRecyclerViewStepCounter);
-        NormalStep = view.findViewById(R.id.recipeRecyclerViewStepInfo);
+        NormalStepCounter = view.findViewById(R.id.recipeRecyclerViewNormalStepCounter);
+        NormalStep = view.findViewById(R.id.recipeRecyclerViewNormalStepInfo);
+        // Set cook step view
+        CookStepView = view.findViewById(R.id.recipeRecyclerViewCookView);
+        CookStepCounter = view.findViewById(R.id.recipeRecyclerViewCookStepCounter);
+        CookTime = view.findViewById(R.id.recipeRecyclerViewCookTime);
+        CookTempreture = view.findViewById(R.id.recipeRecyclerViewCookTempreture);
+        // Set context
         context = view.getContext();
     }
 }
