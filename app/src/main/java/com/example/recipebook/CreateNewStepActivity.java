@@ -29,6 +29,7 @@ public class CreateNewStepActivity extends AppCompatActivity {
                 new ToastHandler().showLongToast(this, "Step contains special characters which are not allowed");
                 return;
             }
+
             DBHandler dbHandler = new DBHandler(this);
 
             String info = dbHandler.readCollection(getIntent().getExtras().getInt("recipeId"))[2];

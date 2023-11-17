@@ -76,7 +76,7 @@ public class EditRecipeDetailsActivity extends AppCompatActivity {
                         finish();
                     })
                     .setNegativeButton("No", (dialog, which) -> {
-                        // Do nothing
+                        return;
                     })
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .show();
