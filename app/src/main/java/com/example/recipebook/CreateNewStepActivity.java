@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.widget.EditText;
 
 import com.example.recipebook.util.DBHandler;
-import com.example.recipebook.util.RecipeInfo;
 import com.example.recipebook.util.ToastHandler;
 
 public class CreateNewStepActivity extends AppCompatActivity {

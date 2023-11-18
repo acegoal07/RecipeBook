@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.example.recipebook.util.DBHandler;
-import com.example.recipebook.util.RecipeInfo;
+import com.example.recipebook.util.RecipeDetails;
 import com.example.recipebook.util.recycleViewers.recipeView.RecipeAdapterView;
 
 public class RecipeViewActivity extends AppCompatActivity {
@@ -26,17 +26,17 @@ public class RecipeViewActivity extends AppCompatActivity {
         // Get DBHandler instance
         DBHandler dbHandler = new DBHandler(this);
         // Get recipe info
-        RecipeInfo recipeInfo = dbHandler.getRecipeByID(ID);
+        RecipeDetails recipeDetails = dbHandler.getRecipeByID(ID);
 
         // Get the recipe title and set it
         TextView titleTextView = findViewById(R.id.recipeViewTitle);
-        titleTextView.setText(recipeInfo.getTitle());
+        titleTextView.setText(recipeDetails.getTitle());
         // Get the recipe description and set it
         TextView descriptionTextView = findViewById(R.id.recipeViewDescription);
-        if (recipeInfo.getDescription().isEmpty()) {
+        if (recipeDetails.getDescription().isEmpty()) {
             descriptionTextView.setVisibility(TextView.GONE);
         } else {
-            descriptionTextView.setText(recipeInfo.getDescription());
+            descriptionTextView.setText(recipeDetails.getDescription());
         }
 
         // Get Recycler view

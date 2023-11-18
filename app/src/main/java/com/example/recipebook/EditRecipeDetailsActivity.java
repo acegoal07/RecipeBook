@@ -7,7 +7,7 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.recipebook.util.DBHandler;
-import com.example.recipebook.util.RecipeInfo;
+import com.example.recipebook.util.RecipeDetails;
 import com.example.recipebook.util.ToastHandler;
 
 public class EditRecipeDetailsActivity extends AppCompatActivity {
@@ -22,12 +22,12 @@ public class EditRecipeDetailsActivity extends AppCompatActivity {
         // Get DBHandler instance
         DBHandler dbHandler = new DBHandler(this);
         // Get recipe info
-        RecipeInfo recipeInfo = dbHandler.getRecipeByID(getIntent().getExtras().getInt("recipeId"));
+        RecipeDetails recipeDetails = dbHandler.getRecipeByID(getIntent().getExtras().getInt("recipeId"));
         // Get recipe id
         ID = getIntent().getExtras().getInt("recipeId");
 
-        String tempTitle = recipeInfo.getTitle();
-        String tempDescription = recipeInfo.getDescription();
+        String tempTitle = recipeDetails.getTitle();
+        String tempDescription = recipeDetails.getDescription();
 
         // Get title input
         EditText titleInput = findViewById(R.id.editRecipeDetailsTitleInput);

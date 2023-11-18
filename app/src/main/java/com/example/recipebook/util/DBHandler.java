@@ -71,44 +71,46 @@ public class DBHandler extends SQLiteOpenHelper {
      * Reads all the recipes from the database
      * @return An ArrayList of RecipeInfo objects
      */
-    public ArrayList<RecipeInfo> getRecipes() {
-        ArrayList<RecipeInfo> recipeInfoArrayList = new ArrayList<>();
+    public ArrayList<RecipeDetails> getRecipes() {
+        ArrayList<RecipeDetails> recipeDetailsArrayList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + DB_INFO.TABLE_NAME, null);
         while (cursor.moveToNext()) {
-            int id = cursor.getInt(0);
-            String title = cursor.getString(1);
-            String description = cursor.getString(2);
-            String recipe = cursor.getString(3);
-            RecipeInfo collection = new RecipeInfo(id, title, description, recipe);
-            recipeInfoArrayList.add(collection);
+            recipeDetailsArrayList.add(
+                    new RecipeDetails(
+                            cursor.getInt(0),
+                            cursor.getString(1),
+                            cursor.getString(2),
+                            new RecipeSteps(cursor.getString(3))
+                    )
+            );
         }
         cursor.close();
         db.close();
 
-        return recipeInfoArrayList;
+        return recipeDetailsArrayList;
     }
     /**
      * Reads a recipe from the database by id
      * @param id The id of the recipe to read
      * @return The recipe
      */
-    public RecipeInfo getRecipeByID(int id) {
+    public RecipeDetails getRecipeByID(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + DB_INFO.TABLE_NAME + " WHERE " + DB_INFO.KEY_ID + " = ?", new String[] { String.valueOf(id) });
         cursor.moveToFirst();
         if (cursor.getCount() == 0) {
             return null;
         }
-        RecipeInfo recipeInfo = new RecipeInfo(
+        RecipeDetails recipeDetails = new RecipeDetails(
                 cursor.getInt(0),
                 cursor.getString(1),
                 cursor.getString(2),
-                cursor.getString(3)
+                new RecipeSteps(cursor.getString(3))
         );
         cursor.close();
         db.close();
-        return recipeInfo;
+        return recipeDetails;
     }
     /**
      * Updates the title of a recipe
@@ -142,19 +144,7 @@ public class DBHandler extends SQLiteOpenHelper {
      * @param id The id of the recipe to read the steps from
      */
     public ArrayList<StepInfo> readRecipeStepInfo(int id) {
-        ArrayList<StepInfo> stepInfoArrayList = new ArrayList<>();
-        RecipeInfo recipeInfo = getRecipeByID(id);
-        if (recipeInfo != null) {
-            if (recipeInfo.getRecipe() == null) {
-                return stepInfoArrayList;
-            }
-            for (String step : recipeInfo.getRecipe().split("!!")) {
-                String[] stepInfoBreakdown = step.split("--");
-                StepInfo stepinfo = new StepInfo(stepInfoBreakdown[1], StepInfo.convertIntToType(Integer.parseInt(stepInfoBreakdown[0])));
-                stepInfoArrayList.add(stepinfo);
-            }
-        }
-        return stepInfoArrayList;
+        return getRecipeByID(id).getRecipe().getSteps();
     }
     /**
      * Adds a new step to a recipe
@@ -175,9 +165,9 @@ public class DBHandler extends SQLiteOpenHelper {
      */
     public void removeRecipeStep(int id, int stepNum) {
         SQLiteDatabase db = this.getWritableDatabase();
-        RecipeInfo recipeInfo = getRecipeByID(id);
-        if (recipeInfo != null) {
-            String[] steps = recipeInfo.getRecipe().split("!!");
+        RecipeDetails recipeDetails = getRecipeByID(id);
+        if (recipeDetails != null) {
+            String[] steps = recipeDetails.getRecipe().getRawSteps();
             String newSteps = "";
             for (int i = 0; i < steps.length; i++) {
                 if (i != stepNum) {
@@ -198,9 +188,9 @@ public class DBHandler extends SQLiteOpenHelper {
      */
     public void updateRecipeStep(int id, int stepNum, String newStep) {
         SQLiteDatabase db = this.getWritableDatabase();
-        RecipeInfo recipeInfo = getRecipeByID(id);
-        if (recipeInfo != null) {
-            String[] steps = recipeInfo.getRecipe().split("!!");
+        RecipeDetails recipeDetails = getRecipeByID(id);
+        if (recipeDetails != null) {
+            String[] steps = recipeDetails.getRecipe().getRawSteps();
             String newSteps = "";
             for (int i = 0; i < steps.length; i++) {
                 if (i == stepNum) {

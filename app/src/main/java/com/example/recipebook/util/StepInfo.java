@@ -2,13 +2,12 @@ package com.example.recipebook.util;
 
 public class StepInfo {
     private static StepType StepType = null;
-    String step;
+    private String step;
     public enum StepType {
         NORMAL,
         COOK,
         COOL
     }
-
     /**
      * Constructor for StepInfo
      * @param step The step
@@ -17,7 +16,6 @@ public class StepInfo {
         this.step = step;
         this.StepType = type;
     }
-
     /**
      * Gets the step
      * @return The step
@@ -25,7 +23,6 @@ public class StepInfo {
     public String getStep() {
         return this.step;
     }
-
     /**
      * Gets the step type
      * @return The step type
@@ -33,7 +30,6 @@ public class StepInfo {
     public StepType getStepType() {
         return this.StepType;
     }
-
     /**
      * Converts a into type to an stepTyoe
      * @param num The int

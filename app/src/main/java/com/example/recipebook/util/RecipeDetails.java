@@ -1,10 +1,10 @@
 package com.example.recipebook.util;
 
-public class RecipeInfo {
+public class RecipeDetails {
     private int id;
     private String title;
     private String description;
-    private String recipe;
+    private RecipeSteps recipe;
 
     /**
      * Constructor for RecipeCollection
@@ -13,7 +13,7 @@ public class RecipeInfo {
      * @param description The description of the recipe collection
      * @param recipe The recipe of the recipe collection
      */
-    public RecipeInfo(int id, String title, String description, String recipe) {
+    public RecipeDetails(int id, String title, String description, RecipeSteps recipe) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -48,7 +48,7 @@ public class RecipeInfo {
      * Gets the recipe of the recipe collection
      * @return The recipe
      */
-    public String getRecipe() {
+    public RecipeSteps getRecipe() {
         return this.recipe;
     }
 }

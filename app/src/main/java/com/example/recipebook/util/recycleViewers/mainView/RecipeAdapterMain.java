@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.recipebook.EditRecipeDetailsActivity;
 import com.example.recipebook.R;
 import com.example.recipebook.RecipeViewActivity;
-import com.example.recipebook.util.RecipeInfo;
+import com.example.recipebook.util.RecipeDetails;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,16 +19,16 @@ import java.util.List;
 public class RecipeAdapterMain extends RecyclerView.Adapter<ViewHolderMain> {
     private Context context;
     private static final String TAG = "RecipeAdaptorMain";
-    public List<RecipeInfo> RecipeInfo;
+    public List<RecipeDetails> RecipeDetails;
 
     /**
      * Constructor for RecipeAdapter
      * @param applicationContext The application context
      * @param collections An ArrayList of RecipeInfo objects
      */
-    public RecipeAdapterMain(Context applicationContext, ArrayList<RecipeInfo> collections) {
+    public RecipeAdapterMain(Context applicationContext, ArrayList<RecipeDetails> collections) {
         this.context = applicationContext;
-        RecipeInfo = collections;
+        RecipeDetails = collections;
     }
 
     /**
@@ -50,24 +50,24 @@ public class RecipeAdapterMain extends RecyclerView.Adapter<ViewHolderMain> {
     @Override
     public void onBindViewHolder(ViewHolderMain holder, @SuppressLint("RecyclerView") int position) {
         // Set data for recipe collection
-        holder.Title.setText(RecipeInfo.get(position).getTitle());
-        if (RecipeInfo.get(position).getDescription().isEmpty()) {
+        holder.Title.setText(RecipeDetails.get(position).getTitle());
+        if (RecipeDetails.get(position).getDescription().isEmpty()) {
             holder.Description.setVisibility(RecyclerView.GONE);
         } else {
-            holder.Description.setText(RecipeInfo.get(position).getDescription());
+            holder.Description.setText(RecipeDetails.get(position).getDescription());
         }
         // Set click listener for delete button
         holder.DeleteButton.setOnClickListener(v -> {
             Intent Intent = new Intent(v.getContext(), EditRecipeDetailsActivity.class);
-            Intent.putExtra("recipeId", RecipeInfo.get(position).getId());
+            Intent.putExtra("recipeId", RecipeDetails.get(position).getId());
             Intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             v.getContext().startActivity(Intent);
         });
         // Set click listener for recipe item
         holder.itemView.setOnClickListener(v -> {
             Intent Intent = new Intent(v.getContext(), RecipeViewActivity.class);
-            Intent.putExtra("recipeId", RecipeInfo.get(position).getId());
-            System.out.println(RecipeInfo.get(position).getId());
+            Intent.putExtra("recipeId", RecipeDetails.get(position).getId());
+            System.out.println(RecipeDetails.get(position).getId());
             Intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             v.getContext().startActivity(Intent);
         });
@@ -79,6 +79,6 @@ public class RecipeAdapterMain extends RecyclerView.Adapter<ViewHolderMain> {
      */
     @Override
     public int getItemCount() {
-        return RecipeInfo.size();
+        return RecipeDetails.size();
     }
 }
