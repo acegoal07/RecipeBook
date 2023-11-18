@@ -9,45 +9,46 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.example.recipebook.util.DBHandler;
+import com.example.recipebook.util.RecipeInfo;
 import com.example.recipebook.util.recycleViewers.recipeView.RecipeAdapterView;
 
 public class RecipeViewActivity extends AppCompatActivity {
 
     private DBHandler dbHandler = new DBHandler(this);
-    private int id;
+    private int ID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_view);
         // Set Id
-        id = getIntent().getExtras().getInt("recipeId");
+        ID = getIntent().getExtras().getInt("recipeId");
         // Get DBHandler instance
         DBHandler dbHandler = new DBHandler(this);
         // Get recipe info
-        String[] recipeInfo = dbHandler.readCollection(id);
+        RecipeInfo recipeInfo = dbHandler.getRecipeByID(ID);
 
         // Get the recipe title and set it
         TextView titleTextView = findViewById(R.id.recipeViewTitle);
-        titleTextView.setText(recipeInfo[0]);
+        titleTextView.setText(recipeInfo.getTitle());
         // Get the recipe description and set it
         TextView descriptionTextView = findViewById(R.id.recipeViewDescription);
-        if (recipeInfo[1].isEmpty()) {
+        if (recipeInfo.getDescription().isEmpty()) {
             descriptionTextView.setVisibility(TextView.GONE);
         } else {
-            descriptionTextView.setText(recipeInfo[1]);
+            descriptionTextView.setText(recipeInfo.getDescription());
         }
 
         // Get Recycler view
         RecyclerView recyclerView = findViewById(R.id.recipeViewRecipeRecycler);
         // Set layout manager
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new RecipeAdapterView(getApplicationContext(), dbHandler.readCollectionsStepInfo(id)));
+        recyclerView.setAdapter(new RecipeAdapterView(getApplicationContext(), dbHandler.readRecipeStepInfo(ID)));
 
         // Get create new step button
         findViewById(R.id.recipeViewAddNewStepButton).setOnClickListener(click -> {
             Intent intent = new Intent(this, CreateNewStepActivity.class);
-            intent.putExtra("recipeId", id);
+            intent.putExtra("recipeId", ID);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
 
@@ -64,6 +65,6 @@ public class RecipeViewActivity extends AppCompatActivity {
         super.onResume();
         RecyclerView recyclerView = findViewById(R.id.recipeViewRecipeRecycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new RecipeAdapterView(getApplicationContext(), dbHandler.readCollectionsStepInfo(getIntent().getExtras().getInt("recipeId"))));
+        recyclerView.setAdapter(new RecipeAdapterView(getApplicationContext(), dbHandler.readRecipeStepInfo(ID)));
     }
 }

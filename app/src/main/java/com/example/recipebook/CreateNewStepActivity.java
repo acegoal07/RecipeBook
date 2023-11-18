@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.widget.EditText;
 
 import com.example.recipebook.util.DBHandler;
-import com.example.recipebook.util.StepInfo;
+import com.example.recipebook.util.RecipeInfo;
 import com.example.recipebook.util.ToastHandler;
 
 public class CreateNewStepActivity extends AppCompatActivity {
+
+    private int ID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +20,9 @@ public class CreateNewStepActivity extends AppCompatActivity {
 
         // Get input fields
         EditText stepInput = findViewById(R.id.createNewStepInput);
+
+        // Get recipe id
+        ID = getIntent().getExtras().getInt("recipeId");
 
         // Get save button
         findViewById(R.id.createNewStepSaveButton).setOnClickListener(click -> {
@@ -32,7 +37,7 @@ public class CreateNewStepActivity extends AppCompatActivity {
 
             DBHandler dbHandler = new DBHandler(this);
 
-            String info = dbHandler.readCollection(getIntent().getExtras().getInt("recipeId"))[2];
+            String info = dbHandler.getRecipeByID(ID).getRecipe().toString();
             if (info == null) {
                 info = "0--"+stepInput.getText().toString();
             } else {
@@ -41,7 +46,7 @@ public class CreateNewStepActivity extends AppCompatActivity {
                 info = stringBuilder.toString();
             }
 
-            dbHandler.addNewStep(getIntent().getExtras().getInt("recipeId"), info);
+            dbHandler.addNewRecipeStep(ID, info);
             finish();
         });
 

@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.mainRecipeRecycler);
         // Set layout manager
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new RecipeAdapterMain(getApplicationContext(),dbHandler.readCollections()));
+        recyclerView.setAdapter(new RecipeAdapterMain(getApplicationContext(), dbHandler.getRecipes()));
 
         findViewById(R.id.mainNewRecipeButton).setOnClickListener(click -> {
             Intent Intent = new Intent(this, CreateNewRecipeActivity.class);
@@ -36,6 +36,6 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         RecyclerView recyclerView = findViewById(R.id.mainRecipeRecycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new RecipeAdapterMain(getApplicationContext(),dbHandler.readCollections()));
+        recyclerView.setAdapter(new RecipeAdapterMain(getApplicationContext(), dbHandler.getRecipes()));
     }
 }
