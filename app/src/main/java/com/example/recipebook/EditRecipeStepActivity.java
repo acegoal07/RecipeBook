@@ -43,11 +43,11 @@ public class EditRecipeStepActivity extends AppCompatActivity implements Adapter
         }
 
         // Set Spinner
-        Spinner spinner = findViewById(R.id.editRecipeStepSpinner);
-        spinner.setOnItemSelectedListener(this);
-        ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, stepNames);
-        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(aa);
+        Spinner stepSpinner = findViewById(R.id.editRecipeStepSpinner);
+        stepSpinner.setOnItemSelectedListener(this);
+        ArrayAdapter stepSpinnerArrayAdapter = new ArrayAdapter(this, R.layout.spinner, stepNames);
+        stepSpinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
+        stepSpinner.setAdapter(stepSpinnerArrayAdapter);
 
         // Get step edit text
         EditText stepText = findViewById(R.id.editRecipeStepStep);
@@ -56,8 +56,8 @@ public class EditRecipeStepActivity extends AppCompatActivity implements Adapter
         // Listener for save button
         findViewById(R.id.editRecipeStepSaveButton).setOnClickListener(click -> {
             // add a check to see if any changes have been made
-            if (stepText.getText().toString().equals(steps.get(spinner.getSelectedItemPosition()).getStep())) {
-                new ToastHandler().showLongToast(this, "No changes have been made");
+            if (stepText.getText().toString().equals(steps.get(stepSpinner.getSelectedItemPosition()).getStep())) {
+                new ToastHandler(this).showLongToast("No changes have been made");
                 return;
             }
 
@@ -66,7 +66,7 @@ public class EditRecipeStepActivity extends AppCompatActivity implements Adapter
             // Get step text
             String newStep = stepEditText.getText().toString();
             // Get selected step
-            int selectedStep = spinner.getSelectedItemPosition();
+            int selectedStep = stepSpinner.getSelectedItemPosition();
             // Update step
             dbHandler.updateRecipeStep(ID, selectedStep, "0::"+newStep);
             // Finish activity
@@ -80,7 +80,7 @@ public class EditRecipeStepActivity extends AppCompatActivity implements Adapter
                     .setMessage("Are you sure you want to delete this Step?")
                     .setPositiveButton("Yes", (dialog, which) -> {
                         // Get selected step
-                        int selectedStep = spinner.getSelectedItemPosition();
+                        int selectedStep = stepSpinner.getSelectedItemPosition();
                         // Delete step
                         dbHandler.removeRecipeStep(ID, selectedStep);
                         // Finish activity

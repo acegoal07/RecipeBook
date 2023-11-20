@@ -25,19 +25,19 @@ public class CreateNewRecipeActivity extends AppCompatActivity {
             // Make sure title is not empty
             if (titleInput.getText().toString().isEmpty()) {
                 // Send Toast message
-                new ToastHandler().showLongToast(this, "Please fill in the title field");
+                new ToastHandler(this).showLongToast("Please fill in the title field");
                 return;
             }
             // Check length of title
             if (titleInput.getText().toString().length() > 24) {
                 // Send Toast message
-                new ToastHandler().showLongToast(this, "Title must be 24 characters long or less");
+                new ToastHandler(this).showLongToast("Title must be 24 characters long or less");
                 return;
             }
             // Check length of description
             if (descriptionInput.getText().toString().length() > 50) {
                 // Send Toast message
-                new ToastHandler().showLongToast(this, "Description must be 50 characters long or less");
+                new ToastHandler(this).showLongToast("Description must be 50 characters long or less");
                 return;
             }
             // Get DBHandler instance
@@ -45,7 +45,7 @@ public class CreateNewRecipeActivity extends AppCompatActivity {
             // Add new recipe
             dbHandler.addNewRecipe(titleInput.getText().toString(), descriptionInput.getText().toString());
             // Send Toast message
-            new ToastHandler().showLongToast(this, "Recipe Created");
+            new ToastHandler(this).showLongToast("Recipe Created");
             // Go back to main activity
             finish();
         });

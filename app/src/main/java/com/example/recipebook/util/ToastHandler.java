@@ -7,7 +7,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class ToastHandler extends AppCompatActivity {
 
-    public ToastHandler() {
+    private Context context;
+
+    public ToastHandler(Context context) {
+        this.context = context;
     }
 
     /**
@@ -15,7 +18,7 @@ public class ToastHandler extends AppCompatActivity {
      * @param context the context of the activity
      * @param message the message to be displayed
      */
-    public void showLongToast(Context context, String message) {
+    public void showLongToast(String message) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 
@@ -24,7 +27,7 @@ public class ToastHandler extends AppCompatActivity {
      * @param context the context of the activity
      * @param message the message to be displayed
      */
-    public void showShortToast(Context context, String message) {
+    public void showShortToast(String message) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 }

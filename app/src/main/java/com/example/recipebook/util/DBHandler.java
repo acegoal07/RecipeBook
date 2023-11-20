@@ -211,6 +211,35 @@ public class DBHandler extends SQLiteOpenHelper {
             db.update(DB_INFO.TABLE_NAME, values, DB_INFO.KEY_ID + " = ?", new String[] { String.valueOf(id) });
             db.close();
         }
-
+    }
+    /**
+     * Moves a step in a recipe to a new position
+     * @param id The id of the recipe to move the step in
+     * @param oldStepNum The step number to move
+     * @param newStepNum The new position of the step
+     */
+    public void moveRecipeStep(int id, int oldStepNum, int newStepNum) {
+        RecipeDetails recipeDetails = getRecipeByID(id);
+        if (recipeDetails != null) {
+            String[] steps = recipeDetails.getRecipe().getRawSteps();
+            String temp = steps[oldStepNum];
+            StringBuilder newSteps = new StringBuilder();
+            for (int i = 0; i < steps.length; i++) {
+                if (i != oldStepNum) {
+                    if (i != 0) {
+                        newSteps.append("!!");
+                    }
+                    newSteps.append(steps[i]);
+                    if (i == newStepNum) {
+                        newSteps.append("!!"+temp);
+                    }
+                }
+            }
+            ContentValues values = new ContentValues();
+            values.put(DB_INFO.KEY_RECIPE, newSteps.toString());
+            SQLiteDatabase db = this.getWritableDatabase();
+            db.update(DB_INFO.TABLE_NAME, values, DB_INFO.KEY_ID + " = ?", new String[] { String.valueOf(id) });
+            db.close();
+        }
     }
 }

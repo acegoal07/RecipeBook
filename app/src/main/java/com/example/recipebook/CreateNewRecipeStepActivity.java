@@ -26,11 +26,11 @@ public class CreateNewRecipeStepActivity extends AppCompatActivity {
         // Get save button
         findViewById(R.id.createNewStepSaveButton).setOnClickListener(click -> {
             if (stepInput.getText().toString().isEmpty()) {
-                new ToastHandler().showLongToast(this, "Please enter a step");
+                new ToastHandler(this).showLongToast("Please enter a step");
                 return;
             }
             if (stepInput.getText().toString().contains("!!") || stepInput.getText().toString().contains("::")) {
-                new ToastHandler().showLongToast(this, "Step contains special characters which are not allowed");
+                new ToastHandler(this).showLongToast("Step contains special characters which are not allowed");
                 return;
             }
 

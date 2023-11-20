@@ -41,7 +41,7 @@ public class EditRecipeDetailsActivity extends AppCompatActivity {
             // Check if any changes were made
             if (titleInput.getText().toString().equals(tempTitle) && descriptionInput.getText().toString().equals(tempDescription)) {
                 // Send Toast message
-                new ToastHandler().showLongToast(this, "No changes made");
+                new ToastHandler(this).showLongToast("No changes made");
                 return;
             } else {
                 // Check if title was changed
@@ -49,13 +49,13 @@ public class EditRecipeDetailsActivity extends AppCompatActivity {
                     // Make sure title is not empty
                     if (titleInput.getText().toString().isEmpty()) {
                         // Send Toast message
-                        new ToastHandler().showLongToast(this, "Please fill in the title field");
+                        new ToastHandler(this).showLongToast("Please fill in the title field");
                         return;
                     }
                     // Check length of title
                     if (titleInput.getText().toString().length() > 24) {
                         // Send Toast message
-                        new ToastHandler().showLongToast(this, "Title must be 24 characters long or less");
+                        new ToastHandler(this).showLongToast("Title must be 24 characters long or less");
                         return;
                     }
                     // Update database
@@ -66,7 +66,7 @@ public class EditRecipeDetailsActivity extends AppCompatActivity {
                     // Check length of description
                     if (descriptionInput.getText().toString().length() > 50) {
                         // Send Toast message
-                        new ToastHandler().showLongToast(this, "Description must be 50 characters long or less");
+                        new ToastHandler(this).showLongToast("Description must be 50 characters long or less");
                         return;
                     }
                     // Update database
@@ -74,7 +74,7 @@ public class EditRecipeDetailsActivity extends AppCompatActivity {
                 }
             }
             // Send toast
-            new ToastHandler().showLongToast(this, "Changes Saved");
+            new ToastHandler(this).showLongToast("Changes Saved");
             // Go back to main activity
             finish();
         });
@@ -94,7 +94,7 @@ public class EditRecipeDetailsActivity extends AppCompatActivity {
                         // Delete recipe
                         dbHandler.removeRecipeById(ID);
                         // Send toast
-                        new ToastHandler().showLongToast(this, "Recipe Deleted");
+                        new ToastHandler(this).showLongToast("Recipe Deleted");
                         // Go back to main activity
                         finish();
                     })

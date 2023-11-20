@@ -1,7 +1,7 @@
 package com.example.recipebook.util;
 
 public class StepInfo {
-    private static StepType StepType = null;
+    private static StepType StepType;
     private String step;
     public enum StepType {
         NORMAL,
@@ -45,6 +45,23 @@ public class StepInfo {
                 return StepType.COOL;
             default:
                 return StepType.NORMAL;
+        }
+    }
+    /**
+     * Converts a step type to an int
+     * @param type The step type
+     * @return The int
+     */
+    public static int convertTypeToInt(StepType type) {
+        switch (type) {
+            case NORMAL:
+                return 0;
+            case COOK:
+                return 1;
+            case COOL:
+                return 2;
+            default:
+                return 0;
         }
     }
 }

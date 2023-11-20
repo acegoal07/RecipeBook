@@ -61,7 +61,7 @@ public class RecipeViewActivity extends AppCompatActivity {
         // Add listener to edit steps button
         findViewById(R.id.recipeViewEditStepsButton).setOnClickListener(click -> {
             if (dbHandler.getRecipeByID(ID).getRecipe().getStepCount() == 0) {
-                new ToastHandler().showLongToast(this, "No steps to edit");
+                new ToastHandler(this).showLongToast("No steps to edit");
                 return;
             }
             Intent intent = new Intent(this, EditRecipeStepActivity.class);
