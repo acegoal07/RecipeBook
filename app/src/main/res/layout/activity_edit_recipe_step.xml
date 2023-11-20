@@ -22,8 +22,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:backgroundTint="@color/colorSecondary"
-            android:text="Button"
-            android:textColor="@color/primaryTextColor" />
+            android:text="Cancel"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="24sp" />
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -50,6 +51,56 @@
             android:id="@+id/editRecipeStepSpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <EditText
+            android:id="@+id/editRecipeStepStep"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Step"
+            android:inputType="textMultiLine"
+            android:textSize="24sp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_weight="0" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/editRecipeStepDeleteStepButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@android:color/holo_red_dark"
+                android:text="Delete Step"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="24sp" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/editRecipeStepSaveButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="Save"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="24sp" />
+        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

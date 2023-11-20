@@ -7,6 +7,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class ToastHandler extends AppCompatActivity {
 
+    public ToastHandler() {
+    }
+
     /**
      * Shows a long toast message
      * @param context the context of the activity

@@ -46,6 +46,9 @@ public class RecipeAdapterView extends RecyclerView.Adapter<ViewHolderView> {
      */
     @Override
     public void onBindViewHolder(ViewHolderView holder, @SuppressLint("RecyclerView") int position) {
+        if (RecipeSteps == null) {
+            return;
+        }
         switch (RecipeSteps.get(position).getStepType()) {
             case NORMAL:
                 holder.NormalStepView.setVisibility(RecyclerView.VISIBLE);
@@ -60,13 +63,15 @@ public class RecipeAdapterView extends RecyclerView.Adapter<ViewHolderView> {
                 break;
         }
     }
-
     /**
      * Returns the number of items in the recycler view
      * @return int
      */
     @Override
     public int getItemCount() {
+        if (RecipeSteps == null) {
+            return 0;
+        }
         return RecipeSteps.size();
     }
 }

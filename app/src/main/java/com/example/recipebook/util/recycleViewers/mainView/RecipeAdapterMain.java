@@ -67,7 +67,6 @@ public class RecipeAdapterMain extends RecyclerView.Adapter<ViewHolderMain> {
         holder.itemView.setOnClickListener(v -> {
             Intent Intent = new Intent(v.getContext(), RecipeViewActivity.class);
             Intent.putExtra("recipeId", RecipeDetails.get(position).getId());
-            System.out.println(RecipeDetails.get(position).getId());
             Intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             v.getContext().startActivity(Intent);
         });

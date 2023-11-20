@@ -8,14 +8,14 @@ import android.widget.EditText;
 import com.example.recipebook.util.DBHandler;
 import com.example.recipebook.util.ToastHandler;
 
-public class CreateNewStepActivity extends AppCompatActivity {
+public class CreateNewRecipeStepActivity extends AppCompatActivity {
 
     private int ID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_new_step);
+        setContentView(R.layout.activity_create_new_recipe_step);
 
         // Get input fields
         EditText stepInput = findViewById(R.id.createNewStepInput);
@@ -29,19 +29,19 @@ public class CreateNewStepActivity extends AppCompatActivity {
                 new ToastHandler().showLongToast(this, "Please enter a step");
                 return;
             }
-            if (stepInput.getText().toString().contains("!!") || stepInput.getText().toString().contains("--")) {
+            if (stepInput.getText().toString().contains("!!") || stepInput.getText().toString().contains("::")) {
                 new ToastHandler().showLongToast(this, "Step contains special characters which are not allowed");
                 return;
             }
 
             DBHandler dbHandler = new DBHandler(this);
 
-            String info = dbHandler.getRecipeByID(ID).getRecipe().toString();
-            if (info == null) {
-                info = "0--"+stepInput.getText().toString();
+            String info = dbHandler.getRecipeByID(ID).getRecipe().getRawStepsString();
+            if (info == null || info.isEmpty()) {
+                info = "0::"+stepInput.getText();
             } else {
                 StringBuilder stringBuilder = new StringBuilder(info);
-                stringBuilder.append("!!0--"+stepInput.getText().toString());
+                stringBuilder.append("!!0::"+stepInput.getText());
                 info = stringBuilder.toString();
             }
 

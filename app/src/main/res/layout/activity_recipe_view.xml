@@ -52,17 +52,38 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="20dp" />
 
-        <Button
-            android:id="@+id/recipeViewAddNewStepButton"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:backgroundTint="@color/colorPrimary"
-            android:text="Add new step"
-            android:textColor="@color/primaryTextColor"
-            android:textSize="24sp" />
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/recipeViewEditStepsButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="Edit steps"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="24sp" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/recipeViewAddNewStepButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="Add new step"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="24sp" />
+        </LinearLayout>
 
         <Space
             android:layout_width="match_parent"
@@ -72,6 +93,7 @@
             android:id="@+id/recipeViewRecipeRecycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
     </LinearLayout>
 
 </LinearLayout>

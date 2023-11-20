@@ -110,6 +110,7 @@ public class DBHandler extends SQLiteOpenHelper {
         );
         cursor.close();
         db.close();
+
         return recipeDetails;
     }
     /**
@@ -164,18 +165,21 @@ public class DBHandler extends SQLiteOpenHelper {
      * @param stepNum The step number to remove
      */
     public void removeRecipeStep(int id, int stepNum) {
-        SQLiteDatabase db = this.getWritableDatabase();
         RecipeDetails recipeDetails = getRecipeByID(id);
         if (recipeDetails != null) {
             String[] steps = recipeDetails.getRecipe().getRawSteps();
-            String newSteps = "";
+            StringBuilder newSteps = new StringBuilder();
             for (int i = 0; i < steps.length; i++) {
                 if (i != stepNum) {
-                    newSteps += steps[i] + "!!";
+                    if (i != 0 && newSteps.length() != 0) {
+                        newSteps.append("!!");
+                    }
+                    newSteps.append(steps[i]);
                 }
             }
             ContentValues values = new ContentValues();
-            values.put(DB_INFO.KEY_RECIPE, newSteps);
+            values.put(DB_INFO.KEY_RECIPE, newSteps.toString());
+            SQLiteDatabase db = this.getWritableDatabase();
             db.update(DB_INFO.TABLE_NAME, values, DB_INFO.KEY_ID + " = ?", new String[] { String.valueOf(id) });
             db.close();
         }
@@ -187,22 +191,26 @@ public class DBHandler extends SQLiteOpenHelper {
      * @param newStep The new step
      */
     public void updateRecipeStep(int id, int stepNum, String newStep) {
-        SQLiteDatabase db = this.getWritableDatabase();
         RecipeDetails recipeDetails = getRecipeByID(id);
         if (recipeDetails != null) {
             String[] steps = recipeDetails.getRecipe().getRawSteps();
-            String newSteps = "";
+            StringBuilder newSteps = new StringBuilder();
             for (int i = 0; i < steps.length; i++) {
+                if (i != 0) {
+                    newSteps.append("!!");
+                }
                 if (i == stepNum) {
-                    newSteps += newStep + "!!";
+                    newSteps.append(newStep);
                 } else {
-                    newSteps += steps[i] + "!!";
+                    newSteps.append(steps[i]);
                 }
             }
             ContentValues values = new ContentValues();
-            values.put(DB_INFO.KEY_RECIPE, newSteps);
+            values.put(DB_INFO.KEY_RECIPE, newSteps.toString());
+            SQLiteDatabase db = this.getWritableDatabase();
             db.update(DB_INFO.TABLE_NAME, values, DB_INFO.KEY_ID + " = ?", new String[] { String.valueOf(id) });
             db.close();
         }
+
     }
 }
