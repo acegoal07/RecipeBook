@@ -44,11 +44,9 @@ public class CreateNewRecipeStepActivity extends AppCompatActivity implements Ad
                 new ToastHandler(this).showLongToast("Please enter a step");
                 return;
             }
-            // Create a pattern check for any special characters
-            Pattern regex = Pattern.compile("[^A-Za-z0-9]");
-            Matcher matcher = regex.matcher(stepInput.getText().toString());
+
             // Check if there are any special characters and display a toast if there are
-            if (matcher.find()) {
+            if (stepInput.getText().toString().matches("[^A-Za-z0-9]")) {
                 new ToastHandler(this).showLongToast("Step contains special characters which are not allowed");
                 return;
             }

@@ -21,17 +21,21 @@ public class EditRecipeDetailsActivity extends AppCompatActivity {
 
         // Get DBHandler instance
         DBHandler dbHandler = new DBHandler(this);
+
         // Get recipe info
         RecipeDetails recipeDetails = dbHandler.getRecipeByID(getIntent().getExtras().getInt("recipeId"));
+
         // Get recipe id
         ID = getIntent().getExtras().getInt("recipeId");
 
+        // Get temp title and description
         String tempTitle = recipeDetails.getTitle();
         String tempDescription = recipeDetails.getDescription();
 
         // Get title input
         EditText titleInput = findViewById(R.id.editRecipeDetailsTitleInput);
         titleInput.setText(tempTitle);
+
         // Get description input
         EditText descriptionInput = findViewById(R.id.editRecipeDetailsDesciptionInput);
         descriptionInput.setText(tempDescription);
@@ -58,6 +62,12 @@ public class EditRecipeDetailsActivity extends AppCompatActivity {
                         new ToastHandler(this).showLongToast("Title must be 24 characters long or less");
                         return;
                     }
+                    // Check if there are any special characters and display a toast if there are
+                    if (titleInput.getText().toString().matches("[^A-Za-z0-9]")) {
+                        // Send Toast message
+                        new ToastHandler(this).showLongToast("Title contains special characters which are not allowed");
+                        return;
+                    }
                     // Update database
                     dbHandler.updateRecipeTitle(ID, titleInput.getText().toString());
                 }
@@ -67,6 +77,12 @@ public class EditRecipeDetailsActivity extends AppCompatActivity {
                     if (descriptionInput.getText().toString().length() > 50) {
                         // Send Toast message
                         new ToastHandler(this).showLongToast("Description must be 50 characters long or less");
+                        return;
+                    }
+                    // Check if there are any special characters and display a toast if there are
+                    if (descriptionInput.getText().toString().matches("[^A-Za-z0-9]")) {
+                        // Send Toast message
+                        new ToastHandler(this).showLongToast("Description contains special characters which are not allowed");
                         return;
                     }
                     // Update database

@@ -60,11 +60,20 @@ public class EditRecipeStepActivity extends AppCompatActivity implements Adapter
                 new ToastHandler(this).showLongToast("No changes have been made");
                 return;
             }
-
             // Get step edit text
             EditText stepEditText = findViewById(R.id.editRecipeStepStep);
             // Get step text
             String newStep = stepEditText.getText().toString();
+            // Check if the step input is empty and display a toast if it is
+            if (newStep.isEmpty()) {
+                new ToastHandler(this).showLongToast("Please enter a step");
+                return;
+            }
+            // Check if the step input is empty and display a toast if it is
+            if (newStep.toString().matches("[^A-Za-z0-9]")) {
+                new ToastHandler(this).showLongToast("Step contains special characters which are not allowed");
+                return;
+            }
             // Get selected step
             int selectedStep = stepSpinner.getSelectedItemPosition();
             // Update step
@@ -105,7 +114,6 @@ public class EditRecipeStepActivity extends AppCompatActivity implements Adapter
         RecipeSteps recipe = new DBHandler(this).getRecipeByID(ID).getRecipe();
         // Get steps data
         ArrayList<StepInfo> steps = recipe.getSteps();
-
         // Get step edit text
         EditText stepText = findViewById(R.id.editRecipeStepStep);
         stepText.setText(steps.get(position).getStep());

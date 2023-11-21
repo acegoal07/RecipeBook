@@ -46,18 +46,13 @@ public class CreateNewRecipeActivity extends AppCompatActivity {
                 return;
             }
 
-            // Create a patter check for any special characters
-            Pattern regex = Pattern.compile("[^A-Za-z0-9]");
-            Matcher matcherTitle = regex.matcher(titleInput.getText().toString());
-            Matcher matcherDescription = regex.matcher(descriptionInput.getText().toString());
-
             // Check if there are any special characters and display a toast if there are
-            if (matcherTitle.find()) {
+            if (titleInput.getText().toString().matches("[^A-Za-z0-9]")) {
                 // Send Toast message
                 new ToastHandler(this).showLongToast("Title contains special characters which are not allowed");
                 return;
             }
-            if (matcherDescription.find()) {
+            if (descriptionInput.getText().toString().matches("[^A-Za-z0-9]")) {
                 // Send Toast message
                 new ToastHandler(this).showLongToast("Description contains special characters which are not allowed");
                 return;
