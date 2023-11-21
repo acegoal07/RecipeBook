@@ -8,7 +8,7 @@
     tools:context=".CreateNewRecipeStepActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/createNewStepToolbar"
+        android:id="@+id/createNewRecipeStepToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
@@ -37,7 +37,7 @@
         android:paddingRight="20dp">
 
         <TextView
-            android:id="@+id/createNewStepTextView"
+            android:id="@+id/createNewRecipeStepTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Create new step"
@@ -48,8 +48,18 @@
             android:layout_width="match_parent"
             android:layout_height="20dp" />
 
+        <Spinner
+            android:id="@+id/createNewRecipeStepSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
         <EditText
-            android:id="@+id/createNewStepInput"
+            android:id="@+id/createNewRecipeStepInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -62,7 +72,7 @@
             android:layout_height="40dp" />
 
         <Button
-            android:id="@+id/createNewStepSaveButton"
+            android:id="@+id/createNewRecipeStepSaveButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

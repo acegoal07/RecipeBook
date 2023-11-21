@@ -8,6 +8,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.recipebook.util.DBHandler;
 import com.example.recipebook.util.ToastHandler;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class CreateNewRecipeActivity extends AppCompatActivity {
 
     @Override
@@ -28,18 +31,37 @@ public class CreateNewRecipeActivity extends AppCompatActivity {
                 new ToastHandler(this).showLongToast("Please fill in the title field");
                 return;
             }
+
             // Check length of title
             if (titleInput.getText().toString().length() > 24) {
                 // Send Toast message
                 new ToastHandler(this).showLongToast("Title must be 24 characters long or less");
                 return;
             }
+
             // Check length of description
             if (descriptionInput.getText().toString().length() > 50) {
                 // Send Toast message
                 new ToastHandler(this).showLongToast("Description must be 50 characters long or less");
                 return;
             }
+
+            // Create a patter check for any special characters
+            Pattern regex = Pattern.compile("[^A-Za-z0-9]");
+            Matcher matcherTitle = regex.matcher(titleInput.getText().toString());
+            Matcher matcherDescription = regex.matcher(descriptionInput.getText().toString());
+            // Check if there are any special characters and display a toast if there are
+            if (matcherTitle.find()) {
+                // Send Toast message
+                new ToastHandler(this).showLongToast("Title contains special characters which are not allowed");
+                return;
+            }
+            if (matcherDescription.find()) {
+                // Send Toast message
+                new ToastHandler(this).showLongToast("Description contains special characters which are not allowed");
+                return;
+            }
+
             // Get DBHandler instance
             DBHandler dbHandler = new DBHandler(this);
             // Add new recipe

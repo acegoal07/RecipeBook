@@ -56,6 +56,10 @@ public class RecipeAdapterView extends RecyclerView.Adapter<ViewHolderView> {
                 holder.NormalStep.setText(RecipeSteps.get(position).getStep());
                 break;
             case COOK:
+                holder.CookStepView.setVisibility(RecyclerView.VISIBLE);
+                holder.CookStepCounter.setText("Step " + (position + 1)+ ":");
+                holder.CookTime.setText(RecipeSteps.get(position).getTime());
+                holder.CookTempreture.setText(RecipeSteps.get(position).getCookTemperature());
                 break;
             case COOL:
                 break;

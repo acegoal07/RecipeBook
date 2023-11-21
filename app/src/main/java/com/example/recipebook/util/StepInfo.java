@@ -3,6 +3,9 @@ package com.example.recipebook.util;
 public class StepInfo {
     private static StepType StepType;
     private String step;
+    /**
+     * Enum for step type
+     */
     public enum StepType {
         NORMAL,
         COOK,
@@ -30,6 +33,21 @@ public class StepInfo {
     public StepType getStepType() {
         return this.StepType;
     }
+    /**
+     * Gets the time
+     * @return The time
+     */
+    public String getTime() {
+        return this.step.split("%%")[0];
+    }
+    /**
+     * Gets the cook tempreture
+     * @return The cook tempreture
+     */
+    public String getCookTemperature() {
+        return this.step.split("%%")[1];
+    }
+
     /**
      * Converts a into type to an stepTyoe
      * @param num The int
