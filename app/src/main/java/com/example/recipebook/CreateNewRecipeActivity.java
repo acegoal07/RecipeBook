@@ -50,6 +50,7 @@ public class CreateNewRecipeActivity extends AppCompatActivity {
             Pattern regex = Pattern.compile("[^A-Za-z0-9]");
             Matcher matcherTitle = regex.matcher(titleInput.getText().toString());
             Matcher matcherDescription = regex.matcher(descriptionInput.getText().toString());
+
             // Check if there are any special characters and display a toast if there are
             if (matcherTitle.find()) {
                 // Send Toast message
