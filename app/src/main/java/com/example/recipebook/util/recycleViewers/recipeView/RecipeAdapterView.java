@@ -61,10 +61,6 @@ public class RecipeAdapterView extends RecyclerView.Adapter<ViewHolderView> {
                 holder.CookTime.setText(RecipeSteps.get(position).getTime());
                 holder.CookTempreture.setText(RecipeSteps.get(position).getCookTemperature());
                 break;
-            case COOL:
-                break;
-            default:
-                break;
         }
     }
     /**

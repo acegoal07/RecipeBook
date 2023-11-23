@@ -12,9 +12,6 @@ import android.widget.Spinner;
 import com.example.recipebook.util.DBHandler;
 import com.example.recipebook.util.ToastHandler;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class CreateNewRecipeStepActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private int ID;
@@ -29,42 +26,61 @@ public class CreateNewRecipeStepActivity extends AppCompatActivity implements Ad
         // Get input fields
         EditText stepInput = findViewById(R.id.createNewRecipeStepInput);
         // Get Spinner
-        Spinner stepSpinner = findViewById(R.id.createNewRecipeStepSpinner);
+        Spinner stepTypeSpinner = findViewById(R.id.createNewRecipeStepSpinner);
+        // Get Symbol Spinner
+        Spinner symbolSpinner = findViewById(R.id.createNewRecipeStepCookSymbolSpinner);
+        // Get Cook Time Inputs
+        EditText cookTimeHourInput = findViewById(R.id.createNewRecipeCookHourInput);
+        EditText cookTimeMinuteInput = findViewById(R.id.createNewRecipeCookMinuteInput);
+        // Get Cook Temperature Input
+        EditText cookTemperatureInput = findViewById(R.id.createNewRecipeStepCookTemperatureInput);
 
-        // Set Spinner
-        stepSpinner.setOnItemSelectedListener(this);
-        ArrayAdapter stepSpinnerArrayAdapter = new ArrayAdapter(this, R.layout.spinner, new String[]{"Normal"});
+        // Set Spinners
+        stepTypeSpinner.setOnItemSelectedListener(this);
+        ArrayAdapter stepSpinnerArrayAdapter = ArrayAdapter.createFromResource(this, R.array.recipe_step_types, R.layout.spinner);
         stepSpinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
-        stepSpinner.setAdapter(stepSpinnerArrayAdapter);
+        stepTypeSpinner.setAdapter(stepSpinnerArrayAdapter);
+
+        ArrayAdapter symbolSpinnerArrayAdapter = ArrayAdapter.createFromResource(this, R.array.temperature_symbols, R.layout.spinner);
+        symbolSpinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
+        symbolSpinner.setAdapter(symbolSpinnerArrayAdapter);
+
 
         // Get save button
         findViewById(R.id.createNewRecipeStepSaveButton).setOnClickListener(click -> {
-            // Check if the step input is empty and display a toast if it is
-            if (stepInput.getText().toString().isEmpty()) {
-                new ToastHandler(this).showLongToast("Please enter a step");
-                return;
-            }
-
-            // Check if there are any special characters and display a toast if there are
-            if (stepInput.getText().toString().matches("[^A-Za-z0-9]")) {
-                new ToastHandler(this).showLongToast("Step contains special characters which are not allowed");
-                return;
-            }
-
             // Get DBHandler
             DBHandler dbHandler = new DBHandler(this);
             // Get raw step info
             String info = dbHandler.getRecipeByID(ID).getRecipe().getRawStepsString();
+            // Create a string builder
+            StringBuilder stepString = new StringBuilder(info);
 
-            if (info == null || info.isEmpty()) {
-                info = stepSpinner.getSelectedItemPosition()+"::"+stepInput.getText();
-            } else {
-                StringBuilder stringBuilder = new StringBuilder(info);
-                stringBuilder.append("!!"+stepSpinner.getSelectedItemPosition()+"::"+stepInput.getText());
-                info = stringBuilder.toString();
+            if (stepTypeSpinner.getSelectedItemPosition() == 0) {
+                // Check if the step input is empty and display a toast if it is
+                if (stepInput.getText().toString().isEmpty()) {
+                    new ToastHandler(this).showLongToast("Please enter a step");
+                    return;
+                }
+                // Check if there are any special characters and display a toast if there are
+                if (stepInput.getText().toString().matches("[^A-Za-z0-9]")) {
+                    new ToastHandler(this).showLongToast("Step contains special characters which are not allowed");
+                    return;
+                }
+                if (stepString.toString() == null || stepString.toString().isEmpty()) {
+                    stepString.append(stepTypeSpinner.getSelectedItemPosition()+"::"+stepInput.getText());
+                } else {
+                    stepString.append("!!"+stepTypeSpinner.getSelectedItemPosition()+"::"+stepInput.getText());
+                }
+            } else if (stepTypeSpinner.getSelectedItemPosition() == 1) {
+                String cookTime = cookTimeHourInput.getText().toString()+" Hrs : "+cookTimeMinuteInput.getText().toString()+" Min";
+                if (stepString.toString() == null || stepString.toString().isEmpty()) {
+                    stepString.append(stepTypeSpinner.getSelectedItemPosition()+"::"+cookTime+"%%"+cookTemperatureInput.getText()+symbolSpinner.getSelectedItem().toString());
+                } else {
+                    stepString.append("!!" + stepTypeSpinner.getSelectedItemPosition() + "::" + cookTime + "%%" + cookTemperatureInput.getText() + symbolSpinner.getSelectedItem().toString());
+                }
             }
             // Add new step
-            dbHandler.addNewRecipeStep(ID, info);
+            dbHandler.addNewRecipeStep(ID, stepString.toString());
             finish();
         });
 
@@ -75,7 +91,15 @@ public class CreateNewRecipeStepActivity extends AppCompatActivity implements Ad
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {}
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        if (position == 0 && findViewById(R.id.createNewRecipeStepNormalView).getVisibility() == view.GONE) {
+            findViewById(R.id.createNewRecipeStepCookView).setVisibility(View.GONE);
+            findViewById(R.id.createNewRecipeStepNormalView).setVisibility(View.VISIBLE);
+        } else if (position == 1 && findViewById(R.id.createNewRecipeStepCookView).getVisibility() == view.GONE) {
+            findViewById(R.id.createNewRecipeStepNormalView).setVisibility(View.GONE);
+            findViewById(R.id.createNewRecipeStepCookView).setVisibility(View.VISIBLE);
+        }
+    }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {}

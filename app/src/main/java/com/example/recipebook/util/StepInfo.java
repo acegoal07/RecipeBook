@@ -1,21 +1,18 @@
 package com.example.recipebook.util;
 
 public class StepInfo {
-    private static StepType StepType;
+    private RecipeStepType StepType;
     private String step;
-    /**
-     * Enum for step type
-     */
-    public enum StepType {
+    public enum RecipeStepType {
         NORMAL,
         COOK,
-        COOL
+        COOL;
     }
     /**
      * Constructor for StepInfo
      * @param step The step
      */
-    public StepInfo(String step, StepType type) {
+    public StepInfo(String step, RecipeStepType type) {
         this.step = step;
         this.StepType = type;
     }
@@ -30,7 +27,7 @@ public class StepInfo {
      * Gets the step type
      * @return The step type
      */
-    public StepType getStepType() {
+    public RecipeStepType getStepType() {
         return this.StepType;
     }
     /**
@@ -41,45 +38,25 @@ public class StepInfo {
         return this.step.split("%%")[0];
     }
     /**
-     * Gets the cook tempreture
-     * @return The cook tempreture
+     * Gets the cook temperature
+     * @return The cook temperature
      */
     public String getCookTemperature() {
         return this.step.split("%%")[1];
     }
-
     /**
      * Converts a into type to an stepTyoe
      * @param num The int
      * @return The step type
      */
-    public static StepType convertIntToType(int num) {
+    public static RecipeStepType convertIntToType(int num) {
         switch (num) {
-            case 0:
-                return StepType.NORMAL;
             case 1:
-                return StepType.COOK;
+                return RecipeStepType.COOK;
             case 2:
-                return StepType.COOL;
+                return RecipeStepType.COOL;
             default:
-                return StepType.NORMAL;
-        }
-    }
-    /**
-     * Converts a step type to an int
-     * @param type The step type
-     * @return The int
-     */
-    public static int convertTypeToInt(StepType type) {
-        switch (type) {
-            case NORMAL:
-                return 0;
-            case COOK:
-                return 1;
-            case COOL:
-                return 2;
-            default:
-                return 0;
+                return RecipeStepType.NORMAL;
         }
     }
 }

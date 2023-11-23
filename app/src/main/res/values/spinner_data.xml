@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="temperature_symbols">
+        <item>°C</item>
+        <item>°F</item>
+    </string-array>
+    <string-array name="recipe_step_types">
+        <item>Normal</item>
+        <item>Cook</item>
+    </string-array>
+</resources>
