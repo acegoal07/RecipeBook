@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -51,9 +52,8 @@ public class RecipeAdapterMain extends RecyclerView.Adapter<ViewHolderMain> {
     public void onBindViewHolder(ViewHolderMain holder, @SuppressLint("RecyclerView") int position) {
         // Set data for recipe collection
         holder.Title.setText(RecipeDetails.get(position).getTitle());
-        if (RecipeDetails.get(position).getDescription().isEmpty()) {
-            holder.Description.setVisibility(RecyclerView.GONE);
-        } else {
+        if (RecipeDetails.get(position).getDescription() != null) {
+            holder.Description.setVisibility(RecyclerView.VISIBLE);
             holder.Description.setText(RecipeDetails.get(position).getDescription());
         }
         // Set click listener for delete button

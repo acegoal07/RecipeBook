@@ -14,40 +14,35 @@ import com.example.recipebook.util.ToastHandler;
 import com.example.recipebook.util.recycleViewers.recipeView.RecipeAdapterView;
 
 public class RecipeViewActivity extends AppCompatActivity {
-
     private int ID;
-
+    private DBHandler dbHandler = new DBHandler(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_view);
+
         // Set Id
         ID = getIntent().getExtras().getInt("recipeId");
-        // Get DBHandler instance
-        DBHandler dbHandler = new DBHandler(this);
+
         // Get recipe info
         RecipeDetails recipeDetails = dbHandler.getRecipeByID(ID);
 
         // Get the recipe title and set it
         TextView titleTextView = findViewById(R.id.recipeViewTitle);
         titleTextView.setText(recipeDetails.getTitle());
+
         // Get the recipe description and set it
         TextView descriptionTextView = findViewById(R.id.recipeViewDescription);
-        if (recipeDetails.getDescription() == null || recipeDetails.getDescription().isEmpty()) {
-            descriptionTextView.setVisibility(TextView.GONE);
-        } else {
+        if (recipeDetails.getDescription() != null) {
+            descriptionTextView.setVisibility(TextView.VISIBLE);
             descriptionTextView.setText(recipeDetails.getDescription());
         }
 
+        // Check if there is recipe data and if not, return else refresh view
         if (recipeDetails.getRecipe() == null) {
             return;
         } else {
-            // Get Recycler view
-            RecyclerView recyclerView = findViewById(R.id.recipeViewRecipeRecycler);
-            // Set layout manager
-
-            recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            recyclerView.setAdapter(new RecipeAdapterView(getApplicationContext(), dbHandler.readRecipeStepInfo(ID)));
+            refreshView();
         }
 
         // Get create new step button
@@ -79,7 +74,10 @@ public class RecipeViewActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        DBHandler dbHandler = new DBHandler(this);
+        refreshView();
+    }
+
+    private void refreshView() {
         RecyclerView recyclerView = findViewById(R.id.recipeViewRecipeRecycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new RecipeAdapterView(getApplicationContext(), dbHandler.readRecipeStepInfo(ID)));

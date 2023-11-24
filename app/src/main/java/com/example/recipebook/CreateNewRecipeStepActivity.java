@@ -15,6 +15,7 @@ import com.example.recipebook.util.ToastHandler;
 public class CreateNewRecipeStepActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private int ID;
+    private DBHandler DBHandler = new DBHandler(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,37 +24,35 @@ public class CreateNewRecipeStepActivity extends AppCompatActivity implements Ad
 
         // Get recipe id and store it
         ID = getIntent().getExtras().getInt("recipeId");
-        // Get input fields
-        EditText stepInput = findViewById(R.id.createNewRecipeStepInput);
-        // Get Spinner
+
+        // Get inputs/outputs
+        EditText stepInput = findViewById(R.id.createNewRecipeStepNormalInput);
         Spinner stepTypeSpinner = findViewById(R.id.createNewRecipeStepSpinner);
-        // Get Symbol Spinner
         Spinner symbolSpinner = findViewById(R.id.createNewRecipeStepCookSymbolSpinner);
-        // Get Cook Time Inputs
         EditText cookTimeHourInput = findViewById(R.id.createNewRecipeCookHourInput);
         EditText cookTimeMinuteInput = findViewById(R.id.createNewRecipeCookMinuteInput);
-        // Get Cook Temperature Input
         EditText cookTemperatureInput = findViewById(R.id.createNewRecipeStepCookTemperatureInput);
 
         // Set Spinners
         stepTypeSpinner.setOnItemSelectedListener(this);
-        ArrayAdapter stepSpinnerArrayAdapter = ArrayAdapter.createFromResource(this, R.array.recipe_step_types, R.layout.spinner);
+        ArrayAdapter<CharSequence> stepSpinnerArrayAdapter = ArrayAdapter.createFromResource(this, R.array.recipe_step_types, R.layout.spinner);
         stepSpinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
         stepTypeSpinner.setAdapter(stepSpinnerArrayAdapter);
 
-        ArrayAdapter symbolSpinnerArrayAdapter = ArrayAdapter.createFromResource(this, R.array.temperature_symbols, R.layout.spinner);
+        ArrayAdapter<CharSequence> symbolSpinnerArrayAdapter = ArrayAdapter.createFromResource(this, R.array.temperature_symbols, R.layout.spinner);
         symbolSpinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
         symbolSpinner.setAdapter(symbolSpinnerArrayAdapter);
 
 
         // Get save button
         findViewById(R.id.createNewRecipeStepSaveButton).setOnClickListener(click -> {
-            // Get DBHandler
-            DBHandler dbHandler = new DBHandler(this);
             // Get raw step info
-            String info = dbHandler.getRecipeByID(ID).getRecipe().getRawStepsString();
+            String info = DBHandler.getRecipeByID(ID).getRecipe().getRawStepsString();
             // Create a string builder
-            StringBuilder stepString = new StringBuilder(info);
+            StringBuilder stepString = new StringBuilder();
+            if (info != null && !info.isEmpty()) {
+                stepString.append(info);
+            }
 
             if (stepTypeSpinner.getSelectedItemPosition() == 0) {
                 // Check if the step input is empty and display a toast if it is
@@ -66,21 +65,46 @@ public class CreateNewRecipeStepActivity extends AppCompatActivity implements Ad
                     new ToastHandler(this).showLongToast("Step contains special characters which are not allowed");
                     return;
                 }
-                if (stepString.toString() == null || stepString.toString().isEmpty()) {
-                    stepString.append(stepTypeSpinner.getSelectedItemPosition()+"::"+stepInput.getText());
+                if (stepString.toString().isEmpty()) {
+                    stepString
+                            .append(stepTypeSpinner.getSelectedItemPosition())
+                            .append("::")
+                            .append(stepInput.getText());
                 } else {
-                    stepString.append("!!"+stepTypeSpinner.getSelectedItemPosition()+"::"+stepInput.getText());
+                    stepString
+                            .append("!!")
+                            .append(stepTypeSpinner.getSelectedItemPosition())
+                            .append("::")
+                            .append(stepInput.getText());
                 }
             } else if (stepTypeSpinner.getSelectedItemPosition() == 1) {
-                String cookTime = cookTimeHourInput.getText().toString()+" Hrs : "+cookTimeMinuteInput.getText().toString()+" Min";
-                if (stepString.toString() == null || stepString.toString().isEmpty()) {
-                    stepString.append(stepTypeSpinner.getSelectedItemPosition()+"::"+cookTime+"%%"+cookTemperatureInput.getText()+symbolSpinner.getSelectedItem().toString());
+                if (stepString.toString().isEmpty()) {
+                    stepString
+                            .append(stepTypeSpinner.getSelectedItemPosition())
+                            .append("::")
+                            .append(cookTimeHourInput.getText())
+                            .append("%%")
+                            .append(cookTimeMinuteInput.getText())
+                            .append("%%")
+                            .append(cookTemperatureInput.getText())
+                            .append("%%")
+                            .append(symbolSpinner.getSelectedItem());
                 } else {
-                    stepString.append("!!" + stepTypeSpinner.getSelectedItemPosition() + "::" + cookTime + "%%" + cookTemperatureInput.getText() + symbolSpinner.getSelectedItem().toString());
+                    stepString
+                            .append("!!")
+                            .append(stepTypeSpinner.getSelectedItemPosition())
+                            .append("::")
+                            .append(cookTimeHourInput.getText())
+                            .append("%%")
+                            .append(cookTimeMinuteInput.getText())
+                            .append("%%")
+                            .append(cookTemperatureInput.getText())
+                            .append("%%")
+                            .append(symbolSpinner.getSelectedItem());
                 }
             }
             // Add new step
-            dbHandler.addNewRecipeStep(ID, stepString.toString());
+            DBHandler.addNewRecipeStep(ID, stepString.toString());
             finish();
         });
 

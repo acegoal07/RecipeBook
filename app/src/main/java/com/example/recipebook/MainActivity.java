@@ -18,13 +18,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        // Get Recycler view
-        RecyclerView recyclerView = findViewById(R.id.mainRecipeRecycler);
-        // Set layout manager
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new RecipeAdapterMain(getApplicationContext(), dbHandler.getRecipes()));
-
+        // Refresh view
+        refreshView();
+        // Add listener to create new recipe button
         findViewById(R.id.mainNewRecipeButton).setOnClickListener(click -> {
             Intent Intent = new Intent(this, CreateNewRecipeActivity.class);
             startActivity(Intent);
@@ -34,6 +30,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        refreshView();
+    }
+
+    private void refreshView() {
         RecyclerView recyclerView = findViewById(R.id.mainRecipeRecycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new RecipeAdapterMain(getApplicationContext(), dbHandler.getRecipes()));

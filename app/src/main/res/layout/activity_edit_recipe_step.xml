@@ -58,14 +58,83 @@
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-        <EditText
-            android:id="@+id/editRecipeStepStep"
+        <LinearLayout
+            android:id="@+id/editRecipeStepNormalView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Step"
-            android:inputType="textMultiLine"
-            android:textSize="24sp" />
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <EditText
+                android:id="@+id/editRecipeStepNormalInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Step"
+                android:inputType="textMultiLine"
+                android:textSize="24sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"></LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/editRecipeStepCookView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/editRecipeStepCookHourInput"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="Hours"
+                    android:inputType="number"
+                    android:textSize="24sp" />
+
+                <EditText
+                    android:id="@+id/editRecipeStepCookMinuteInput"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="Minutes"
+                    android:inputType="number"
+                    android:textSize="24sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/editRecipeStepCookTemperatureInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="Temperature"
+                    android:inputType="number"
+                    android:textSize="24sp" />
+
+                <Spinner
+                    android:id="@+id/editRecipeStepCookTemperatureSymbolSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+            </LinearLayout>
+        </LinearLayout>
 
         <Space
             android:layout_width="match_parent"

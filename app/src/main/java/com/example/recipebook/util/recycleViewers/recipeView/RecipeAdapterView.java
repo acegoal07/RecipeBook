@@ -52,14 +52,14 @@ public class RecipeAdapterView extends RecyclerView.Adapter<ViewHolderView> {
         switch (RecipeSteps.get(position).getStepType()) {
             case NORMAL:
                 holder.NormalStepView.setVisibility(RecyclerView.VISIBLE);
-                holder.NormalStepCounter.setText("Step " + (position + 1)+ ":");
+                holder.NormalStepCounter.setText("Step " + (position + 1)+ ": ");
                 holder.NormalStep.setText(RecipeSteps.get(position).getStep());
                 break;
             case COOK:
                 holder.CookStepView.setVisibility(RecyclerView.VISIBLE);
-                holder.CookStepCounter.setText("Step " + (position + 1)+ ":");
-                holder.CookTime.setText(RecipeSteps.get(position).getTime());
-                holder.CookTempreture.setText(RecipeSteps.get(position).getCookTemperature());
+                holder.CookStepCounter.setText("Step " + (position + 1)+ ": ");
+                holder.CookTime.setText(RecipeSteps.get(position).getDisplayTime());
+                holder.CookTempreture.setText(RecipeSteps.get(position).getDisplayTemperature());
                 break;
         }
     }
