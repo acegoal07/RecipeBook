@@ -13,17 +13,15 @@ import com.example.recipebook.util.ToastHandler;
 public class EditRecipeDetailsActivity extends AppCompatActivity {
 
     private int ID;
+    private final DBHandler DBHandler = new DBHandler(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_recipe_details);
 
-        // Get DBHandler instance
-        DBHandler dbHandler = new DBHandler(this);
-
         // Get recipe info
-        RecipeDetails recipeDetails = dbHandler.getRecipeByID(getIntent().getExtras().getInt("recipeId"));
+        RecipeDetails recipeDetails = DBHandler.getRecipeByID(getIntent().getExtras().getInt("recipeId"));
 
         // Get recipe id
         ID = getIntent().getExtras().getInt("recipeId");
@@ -69,7 +67,7 @@ public class EditRecipeDetailsActivity extends AppCompatActivity {
                         return;
                     }
                     // Update database
-                    dbHandler.updateRecipeTitle(ID, titleInput.getText().toString());
+                    DBHandler.updateRecipeTitle(ID, titleInput.getText().toString());
                 }
                 // Check if description was changed
                 if (!descriptionInput.getText().toString().equals(tempDescription)) {
@@ -86,7 +84,7 @@ public class EditRecipeDetailsActivity extends AppCompatActivity {
                         return;
                     }
                     // Update database
-                    dbHandler.updateRecipeDescription(ID, descriptionInput.getText().toString());
+                    DBHandler.updateRecipeDescription(ID, descriptionInput.getText().toString());
                 }
             }
             // Send toast
@@ -108,7 +106,7 @@ public class EditRecipeDetailsActivity extends AppCompatActivity {
                     .setMessage("Are you sure you want to delete this recipe?")
                     .setPositiveButton("Yes", (dialog, which) -> {
                         // Delete recipe
-                        dbHandler.removeRecipeById(ID);
+                        DBHandler.removeRecipeById(ID);
                         // Send toast
                         new ToastHandler(this).showLongToast("Recipe Deleted");
                         // Go back to main activity

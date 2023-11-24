@@ -52,7 +52,7 @@ public class RecipeAdapterMain extends RecyclerView.Adapter<ViewHolderMain> {
     public void onBindViewHolder(ViewHolderMain holder, @SuppressLint("RecyclerView") int position) {
         // Set data for recipe collection
         holder.Title.setText(RecipeDetails.get(position).getTitle());
-        if (RecipeDetails.get(position).getDescription() != null) {
+        if (!RecipeDetails.get(position).getDescription().isEmpty()) {
             holder.Description.setVisibility(RecyclerView.VISIBLE);
             holder.Description.setText(RecipeDetails.get(position).getDescription());
         }

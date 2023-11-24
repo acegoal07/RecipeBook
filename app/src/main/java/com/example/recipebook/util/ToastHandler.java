@@ -15,7 +15,6 @@ public class ToastHandler extends AppCompatActivity {
 
     /**
      * Shows a long toast message
-     * @param context the context of the activity
      * @param message the message to be displayed
      */
     public void showLongToast(String message) {
@@ -24,7 +23,6 @@ public class ToastHandler extends AppCompatActivity {
 
     /**
      * Shows a short toast message
-     * @param context the context of the activity
      * @param message the message to be displayed
      */
     public void showShortToast(String message) {

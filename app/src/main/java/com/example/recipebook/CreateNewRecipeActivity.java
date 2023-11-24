@@ -8,10 +8,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.recipebook.util.DBHandler;
 import com.example.recipebook.util.ToastHandler;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class CreateNewRecipeActivity extends AppCompatActivity {
+
+    private final DBHandler DBHandler = new DBHandler(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,10 +57,8 @@ public class CreateNewRecipeActivity extends AppCompatActivity {
                 return;
             }
 
-            // Get DBHandler instance
-            DBHandler dbHandler = new DBHandler(this);
             // Add new recipe
-            dbHandler.addNewRecipe(titleInput.getText().toString(), descriptionInput.getText().toString());
+            DBHandler.addNewRecipe(titleInput.getText().toString(), descriptionInput.getText().toString());
             // Send Toast message
             new ToastHandler(this).showLongToast("Recipe Created");
             // Go back to main activity

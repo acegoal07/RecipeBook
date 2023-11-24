@@ -18,8 +18,10 @@ import com.example.recipebook.util.ToastHandler;
 import java.util.ArrayList;
 
 public class EditRecipeStepActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+
     private int ID;
-    DBHandler DBHandler = new DBHandler(this);
+    private final DBHandler DBHandler = new DBHandler(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +34,7 @@ public class EditRecipeStepActivity extends AppCompatActivity implements Adapter
         // Get steps data
         ArrayList<StepInfo> steps = recipe.getSteps();
 
-        // Get inputs/outputa
+        // Get inputs/output
         EditText stepEditText = findViewById(R.id.editRecipeStepNormalInput);
         EditText cookTimeHourInput = findViewById(R.id.editRecipeStepCookHourInput);
         EditText cookTimeMinuteInput = findViewById(R.id.editRecipeStepCookMinuteInput);

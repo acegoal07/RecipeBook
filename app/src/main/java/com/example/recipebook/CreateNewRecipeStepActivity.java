@@ -15,7 +15,7 @@ import com.example.recipebook.util.ToastHandler;
 public class CreateNewRecipeStepActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private int ID;
-    private DBHandler DBHandler = new DBHandler(this);
+    private final DBHandler DBHandler = new DBHandler(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,16 +43,12 @@ public class CreateNewRecipeStepActivity extends AppCompatActivity implements Ad
         symbolSpinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
         symbolSpinner.setAdapter(symbolSpinnerArrayAdapter);
 
-
         // Get save button
         findViewById(R.id.createNewRecipeStepSaveButton).setOnClickListener(click -> {
             // Get raw step info
             String info = DBHandler.getRecipeByID(ID).getRecipe().getRawStepsString();
             // Create a string builder
-            StringBuilder stepString = new StringBuilder();
-            if (info != null && !info.isEmpty()) {
-                stepString.append(info);
-            }
+            StringBuilder stepString = new StringBuilder(info != null ? info : "");
 
             if (stepTypeSpinner.getSelectedItemPosition() == 0) {
                 // Check if the step input is empty and display a toast if it is

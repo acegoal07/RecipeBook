@@ -14,8 +14,10 @@ import com.example.recipebook.util.ToastHandler;
 import com.example.recipebook.util.recycleViewers.recipeView.RecipeAdapterView;
 
 public class RecipeViewActivity extends AppCompatActivity {
+
     private int ID;
-    private DBHandler dbHandler = new DBHandler(this);
+    private final DBHandler dbHandler = new DBHandler(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +35,7 @@ public class RecipeViewActivity extends AppCompatActivity {
 
         // Get the recipe description and set it
         TextView descriptionTextView = findViewById(R.id.recipeViewDescription);
-        if (recipeDetails.getDescription() != null) {
+        if (!recipeDetails.getDescription().isEmpty()) {
             descriptionTextView.setVisibility(TextView.VISIBLE);
             descriptionTextView.setText(recipeDetails.getDescription());
         }

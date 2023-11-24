@@ -12,7 +12,7 @@ import com.example.recipebook.util.recycleViewers.mainView.RecipeAdapterMain;
 
 public class MainActivity extends AppCompatActivity {
 
-    private DBHandler dbHandler = new DBHandler(this);
+    private final DBHandler dbHandler = new DBHandler(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
