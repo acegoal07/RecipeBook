@@ -76,7 +76,7 @@ public class CreateNewRecipeStepActivity extends AppCompatActivity implements Ad
                 }
             } else if (stepTypeSpinner.getSelectedItemPosition() == 1) {
                 // Check if the cook time hour and minute inputs are empty and display a toast if they are
-                if (cookTimeHourInput.getText().toString().isEmpty() || cookTimeMinuteInput.getText().toString().isEmpty()) {
+                if (cookTimeHourInput.getText().toString().isEmpty() && cookTimeMinuteInput.getText().toString().isEmpty()) {
                     new ToastHandler(this).showLongToast("Please enter a cook time");
                     return;
                 }
@@ -86,7 +86,7 @@ public class CreateNewRecipeStepActivity extends AppCompatActivity implements Ad
                     return;
                 }
                 // Checks hour and minute time inputs are valid
-                if (Integer.parseInt(cookTimeHourInput.getText().toString()) > 23 || Integer.parseInt(cookTimeMinuteInput.getText().toString()) > 59) {
+                if (Integer.parseInt(cookTimeHourInput.getText().toString().isEmpty() ? "0" : cookTimeHourInput.getText().toString()) > 23 || Integer.parseInt(cookTimeMinuteInput.getText().toString().isEmpty() ? "0" : cookTimeMinuteInput.getText().toString()) > 59) {
                     new ToastHandler(this).showLongToast("Please enter a valid cook time");
                     return;
                 }

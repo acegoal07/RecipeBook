@@ -91,18 +91,23 @@ public class EditRecipeStepActivity extends AppCompatActivity implements Adapter
                     new ToastHandler(this).showLongToast("No changes have been made");
                     return;
                 }
-                // make sure theres a time input
-                if (cookTimeHourInput.getText().toString().isEmpty() && cookTimeMinuteInput.getText().toString().isEmpty()) {
-                    new ToastHandler(this).showLongToast("Please enter a time");
+                // Check if the cook time hour and minute inputs are empty and display a toast if they are
+                if (cookTimeHourInput.getText().toString().isEmpty() || cookTimeMinuteInput.getText().toString().isEmpty()) {
+                    new ToastHandler(this).showLongToast("Please enter a cook time");
                     return;
                 }
-                // make sure theres a temperature input
+                // Checks if the cook temperature input is empty and display a toast if it is
                 if (cookTemperatureInput.getText().toString().isEmpty()) {
-                    new ToastHandler(this).showLongToast("Please enter a temperature");
+                    new ToastHandler(this).showLongToast("Please enter a cook temperature");
+                    return;
+                }
+                // Checks hour and minute time inputs are valid
+                if (Integer.parseInt(cookTimeHourInput.getText().toString().isEmpty() ? "0" : cookTimeHourInput.getText().toString()) > 23 || Integer.parseInt(cookTimeMinuteInput.getText().toString().isEmpty() ? "0" : cookTimeMinuteInput.getText().toString()) > 59) {
+                    new ToastHandler(this).showLongToast("Please enter a valid cook time");
                     return;
                 }
                 // Update step
-                DBHandler.updateRecipeStep(ID, stepSpinner.getSelectedItemPosition(),"1::"+cookTimeHourInput.getText()+"%%"+cookTimeMinuteInput.getText()+"%%"+cookTemperatureInput.getText()+"%%"+cookTemperatureSymbolSpinner.getSelectedItem());
+                DBHandler.updateRecipeStep(ID, stepSpinner.getSelectedItemPosition(),"1" +"::"+(cookTimeHourInput.getText().toString().isEmpty() ? "0" : cookTimeHourInput.getText())+"%%"+(cookTimeMinuteInput.getText().toString().isEmpty() ? "0" : cookTimeMinuteInput.getText())+"%%"+cookTemperatureInput.getText()+"%%"+cookTemperatureSymbolSpinner.getSelectedItem());
             }
             // Finish activity
             finish();
