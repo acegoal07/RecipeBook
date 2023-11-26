@@ -10,10 +10,10 @@ import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.recipebook.util.DBHandler;
-import com.example.recipebook.util.RecipeSteps;
-import com.example.recipebook.util.StepInfo;
-import com.example.recipebook.util.ToastHandler;
+import com.example.recipebook.util.handlers.DBHandler;
+import com.example.recipebook.util.classes.RecipeSteps;
+import com.example.recipebook.util.classes.StepInfo;
+import com.example.recipebook.util.handlers.ToastHandler;
 
 import java.util.ArrayList;
 
@@ -84,10 +84,10 @@ public class EditRecipeStepActivity extends AppCompatActivity implements Adapter
                 DBHandler.updateRecipeStep(ID, stepSpinner.getSelectedItemPosition(), "0::"+stepEditText.getText().toString());
             } else if (steps.get(stepSpinner.getSelectedItemPosition()).getStepType() == StepInfo.RecipeStepType.COOK) {
                 // Check if any changes have been made
-                if (cookTimeHourInput.getText().toString().equals(steps.get(stepSpinner.getSelectedItemPosition()).getCookHour()) &&
-                        cookTimeMinuteInput.getText().toString().equals(steps.get(stepSpinner.getSelectedItemPosition()).getCookMinute()) &&
-                        cookTemperatureInput.getText().toString().equals(steps.get(stepSpinner.getSelectedItemPosition()).getCookTemperature()) &&
-                        cookTemperatureSymbolSpinnerArrayAdapter.getItem(cookTemperatureSymbolSpinner.getSelectedItemPosition()).equals(steps.get(stepSpinner.getSelectedItemPosition()).getCookTemperatureSymbolPosition())) {
+                if (cookTimeHourInput.getText().toString().equals(steps.get(stepSpinner.getSelectedItemPosition()).getCookStepInfo().getHour()) &&
+                        cookTimeMinuteInput.getText().toString().equals(steps.get(stepSpinner.getSelectedItemPosition()).getCookStepInfo().getMinute()) &&
+                        cookTemperatureInput.getText().toString().equals(steps.get(stepSpinner.getSelectedItemPosition()).getCookStepInfo().getTemperature()) &&
+                        cookTemperatureSymbolSpinnerArrayAdapter.getItem(cookTemperatureSymbolSpinner.getSelectedItemPosition()).equals(steps.get(stepSpinner.getSelectedItemPosition()).getCookStepInfo().getCookTemperatureSymbolPosition())) {
                     new ToastHandler(this).showLongToast("No changes have been made");
                     return;
                 }
@@ -170,10 +170,10 @@ public class EditRecipeStepActivity extends AppCompatActivity implements Adapter
             stepEditText.setText(steps.get(position).getStep());
         } else if (steps.get(position).getStepType() == StepInfo.RecipeStepType.COOK) {
             findViewById(R.id.editRecipeStepCookView).setVisibility(View.VISIBLE);
-            cookTimeHourInput.setText(steps.get(position).getCookHour());
-            cookTimeMinuteInput.setText(steps.get(position).getCookMinute());
-            cookTemperatureInput.setText(steps.get(position).getCookTemperature());
-            cookTemperatureSymbolSpinner.setSelection(Integer.parseInt(steps.get(position).getCookTemperatureSymbolPosition()));
+            cookTimeHourInput.setText(steps.get(position).getCookStepInfo().getHour());
+            cookTimeMinuteInput.setText(steps.get(position).getCookStepInfo().getMinute());
+            cookTemperatureInput.setText(steps.get(position).getCookStepInfo().getTemperature());
+            cookTemperatureSymbolSpinner.setSelection(Integer.parseInt(steps.get(position).getCookStepInfo().getCookTemperatureSymbolPosition()));
         }
     }
 }

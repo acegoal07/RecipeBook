@@ -5,14 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.recipebook.EditRecipeDetailsActivity;
 import com.example.recipebook.R;
 import com.example.recipebook.RecipeViewActivity;
-import com.example.recipebook.util.RecipeDetails;
+import com.example.recipebook.util.classes.RecipeDetails;
 
 import java.util.ArrayList;
 import java.util.List;

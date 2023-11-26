@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.recipebook.R;
-import com.example.recipebook.util.StepInfo;
+import com.example.recipebook.util.classes.StepInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,8 +58,8 @@ public class RecipeAdapterView extends RecyclerView.Adapter<ViewHolderView> {
             case COOK:
                 holder.CookStepView.setVisibility(RecyclerView.VISIBLE);
                 holder.CookStepCounter.setText("Step " + (position + 1)+ ": ");
-                holder.CookTime.setText(RecipeSteps.get(position).getDisplayTime());
-                holder.CookTempreture.setText(RecipeSteps.get(position).getDisplayTemperature());
+                holder.CookTime.setText(RecipeSteps.get(position).getCookStepInfo().getDisplayTime());
+                holder.CookTempreture.setText(RecipeSteps.get(position).getCookStepInfo().getDisplayTemperature());
                 break;
         }
     }

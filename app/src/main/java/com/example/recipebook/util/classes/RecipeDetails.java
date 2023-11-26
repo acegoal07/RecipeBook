@@ -1,6 +1,7 @@
-package com.example.recipebook.util;
+package com.example.recipebook.util.classes;
 
 public class RecipeDetails {
+
     private int id;
     private String title;
     private String description;

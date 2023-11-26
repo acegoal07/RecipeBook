@@ -1,4 +1,4 @@
-package com.example.recipebook.util;
+package com.example.recipebook.util.handlers;
 
 import android.content.Context;
 import android.widget.Toast;

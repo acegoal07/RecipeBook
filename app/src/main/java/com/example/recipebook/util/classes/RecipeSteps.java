@@ -1,8 +1,9 @@
-package com.example.recipebook.util;
+package com.example.recipebook.util.classes;
 
 import java.util.ArrayList;
 
 public class RecipeSteps {
+
     private String steps;
 
     public RecipeSteps(String steps) {

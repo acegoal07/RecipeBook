@@ -9,8 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.example.recipebook.util.DBHandler;
-import com.example.recipebook.util.ToastHandler;
+import com.example.recipebook.util.handlers.DBHandler;
+import com.example.recipebook.util.handlers.ToastHandler;
 
 public class CreateNewRecipeStepActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -49,7 +49,7 @@ public class CreateNewRecipeStepActivity extends AppCompatActivity implements Ad
             String info = DBHandler.getRecipeByID(ID).getRecipe().getRawStepsString();
             // Create a string builder
             StringBuilder stepString = new StringBuilder(info != null ? info : "");
-
+            // Type specific checks
             if (stepTypeSpinner.getSelectedItemPosition() == 0) {
                 // Check if the step input is empty and display a toast if it is
                 if (stepInput.getText().toString().isEmpty()) {
@@ -61,6 +61,7 @@ public class CreateNewRecipeStepActivity extends AppCompatActivity implements Ad
                     new ToastHandler(this).showLongToast("Step contains special characters which are not allowed");
                     return;
                 }
+                // Create the string for the string builder
                 if (stepString.toString().isEmpty()) {
                     stepString
                             .append(stepTypeSpinner.getSelectedItemPosition())
@@ -74,13 +75,29 @@ public class CreateNewRecipeStepActivity extends AppCompatActivity implements Ad
                             .append(stepInput.getText());
                 }
             } else if (stepTypeSpinner.getSelectedItemPosition() == 1) {
+                // Check if the cook time hour and minute inputs are empty and display a toast if they are
+                if (cookTimeHourInput.getText().toString().isEmpty() || cookTimeMinuteInput.getText().toString().isEmpty()) {
+                    new ToastHandler(this).showLongToast("Please enter a cook time");
+                    return;
+                }
+                // Checks if the cook temperature input is empty and display a toast if it is
+                if (cookTemperatureInput.getText().toString().isEmpty()) {
+                    new ToastHandler(this).showLongToast("Please enter a cook temperature");
+                    return;
+                }
+                // Checks hour and minute time inputs are valid
+                if (Integer.parseInt(cookTimeHourInput.getText().toString()) > 23 || Integer.parseInt(cookTimeMinuteInput.getText().toString()) > 59) {
+                    new ToastHandler(this).showLongToast("Please enter a valid cook time");
+                    return;
+                }
+                // Create the string for the string builder
                 if (stepString.toString().isEmpty()) {
                     stepString
                             .append(stepTypeSpinner.getSelectedItemPosition())
                             .append("::")
-                            .append(cookTimeHourInput.getText())
+                            .append(cookTimeHourInput.getText().toString().isEmpty() ? "0" : cookTimeHourInput.getText())
                             .append("%%")
-                            .append(cookTimeMinuteInput.getText())
+                            .append(cookTimeMinuteInput.getText().toString().isEmpty() ? "0" : cookTimeMinuteInput.getText())
                             .append("%%")
                             .append(cookTemperatureInput.getText())
                             .append("%%")
@@ -90,9 +107,9 @@ public class CreateNewRecipeStepActivity extends AppCompatActivity implements Ad
                             .append("!!")
                             .append(stepTypeSpinner.getSelectedItemPosition())
                             .append("::")
-                            .append(cookTimeHourInput.getText())
+                            .append(cookTimeHourInput.getText().toString().isEmpty() ? "0" : cookTimeHourInput.getText())
                             .append("%%")
-                            .append(cookTimeMinuteInput.getText())
+                            .append(cookTimeMinuteInput.getText().toString().isEmpty() ? "0" : cookTimeMinuteInput.getText())
                             .append("%%")
                             .append(cookTemperatureInput.getText())
                             .append("%%")

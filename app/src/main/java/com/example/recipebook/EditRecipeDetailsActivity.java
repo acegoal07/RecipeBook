@@ -6,9 +6,9 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.recipebook.util.DBHandler;
-import com.example.recipebook.util.RecipeDetails;
-import com.example.recipebook.util.ToastHandler;
+import com.example.recipebook.util.handlers.DBHandler;
+import com.example.recipebook.util.classes.RecipeDetails;
+import com.example.recipebook.util.handlers.ToastHandler;
 
 public class EditRecipeDetailsActivity extends AppCompatActivity {
 
@@ -20,22 +20,20 @@ public class EditRecipeDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_recipe_details);
 
-        // Get recipe info
-        RecipeDetails recipeDetails = DBHandler.getRecipeByID(getIntent().getExtras().getInt("recipeId"));
-
         // Get recipe id
         ID = getIntent().getExtras().getInt("recipeId");
 
-        // Get temp title and description
-        String tempTitle = recipeDetails.getTitle();
-        String tempDescription = recipeDetails.getDescription();
+        // Get recipe info
+        RecipeDetails recipeDetails = DBHandler.getRecipeByID(ID);
 
         // Get title input
         EditText titleInput = findViewById(R.id.editRecipeDetailsTitleInput);
+        String tempTitle = recipeDetails.getTitle();
         titleInput.setText(tempTitle);
 
         // Get description input
         EditText descriptionInput = findViewById(R.id.editRecipeDetailsDesciptionInput);
+        String tempDescription = recipeDetails.getDescription();
         descriptionInput.setText(tempDescription);
 
         // Add click listener to save button

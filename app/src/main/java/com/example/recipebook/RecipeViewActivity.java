@@ -8,15 +8,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.example.recipebook.util.DBHandler;
-import com.example.recipebook.util.RecipeDetails;
-import com.example.recipebook.util.ToastHandler;
+import com.example.recipebook.util.handlers.DBHandler;
+import com.example.recipebook.util.classes.RecipeDetails;
+import com.example.recipebook.util.handlers.ToastHandler;
 import com.example.recipebook.util.recycleViewers.recipeView.RecipeAdapterView;
 
 public class RecipeViewActivity extends AppCompatActivity {
 
     private int ID;
-    private final DBHandler dbHandler = new DBHandler(this);
+    private final DBHandler DBHandler = new DBHandler(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +27,7 @@ public class RecipeViewActivity extends AppCompatActivity {
         ID = getIntent().getExtras().getInt("recipeId");
 
         // Get recipe info
-        RecipeDetails recipeDetails = dbHandler.getRecipeByID(ID);
+        RecipeDetails recipeDetails = DBHandler.getRecipeByID(ID);
 
         // Get the recipe title and set it
         TextView titleTextView = findViewById(R.id.recipeViewTitle);
@@ -41,9 +41,7 @@ public class RecipeViewActivity extends AppCompatActivity {
         }
 
         // Check if there is recipe data and if not, return else refresh view
-        if (recipeDetails.getRecipe() == null) {
-            return;
-        } else {
+        if (recipeDetails.getRecipe() != null) {
             refreshView();
         }
 
@@ -57,7 +55,7 @@ public class RecipeViewActivity extends AppCompatActivity {
 
         // Add listener to edit steps button
         findViewById(R.id.recipeViewEditStepsButton).setOnClickListener(click -> {
-            if (dbHandler.getRecipeByID(ID).getRecipe().getStepCount() == 0) {
+            if (DBHandler.getRecipeByID(ID).getRecipe().getStepCount() == 0) {
                 new ToastHandler(this).showLongToast("No steps to edit");
                 return;
             }
@@ -82,6 +80,6 @@ public class RecipeViewActivity extends AppCompatActivity {
     private void refreshView() {
         RecyclerView recyclerView = findViewById(R.id.recipeViewRecipeRecycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new RecipeAdapterView(getApplicationContext(), dbHandler.readRecipeStepInfo(ID)));
+        recyclerView.setAdapter(new RecipeAdapterView(getApplicationContext(), DBHandler.readRecipeStepInfo(ID)));
     }
 }

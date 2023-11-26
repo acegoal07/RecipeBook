@@ -1,10 +1,14 @@
-package com.example.recipebook.util;
+package com.example.recipebook.util.handlers;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.example.recipebook.util.classes.RecipeDetails;
+import com.example.recipebook.util.classes.RecipeSteps;
+import com.example.recipebook.util.classes.StepInfo;
 
 import java.util.ArrayList;
 
@@ -20,6 +24,7 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
 ///////// MAIN DB HANDLERS //////////
+
     public DBHandler(Context context) {
         super(context, DB_INFO.DB_NAME, null, DB_INFO.DB_VERSION);
     }
@@ -87,7 +92,6 @@ public class DBHandler extends SQLiteOpenHelper {
         }
         cursor.close();
         db.close();
-
         return recipeDetailsArrayList;
     }
     /**
@@ -110,7 +114,6 @@ public class DBHandler extends SQLiteOpenHelper {
         );
         cursor.close();
         db.close();
-
         return recipeDetails;
     }
     /**

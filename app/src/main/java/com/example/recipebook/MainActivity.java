@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.recipebook.util.DBHandler;
+import com.example.recipebook.util.handlers.DBHandler;
 import com.example.recipebook.util.recycleViewers.mainView.RecipeAdapterMain;
 
 public class MainActivity extends AppCompatActivity {
