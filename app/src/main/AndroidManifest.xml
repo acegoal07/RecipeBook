@@ -16,7 +16,7 @@
             android:name=".EditRecipeStepActivity"
             android:exported="false" />
         <activity
-            android:name=".CreateNewRecipeStepActivity"
+            android:name=".NewRecipeStepActivity"
             android:exported="false" />
         <activity
             android:name=".RecipeViewActivity"
@@ -25,7 +25,7 @@
             android:name=".EditRecipeDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".CreateNewRecipeActivity"
+            android:name=".NewRecipeActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

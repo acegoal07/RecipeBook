@@ -14,7 +14,7 @@ import com.example.recipebook.util.handlers.ToastHandler;
 
 import java.util.Objects;
 
-public class CreateNewRecipeStepActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class NewRecipeStepActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private int ID;
     private final DBHandler DBHandler = new DBHandler(this);
@@ -22,18 +22,18 @@ public class CreateNewRecipeStepActivity extends AppCompatActivity implements Ad
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_new_recipe_step);
+        setContentView(R.layout.activity_new_recipe_step);
 
         // Get recipe id and store it
         ID = Objects.requireNonNull(getIntent().getExtras()).getInt("recipeId");
 
         // Get inputs/outputs
-        EditText stepInput = findViewById(R.id.createNewRecipeStepNormalInput);
-        Spinner stepTypeSpinner = findViewById(R.id.createNewRecipeStepSpinner);
-        Spinner symbolSpinner = findViewById(R.id.createNewRecipeStepCookSymbolSpinner);
-        EditText cookTimeHourInput = findViewById(R.id.createNewRecipeCookHourInput);
-        EditText cookTimeMinuteInput = findViewById(R.id.createNewRecipeCookMinuteInput);
-        EditText cookTemperatureInput = findViewById(R.id.createNewRecipeStepCookTemperatureInput);
+        EditText stepInput = findViewById(R.id.newRecipeStepNormalInput);
+        Spinner stepTypeSpinner = findViewById(R.id.newRecipeStepSpinner);
+        Spinner symbolSpinner = findViewById(R.id.newRecipeStepCookSymbolSpinner);
+        EditText cookTimeHourInput = findViewById(R.id.newRecipeCookHourInput);
+        EditText cookTimeMinuteInput = findViewById(R.id.newRecipeCookMinuteInput);
+        EditText cookTemperatureInput = findViewById(R.id.newRecipeStepCookTemperatureInput);
 
         // Set Spinners
         stepTypeSpinner.setOnItemSelectedListener(this);
@@ -46,7 +46,7 @@ public class CreateNewRecipeStepActivity extends AppCompatActivity implements Ad
         symbolSpinner.setAdapter(symbolSpinnerArrayAdapter);
 
         // Get save button
-        findViewById(R.id.createNewRecipeStepSaveButton).setOnClickListener(click -> {
+        findViewById(R.id.newRecipeStepSaveButton).setOnClickListener(click -> {
             // Get raw step info
             String info = DBHandler.getRecipeByID(ID).getRecipe().getRawStepsString();
             // Create a string builder
@@ -124,17 +124,17 @@ public class CreateNewRecipeStepActivity extends AppCompatActivity implements Ad
         });
 
         // Get cancel button
-        findViewById(R.id.createNewStepCancelButton).setOnClickListener(click -> finish());
+        findViewById(R.id.newRecipeStepCancelButton).setOnClickListener(click -> finish());
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        if (position == 0 && findViewById(R.id.createNewRecipeStepNormalView).getVisibility() == View.GONE) {
-            findViewById(R.id.createNewRecipeStepCookView).setVisibility(View.GONE);
-            findViewById(R.id.createNewRecipeStepNormalView).setVisibility(View.VISIBLE);
-        } else if (position == 1 && findViewById(R.id.createNewRecipeStepCookView).getVisibility() == View.GONE) {
-            findViewById(R.id.createNewRecipeStepNormalView).setVisibility(View.GONE);
-            findViewById(R.id.createNewRecipeStepCookView).setVisibility(View.VISIBLE);
+        if (position == 0 && findViewById(R.id.newRecipeStepNormalView).getVisibility() == View.GONE) {
+            findViewById(R.id.newRecipeStepCookView).setVisibility(View.GONE);
+            findViewById(R.id.newRecipeStepNormalView).setVisibility(View.VISIBLE);
+        } else if (position == 1 && findViewById(R.id.newRecipeStepCookView).getVisibility() == View.GONE) {
+            findViewById(R.id.newRecipeStepNormalView).setVisibility(View.GONE);
+            findViewById(R.id.newRecipeStepCookView).setVisibility(View.VISIBLE);
         }
     }
 

@@ -23,10 +23,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:backgroundTint="@color/colorSecondary"
-            android:text="Create new"
+            android:text="New"
             android:textColor="@color/primaryTextColor"
             android:textSize="24sp"
-            app:icon="@android:drawable/ic_menu_add"
+            app:icon="@drawable/add_circle"
             app:iconSize="24dp"
             app:iconTint="@color/primaryTextColor" />
 

@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".CreateNewRecipeStepActivity">
+    tools:context=".NewRecipeStepActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/createNewRecipeStepToolbar"
+        android:id="@+id/newRecipeStepToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
@@ -17,7 +17,7 @@
         android:theme="?attr/actionBarTheme">
 
         <Button
-            android:id="@+id/createNewStepCancelButton"
+            android:id="@+id/newRecipeStepCancelButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
@@ -37,7 +37,7 @@
         android:paddingRight="20dp">
 
         <TextView
-            android:id="@+id/createNewRecipeStepTextView"
+            android:id="@+id/newRecipeStepTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Create new step"
@@ -49,7 +49,7 @@
             android:layout_height="20dp" />
 
         <Spinner
-            android:id="@+id/createNewRecipeStepSpinner"
+            android:id="@+id/newRecipeStepSpinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -60,14 +60,14 @@
             android:layout_height="10dp" />
 
         <LinearLayout
-            android:id="@+id/createNewRecipeStepNormalView"
+            android:id="@+id/newRecipeStepNormalView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:visibility="visible">
 
             <EditText
-                android:id="@+id/createNewRecipeStepNormalInput"
+                android:id="@+id/newRecipeStepNormalInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -78,7 +78,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/createNewRecipeStepCookView"
+            android:id="@+id/newRecipeStepCookView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -90,7 +90,7 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/createNewRecipeCookHourInput"
+                    android:id="@+id/newRecipeCookHourInput"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -100,7 +100,7 @@
                     android:textSize="24sp" />
 
                 <EditText
-                    android:id="@+id/createNewRecipeCookMinuteInput"
+                    android:id="@+id/newRecipeCookMinuteInput"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -117,7 +117,7 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/createNewRecipeStepCookTemperatureInput"
+                    android:id="@+id/newRecipeStepCookTemperatureInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -127,7 +127,7 @@
                     android:textSize="24sp" />
 
                 <Spinner
-                    android:id="@+id/createNewRecipeStepCookSymbolSpinner"
+                    android:id="@+id/newRecipeStepCookSymbolSpinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
@@ -141,7 +141,7 @@
             android:layout_height="40dp" />
 
         <Button
-            android:id="@+id/createNewRecipeStepSaveButton"
+            android:id="@+id/newRecipeStepSaveButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

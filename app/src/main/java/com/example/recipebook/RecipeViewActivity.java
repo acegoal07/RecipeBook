@@ -49,7 +49,7 @@ public class RecipeViewActivity extends AppCompatActivity {
 
         // Get create new step button
         findViewById(R.id.recipeViewAddNewStepButton).setOnClickListener(click -> {
-            Intent intent = new Intent(this, CreateNewRecipeStepActivity.class);
+            Intent intent = new Intent(this, NewRecipeStepActivity.class);
             intent.putExtra("recipeId", ID);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);

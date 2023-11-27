@@ -8,22 +8,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.recipebook.util.handlers.DBHandler;
 import com.example.recipebook.util.handlers.ToastHandler;
 
-public class CreateNewRecipeActivity extends AppCompatActivity {
+public class NewRecipeActivity extends AppCompatActivity {
 
     private final DBHandler DBHandler = new DBHandler(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_new_recipe);
+        setContentView(R.layout.activity_new_recipe);
 
         // Get title input
-        EditText titleInput = findViewById(R.id.createNewRecipeTitleInput);
+        EditText titleInput = findViewById(R.id.newRecipeTitleInput);
         // Get description input
-        EditText descriptionInput = findViewById(R.id.createNewRecipeDesciptionInput);
+        EditText descriptionInput = findViewById(R.id.newRecipeDesciptionInput);
 
         // Add click listener to create button
-        findViewById(R.id.createNewRecipeCreateButton).setOnClickListener(click -> {
+        findViewById(R.id.newRecipeCreateButton).setOnClickListener(click -> {
             // Make sure title is not empty
             if (titleInput.getText().toString().isEmpty()) {
                 // Send Toast message
@@ -66,7 +66,7 @@ public class CreateNewRecipeActivity extends AppCompatActivity {
         });
 
         // Add click listener to cancel button
-        findViewById(R.id.createNewRecipeCancelButton).setOnClickListener(click -> {
+        findViewById(R.id.newRecipeCancelButton).setOnClickListener(click -> {
             // Go back to main activity
             finish();
         });

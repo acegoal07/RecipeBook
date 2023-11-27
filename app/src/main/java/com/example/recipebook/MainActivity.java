@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         refreshView();
         // Add listener to create new recipe button
         findViewById(R.id.mainNewRecipeButton).setOnClickListener(click -> {
-            Intent Intent = new Intent(this, CreateNewRecipeActivity.class);
+            Intent Intent = new Intent(this, NewRecipeActivity.class);
             startActivity(Intent);
         });
     }

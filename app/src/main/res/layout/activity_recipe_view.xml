@@ -75,7 +75,7 @@
                 android:paddingTop="10dp"
                 android:paddingRight="40dp"
                 android:paddingBottom="10dp"
-                android:src="@android:drawable/ic_menu_edit"
+                android:src="@drawable/edit"
                 android:tint="@color/primaryTextColor" />
         </LinearLayout>
 

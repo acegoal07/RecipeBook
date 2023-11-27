@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".CreateNewRecipeActivity">
+    tools:context=".NewRecipeActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/createNewRecipeToolbar"
+        android:id="@+id/newRecipeToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
@@ -17,7 +17,7 @@
         android:theme="?attr/actionBarTheme">
 
         <Button
-            android:id="@+id/createNewRecipeCancelButton"
+            android:id="@+id/newRecipeCancelButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
@@ -37,7 +37,7 @@
         android:paddingRight="20dp">
 
         <TextView
-            android:id="@+id/createNewRecipeTextView"
+            android:id="@+id/newRecipeTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -50,7 +50,7 @@
             android:layout_height="20dp" />
 
         <EditText
-            android:id="@+id/createNewRecipeTitleInput"
+            android:id="@+id/newRecipeTitleInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -64,7 +64,7 @@
             android:layout_height="20dp" />
 
         <EditText
-            android:id="@+id/createNewRecipeDesciptionInput"
+            android:id="@+id/newRecipeDesciptionInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -79,7 +79,7 @@
             android:layout_height="40dp" />
 
         <Button
-            android:id="@+id/createNewRecipeCreateButton"
+            android:id="@+id/newRecipeCreateButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
