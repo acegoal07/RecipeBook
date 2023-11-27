@@ -67,6 +67,14 @@ public class RecipeViewActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        // Add listener to edit recipe button
+        findViewById(R.id.recipeViewEditRecipeButton).setOnClickListener(click -> {
+            Intent intent = new Intent(this, EditRecipeDetailsActivity.class);
+            intent.putExtra("recipeId", ID);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        });
+
         // Add click listener to Cancel button
         findViewById(R.id.recipeViewReturnButton).setOnClickListener(click -> finish());
     }
@@ -81,5 +89,19 @@ public class RecipeViewActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recipeViewRecipeRecycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new RecipeAdapterView(getApplicationContext(), DBHandler.readRecipeStepInfo(ID)));
+
+        // Get recipe info
+        RecipeDetails recipeDetails = DBHandler.getRecipeByID(ID);
+
+        // Get the recipe title and set it
+        TextView titleTextView = findViewById(R.id.recipeViewTitle);
+        titleTextView.setText(recipeDetails.getTitle());
+
+        // Get the recipe description and set it
+        TextView descriptionTextView = findViewById(R.id.recipeViewDescription);
+        if (!recipeDetails.getDescription().isEmpty()) {
+            descriptionTextView.setVisibility(TextView.VISIBLE);
+            descriptionTextView.setText(recipeDetails.getDescription());
+        }
     }
 }
