@@ -10,6 +10,8 @@ import com.example.recipebook.util.handlers.DBHandler;
 import com.example.recipebook.util.classes.RecipeDetails;
 import com.example.recipebook.util.handlers.ToastHandler;
 
+import java.util.Objects;
+
 public class EditRecipeDetailsActivity extends AppCompatActivity {
 
     private int ID;
@@ -21,7 +23,7 @@ public class EditRecipeDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_recipe_details);
 
         // Get recipe id
-        ID = getIntent().getExtras().getInt("recipeId");
+        ID = Objects.requireNonNull(getIntent().getExtras()).getInt("recipeId");
 
         // Get recipe info
         RecipeDetails recipeDetails = DBHandler.getRecipeByID(ID);
@@ -98,23 +100,19 @@ public class EditRecipeDetailsActivity extends AppCompatActivity {
         });
 
         // Add click listener to delete button
-        findViewById(R.id.editRecipeDetailsDeleteButton).setOnClickListener(click -> {
-            new AlertDialog.Builder(this)
-                    .setTitle("Delete Recipe")
-                    .setMessage("Are you sure you want to delete this recipe?")
-                    .setPositiveButton("Yes", (dialog, which) -> {
-                        // Delete recipe
-                        DBHandler.removeRecipeById(ID);
-                        // Send toast
-                        new ToastHandler(this).showLongToast("Recipe Deleted");
-                        // Go back to main activity
-                        finish();
-                    })
-                    .setNegativeButton("No", (dialog, which) -> {
-                        return;
-                    })
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .show();
-        });
+        findViewById(R.id.editRecipeDetailsDeleteButton).setOnClickListener(click -> new AlertDialog.Builder(this)
+                .setTitle("Delete Recipe")
+                .setMessage("Are you sure you want to delete this recipe?")
+                .setPositiveButton("Yes", (dialog, which) -> {
+                    // Delete recipe
+                    DBHandler.removeRecipeById(ID);
+                    // Send toast
+                    new ToastHandler(this).showLongToast("Recipe Deleted");
+                    // Go back to main activity
+                    finish();
+                })
+                .setNegativeButton("No", (dialog, which) -> {})
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show());
     }
 }

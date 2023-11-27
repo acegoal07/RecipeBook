@@ -20,12 +20,4 @@ public class ToastHandler extends AppCompatActivity {
     public void showLongToast(String message) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
-
-    /**
-     * Shows a short toast message
-     * @param message the message to be displayed
-     */
-    public void showShortToast(String message) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-    }
 }

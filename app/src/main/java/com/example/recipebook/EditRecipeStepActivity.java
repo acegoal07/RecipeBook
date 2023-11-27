@@ -35,11 +35,11 @@ public class EditRecipeStepActivity extends AppCompatActivity implements Adapter
         ArrayList<StepInfo> steps = recipe.getSteps();
 
         // Get inputs/output
+        Spinner stepSpinner = findViewById(R.id.editRecipeStepSpinner);
         EditText stepEditText = findViewById(R.id.editRecipeStepNormalInput);
         EditText cookTimeHourInput = findViewById(R.id.editRecipeStepCookHourInput);
         EditText cookTimeMinuteInput = findViewById(R.id.editRecipeStepCookMinuteInput);
         EditText cookTemperatureInput = findViewById(R.id.editRecipeStepCookTemperatureInput);
-        Spinner stepSpinner = findViewById(R.id.editRecipeStepSpinner);
         Spinner cookTemperatureSymbolSpinner = findViewById(R.id.editRecipeStepCookTemperatureSymbolSpinner);
 
         // Get Spinner data
@@ -51,11 +51,11 @@ public class EditRecipeStepActivity extends AppCompatActivity implements Adapter
 
         // Set Spinners
         stepSpinner.setOnItemSelectedListener(this);
-        ArrayAdapter stepSpinnerArrayAdapter = new ArrayAdapter(this, R.layout.spinner, stepCounter);
+        ArrayAdapter<String> stepSpinnerArrayAdapter = new ArrayAdapter<>(this, R.layout.spinner, stepCounter);
         stepSpinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
         stepSpinner.setAdapter(stepSpinnerArrayAdapter);
 
-        ArrayAdapter cookTemperatureSymbolSpinnerArrayAdapter = ArrayAdapter.createFromResource(this, R.array.temperature_symbols, R.layout.spinner);
+        ArrayAdapter<CharSequence> cookTemperatureSymbolSpinnerArrayAdapter = ArrayAdapter.createFromResource(this, R.array.temperature_symbols, R.layout.spinner);
         cookTemperatureSymbolSpinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
         cookTemperatureSymbolSpinner.setAdapter(cookTemperatureSymbolSpinnerArrayAdapter);
 
@@ -87,7 +87,7 @@ public class EditRecipeStepActivity extends AppCompatActivity implements Adapter
                 if (cookTimeHourInput.getText().toString().equals(steps.get(stepSpinner.getSelectedItemPosition()).getCookStepInfo().getHour()) &&
                         cookTimeMinuteInput.getText().toString().equals(steps.get(stepSpinner.getSelectedItemPosition()).getCookStepInfo().getMinute()) &&
                         cookTemperatureInput.getText().toString().equals(steps.get(stepSpinner.getSelectedItemPosition()).getCookStepInfo().getTemperature()) &&
-                        cookTemperatureSymbolSpinnerArrayAdapter.getItem(cookTemperatureSymbolSpinner.getSelectedItemPosition()).equals(steps.get(stepSpinner.getSelectedItemPosition()).getCookStepInfo().getCookTemperatureSymbolPosition())) {
+                        cookTemperatureSymbolSpinner.getSelectedItemPosition() == Integer.parseInt(steps.get(stepSpinner.getSelectedItemPosition()).getCookStepInfo().getCookTemperatureSymbolPosition())) {
                     new ToastHandler(this).showLongToast("No changes have been made");
                     return;
                 }
@@ -114,29 +114,23 @@ public class EditRecipeStepActivity extends AppCompatActivity implements Adapter
         });
 
         // Listener for delete button
-        findViewById(R.id.editRecipeStepDeleteStepButton).setOnClickListener(click -> {
-            new AlertDialog.Builder(this)
-                    .setTitle("Delete Step")
-                    .setMessage("Are you sure you want to delete this Step?")
-                    .setPositiveButton("Yes", (dialog, which) -> {
-                        // Get selected step
-                        int selectedStep = stepSpinner.getSelectedItemPosition();
-                        // Delete step
-                        DBHandler.removeRecipeStep(ID, selectedStep);
-                        // Finish activity
-                        finish();
-                    })
-                    .setNegativeButton("No", (dialog, which) -> {
-                        return;
-                    })
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .show();
-        });
+        findViewById(R.id.editRecipeStepDeleteStepButton).setOnClickListener(click -> new AlertDialog.Builder(this)
+                .setTitle("Delete Step")
+                .setMessage("Are you sure you want to delete this Step?")
+                .setPositiveButton("Yes", (dialog, which) -> {
+                    // Get selected step
+                    int selectedStep = stepSpinner.getSelectedItemPosition();
+                    // Delete step
+                    DBHandler.removeRecipeStep(ID, selectedStep);
+                    // Finish activity
+                    finish();
+                })
+                .setNegativeButton("No", (dialog, which) -> {})
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show());
 
         // Listener for cancel button
-        findViewById(R.id.editRecipeStepCancelButton).setOnClickListener(click -> {
-            finish();
-        });
+        findViewById(R.id.editRecipeStepCancelButton).setOnClickListener(click -> finish());
     }
 
     @Override

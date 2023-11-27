@@ -11,16 +11,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.recipebook.R;
 
 public class ViewHolderMain extends RecyclerView.ViewHolder {
-    private final Context context;
+    Context context;
     TextView Title;
     TextView Description;
     ImageButton DeleteButton;
 
     public ViewHolderMain(@NonNull View view) {
         super(view);
+        context = view.getContext();
         Title = view.findViewById(R.id.recipeRecyclerMainTitle);
         Description = view.findViewById(R.id.recipeRecyclerMainDescription);
         DeleteButton = view.findViewById(R.id.recipeRecyclerMainEditButton);
-        context = view.getContext();
     }
 }

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.recipebook.EditRecipeDetailsActivity;
@@ -37,8 +38,9 @@ public class RecipeAdapterMain extends RecyclerView.Adapter<ViewHolderMain> {
      * @param viewType The view type of the new View.
      * @return ViewHolder
      */
+    @NonNull
     @Override
-    public ViewHolderMain onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolderMain onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ViewHolderMain(LayoutInflater.from(context).inflate(R.layout.recipe_recycler_main, parent, false));
     }
 
@@ -59,14 +61,14 @@ public class RecipeAdapterMain extends RecyclerView.Adapter<ViewHolderMain> {
         holder.DeleteButton.setOnClickListener(v -> {
             Intent Intent = new Intent(v.getContext(), EditRecipeDetailsActivity.class);
             Intent.putExtra("recipeId", RecipeDetails.get(position).getId());
-            Intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            Intent.setFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK);
             v.getContext().startActivity(Intent);
         });
         // Set click listener for recipe item
         holder.itemView.setOnClickListener(v -> {
             Intent Intent = new Intent(v.getContext(), RecipeViewActivity.class);
             Intent.putExtra("recipeId", RecipeDetails.get(position).getId());
-            Intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            Intent.setFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK);
             v.getContext().startActivity(Intent);
         });
     }

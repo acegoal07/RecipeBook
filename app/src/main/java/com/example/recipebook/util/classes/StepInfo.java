@@ -6,7 +6,7 @@ public class StepInfo {
     private String step;
     public enum RecipeStepType {
         NORMAL,
-        COOK;
+        COOK
     }
 
     /**

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class DBHandler extends SQLiteOpenHelper {
     private static final class DB_INFO {
-        private static final String DB_NAME = "recipedb";
+        private static final String DB_NAME = "recipeDB";
         private static final int DB_VERSION = 1;
         private static final String TABLE_NAME = "recipes";
         private static final String KEY_ID = "id";
@@ -234,7 +234,7 @@ public class DBHandler extends SQLiteOpenHelper {
                     }
                     newSteps.append(steps[i]);
                     if (i == newStepNum) {
-                        newSteps.append("!!"+temp);
+                        newSteps.append("!!").append(temp);
                     }
                 }
             }

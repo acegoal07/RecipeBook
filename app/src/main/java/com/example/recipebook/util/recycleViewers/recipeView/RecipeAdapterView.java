@@ -5,6 +5,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.recipebook.R;
@@ -34,8 +35,9 @@ public class RecipeAdapterView extends RecyclerView.Adapter<ViewHolderView> {
      * @param viewType The view type of the new View.
      * @return ViewHolder
      */
+    @NonNull
     @Override
-    public ViewHolderView onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolderView onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ViewHolderView(LayoutInflater.from(context).inflate(R.layout.recipe_recycler_step_view, parent, false));
     }
 
@@ -45,21 +47,22 @@ public class RecipeAdapterView extends RecyclerView.Adapter<ViewHolderView> {
      * @param position The position of the item within the adapter's data set.
      */
     @Override
-    public void onBindViewHolder(ViewHolderView holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull ViewHolderView holder, @SuppressLint("RecyclerView") int position) {
         if (RecipeSteps == null) {
             return;
         }
+        String stepCounterText = "Step " + (position + 1) + ": ";
         switch (RecipeSteps.get(position).getStepType()) {
             case NORMAL:
                 holder.NormalStepView.setVisibility(RecyclerView.VISIBLE);
-                holder.NormalStepCounter.setText("Step " + (position + 1)+ ": ");
+                holder.NormalStepCounter.setText(stepCounterText);
                 holder.NormalStep.setText(RecipeSteps.get(position).getStep());
                 break;
             case COOK:
                 holder.CookStepView.setVisibility(RecyclerView.VISIBLE);
-                holder.CookStepCounter.setText("Step " + (position + 1)+ ": ");
+                holder.CookStepCounter.setText(stepCounterText);
                 holder.CookTime.setText(RecipeSteps.get(position).getCookStepInfo().getDisplayTime());
-                holder.CookTempreture.setText(RecipeSteps.get(position).getCookStepInfo().getDisplayTemperature());
+                holder.CookTemperature.setText(RecipeSteps.get(position).getCookStepInfo().getDisplayTemperature());
                 break;
         }
     }

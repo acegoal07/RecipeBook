@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.recipebook.R;
 
 public class ViewHolderView extends RecyclerView.ViewHolder {
-    private final Context context;
+    Context context;
     LinearLayout NormalStepView;
     TextView NormalStepCounter;
     TextView NormalStep;
@@ -19,10 +19,12 @@ public class ViewHolderView extends RecyclerView.ViewHolder {
     LinearLayout CookStepView;
     TextView CookStepCounter;
     TextView CookTime;
-    TextView CookTempreture;
+    TextView CookTemperature;
 
     public ViewHolderView(@NonNull View view) {
         super(view);
+        // Set context
+        context = view.getContext();
         // Set normal step view
         NormalStepView = view.findViewById(R.id.recipeRecyclerViewNormalView);
         NormalStepCounter = view.findViewById(R.id.recipeRecyclerViewNormalStepCounter);
@@ -31,8 +33,6 @@ public class ViewHolderView extends RecyclerView.ViewHolder {
         CookStepView = view.findViewById(R.id.recipeRecyclerViewCookView);
         CookStepCounter = view.findViewById(R.id.recipeRecyclerViewCookStepCounter);
         CookTime = view.findViewById(R.id.recipeRecyclerViewCookTime);
-        CookTempreture = view.findViewById(R.id.recipeRecyclerViewCookTempreture);
-        // Set context
-        context = view.getContext();
+        CookTemperature = view.findViewById(R.id.recipeRecyclerViewCookTempreture);
     }
 }

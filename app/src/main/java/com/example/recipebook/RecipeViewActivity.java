@@ -13,6 +13,8 @@ import com.example.recipebook.util.classes.RecipeDetails;
 import com.example.recipebook.util.handlers.ToastHandler;
 import com.example.recipebook.util.recycleViewers.recipeView.RecipeAdapterView;
 
+import java.util.Objects;
+
 public class RecipeViewActivity extends AppCompatActivity {
 
     private int ID;
@@ -24,7 +26,7 @@ public class RecipeViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recipe_view);
 
         // Set Id
-        ID = getIntent().getExtras().getInt("recipeId");
+        ID = Objects.requireNonNull(getIntent().getExtras()).getInt("recipeId");
 
         // Get recipe info
         RecipeDetails recipeDetails = DBHandler.getRecipeByID(ID);
@@ -66,9 +68,7 @@ public class RecipeViewActivity extends AppCompatActivity {
         });
 
         // Add click listener to Cancel button
-        findViewById(R.id.recipeViewReturnButton).setOnClickListener(click -> {
-            finish();
-        });
+        findViewById(R.id.recipeViewReturnButton).setOnClickListener(click -> finish());
     }
 
     @Override

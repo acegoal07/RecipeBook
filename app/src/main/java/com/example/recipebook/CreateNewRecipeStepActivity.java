@@ -12,6 +12,8 @@ import android.widget.Spinner;
 import com.example.recipebook.util.handlers.DBHandler;
 import com.example.recipebook.util.handlers.ToastHandler;
 
+import java.util.Objects;
+
 public class CreateNewRecipeStepActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private int ID;
@@ -23,7 +25,7 @@ public class CreateNewRecipeStepActivity extends AppCompatActivity implements Ad
         setContentView(R.layout.activity_create_new_recipe_step);
 
         // Get recipe id and store it
-        ID = getIntent().getExtras().getInt("recipeId");
+        ID = Objects.requireNonNull(getIntent().getExtras()).getInt("recipeId");
 
         // Get inputs/outputs
         EditText stepInput = findViewById(R.id.createNewRecipeStepNormalInput);
@@ -122,17 +124,15 @@ public class CreateNewRecipeStepActivity extends AppCompatActivity implements Ad
         });
 
         // Get cancel button
-        findViewById(R.id.createNewStepCancelButton).setOnClickListener(click -> {
-            finish();
-        });
+        findViewById(R.id.createNewStepCancelButton).setOnClickListener(click -> finish());
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        if (position == 0 && findViewById(R.id.createNewRecipeStepNormalView).getVisibility() == view.GONE) {
+        if (position == 0 && findViewById(R.id.createNewRecipeStepNormalView).getVisibility() == View.GONE) {
             findViewById(R.id.createNewRecipeStepCookView).setVisibility(View.GONE);
             findViewById(R.id.createNewRecipeStepNormalView).setVisibility(View.VISIBLE);
-        } else if (position == 1 && findViewById(R.id.createNewRecipeStepCookView).getVisibility() == view.GONE) {
+        } else if (position == 1 && findViewById(R.id.createNewRecipeStepCookView).getVisibility() == View.GONE) {
             findViewById(R.id.createNewRecipeStepNormalView).setVisibility(View.GONE);
             findViewById(R.id.createNewRecipeStepCookView).setVisibility(View.VISIBLE);
         }
