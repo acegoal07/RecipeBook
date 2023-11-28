@@ -253,11 +253,14 @@ public class DBHandler extends SQLiteOpenHelper {
             StringBuilder newSteps = new StringBuilder();
             for (int i = 0; i < steps.length; i++) {
                 if (i != oldStepNum) {
-                    if (i != 0) {
+                    if (i != 0 && !newSteps.toString().isEmpty()) {
                         newSteps.append("!!");
                     }
+                    if (i == newStepNum && oldStepNum > newStepNum) {
+                        newSteps.append(temp).append("!!");
+                    }
                     newSteps.append(steps[i]);
-                    if (i == newStepNum) {
+                    if (i == newStepNum && oldStepNum < newStepNum) {
                         newSteps.append("!!").append(temp);
                     }
                 }
