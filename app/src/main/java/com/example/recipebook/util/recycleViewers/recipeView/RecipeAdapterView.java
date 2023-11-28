@@ -21,8 +21,9 @@ public class RecipeAdapterView extends RecyclerView.Adapter<ViewHolderView> {
 
     /**
      * Constructor for RecipeAdapter
+     *
      * @param applicationContext The application context
-     * @param collections An ArrayList of RecipeInfo objects
+     * @param collections        An ArrayList of RecipeInfo objects
      */
     public RecipeAdapterView(Context applicationContext, ArrayList<StepInfo> collections) {
         this.context = applicationContext;
@@ -31,7 +32,8 @@ public class RecipeAdapterView extends RecyclerView.Adapter<ViewHolderView> {
 
     /**
      * Creates a new ViewHolder object whenever the RecyclerView needs a new one.
-     * @param parent The ViewGroup into which the new View will be added after it is bound to an adapter position.
+     *
+     * @param parent   The ViewGroup into which the new View will be added after it is bound to an adapter position.
      * @param viewType The view type of the new View.
      * @return ViewHolder
      */
@@ -43,7 +45,8 @@ public class RecipeAdapterView extends RecyclerView.Adapter<ViewHolderView> {
 
     /**
      * Sets the data for the recycler view
-     * @param holder The ViewHolder which should be updated to represent the contents of the item
+     *
+     * @param holder   The ViewHolder which should be updated to represent the contents of the item
      * @param position The position of the item within the adapter's data set.
      */
     @Override
@@ -66,8 +69,10 @@ public class RecipeAdapterView extends RecyclerView.Adapter<ViewHolderView> {
                 break;
         }
     }
+
     /**
      * Returns the number of items in the recycler view
+     *
      * @return int
      */
     @Override

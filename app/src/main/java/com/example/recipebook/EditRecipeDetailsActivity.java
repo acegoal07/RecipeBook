@@ -54,18 +54,21 @@ public class EditRecipeDetailsActivity extends AppCompatActivity {
                         new ToastHandler(this).showLongToast("Please fill in the title field");
                         return;
                     }
+
                     // Check length of title
                     if (titleInput.getText().toString().length() > 24) {
                         // Send Toast message
                         new ToastHandler(this).showLongToast("Title must be 24 characters long or less");
                         return;
                     }
+
                     // Check if there are any special characters and display a toast if there are
                     if (titleInput.getText().toString().matches("[^A-Za-z0-9]")) {
                         // Send Toast message
                         new ToastHandler(this).showLongToast("Title contains special characters which are not allowed");
                         return;
                     }
+
                     // Update database
                     DBHandler.updateRecipeTitle(ID, titleInput.getText().toString());
                 }
@@ -111,7 +114,8 @@ public class EditRecipeDetailsActivity extends AppCompatActivity {
                     // Go back to main activity
                     finish();
                 })
-                .setNegativeButton("No", (dialog, which) -> {})
+                .setNegativeButton("No", (dialog, which) -> {
+                })
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show());
     }

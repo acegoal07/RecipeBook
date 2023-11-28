@@ -12,6 +12,7 @@ public class RecipeSteps {
 
     /**
      * Gets the steps
+     *
      * @return The steps
      */
     public ArrayList<StepInfo> getSteps() {
@@ -25,8 +26,10 @@ public class RecipeSteps {
         }
         return returnSteps;
     }
+
     /**
      * Gets the raw steps
+     *
      * @return The raw string steps
      */
     public String[] getRawSteps() {
@@ -35,15 +38,19 @@ public class RecipeSteps {
         }
         return steps.split("!!");
     }
+
     /**
      * Gets the raw steps string
+     *
      * @return The raw string steps
      */
     public String getRawStepsString() {
         return steps;
     }
+
     /**
      * Gets the step count
+     *
      * @return The step count
      */
     public int getStepCount() {

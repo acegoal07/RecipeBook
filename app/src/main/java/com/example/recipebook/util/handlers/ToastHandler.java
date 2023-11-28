@@ -15,6 +15,7 @@ public class ToastHandler extends AppCompatActivity {
 
     /**
      * Shows a long toast message
+     *
      * @param message the message to be displayed
      */
     public void showLongToast(String message) {

@@ -4,6 +4,7 @@ public class StepInfo {
 
     private RecipeStepType StepType;
     private String step;
+
     public enum RecipeStepType {
         NORMAL,
         COOK
@@ -11,28 +12,35 @@ public class StepInfo {
 
     /**
      * Constructor for StepInfo
+     *
      * @param step The step
      */
     public StepInfo(String step, RecipeStepType type) {
         this.step = step;
         this.StepType = type;
     }
+
     /**
      * Gets the step
+     *
      * @return The step
      */
     public String getStep() {
         return this.step;
     }
+
     /**
      * Gets the step type
+     *
      * @return The step type
      */
     public RecipeStepType getStepType() {
         return this.StepType;
     }
+
     /**
      * Gets the cook step info
+     *
      * @return The cook step info
      */
     public CookStepInfo getCookStepInfo() {
@@ -41,8 +49,10 @@ public class StepInfo {
         }
         return new CookStepInfo(this.step);
     }
+
     /**
      * Converts a into type to an stepType
+     *
      * @param num The int
      * @return The step type
      */

@@ -52,17 +52,20 @@ public class NewRecipeStepActivity extends AppCompatActivity implements AdapterV
             // Create a string builder
             StringBuilder stepString = new StringBuilder(info != null ? info : "");
             // Type specific checks
+
             if (stepTypeSpinner.getSelectedItemPosition() == 0) {
                 // Check if the step input is empty and display a toast if it is
                 if (stepInput.getText().toString().isEmpty()) {
                     new ToastHandler(this).showLongToast("Please enter a step");
                     return;
                 }
+
                 // Check if there are any special characters and display a toast if there are
                 if (stepInput.getText().toString().matches("[^A-Za-z0-9]")) {
                     new ToastHandler(this).showLongToast("Step contains special characters which are not allowed");
                     return;
                 }
+
                 // Create the string for the string builder
                 if (stepString.toString().isEmpty()) {
                     stepString
@@ -82,16 +85,19 @@ public class NewRecipeStepActivity extends AppCompatActivity implements AdapterV
                     new ToastHandler(this).showLongToast("Please enter a cook time");
                     return;
                 }
+
                 // Checks if the cook temperature input is empty and display a toast if it is
                 if (cookTemperatureInput.getText().toString().isEmpty()) {
                     new ToastHandler(this).showLongToast("Please enter a cook temperature");
                     return;
                 }
+
                 // Checks hour and minute time inputs are valid
                 if (Integer.parseInt(cookTimeHourInput.getText().toString().isEmpty() ? "0" : cookTimeHourInput.getText().toString()) > 23 || Integer.parseInt(cookTimeMinuteInput.getText().toString().isEmpty() ? "0" : cookTimeMinuteInput.getText().toString()) > 59) {
                     new ToastHandler(this).showLongToast("Please enter a valid cook time");
                     return;
                 }
+
                 // Create the string for the string builder
                 if (stepString.toString().isEmpty()) {
                     stepString
@@ -139,5 +145,6 @@ public class NewRecipeStepActivity extends AppCompatActivity implements AdapterV
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> parent) {}
+    public void onNothingSelected(AdapterView<?> parent) {
+    }
 }

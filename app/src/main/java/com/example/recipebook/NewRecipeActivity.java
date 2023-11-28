@@ -59,8 +59,10 @@ public class NewRecipeActivity extends AppCompatActivity {
 
             // Add new recipe
             DBHandler.addNewRecipe(titleInput.getText().toString(), descriptionInput.getText().toString());
+
             // Send Toast message
             new ToastHandler(this).showLongToast("Recipe Created");
+
             // Go back to main activity
             finish();
         });
