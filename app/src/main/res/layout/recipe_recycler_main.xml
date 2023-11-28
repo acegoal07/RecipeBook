@@ -47,6 +47,7 @@
             android:id="@+id/recipeRecyclerMainEditButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:background="@drawable/recipe_recycler_del_btn"
             android:paddingLeft="40dp"

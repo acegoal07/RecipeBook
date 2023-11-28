@@ -29,7 +29,7 @@ public class RecipeAdapterMain extends RecyclerView.Adapter<ViewHolderMain> {
      */
     public RecipeAdapterMain(Context applicationContext, ArrayList<RecipeDetails> collections) {
         this.context = applicationContext;
-        RecipeDetails = collections;
+        this.RecipeDetails = collections;
     }
 
     /**
@@ -52,22 +52,23 @@ public class RecipeAdapterMain extends RecyclerView.Adapter<ViewHolderMain> {
     @Override
     public void onBindViewHolder(ViewHolderMain holder, @SuppressLint("RecyclerView") int position) {
         // Set data for recipe collection
-        holder.Title.setText(RecipeDetails.get(position).getTitle());
-        if (!RecipeDetails.get(position).getDescription().isEmpty()) {
+        RecipeDetails recipeDetails = RecipeDetails.get(position);
+        holder.Title.setText(recipeDetails.getTitle());
+        if (!recipeDetails.getDescription().isEmpty()) {
             holder.Description.setVisibility(RecyclerView.VISIBLE);
-            holder.Description.setText(RecipeDetails.get(position).getDescription());
+            holder.Description.setText(recipeDetails.getDescription());
         }
         // Set click listener for delete button
         holder.DeleteButton.setOnClickListener(v -> {
             Intent Intent = new Intent(v.getContext(), EditRecipeDetailsActivity.class);
-            Intent.putExtra("recipeId", RecipeDetails.get(position).getId());
+            Intent.putExtra("recipeId", recipeDetails.getId());
             Intent.setFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK);
             v.getContext().startActivity(Intent);
         });
         // Set click listener for recipe item
         holder.itemView.setOnClickListener(v -> {
             Intent Intent = new Intent(v.getContext(), RecipeViewActivity.class);
-            Intent.putExtra("recipeId", RecipeDetails.get(position).getId());
+            Intent.putExtra("recipeId", recipeDetails.getId());
             Intent.setFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK);
             v.getContext().startActivity(Intent);
         });
@@ -75,7 +76,7 @@ public class RecipeAdapterMain extends RecyclerView.Adapter<ViewHolderMain> {
 
     /**
      * Returns the number of items in the recycler view
-     * @return int
+     * @return int The number of items in the recycler view
      */
     @Override
     public int getItemCount() {

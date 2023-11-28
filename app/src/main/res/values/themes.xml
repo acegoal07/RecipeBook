@@ -6,10 +6,8 @@
 
     <color name="primaryTextColor">#000000</color>
     <color name="primaryTextColorMuted">#202020</color>
-    <color name="secondaryTextColor">#FFFFFF</color>
     <color name="colorPrimary">#e9ecef</color>
     <color name="colorSecondary">#f8f9fa</color>
-    <color name="backgroundColor">#FFFFFF</color>
 
     <style name="Theme.RecipeBook" parent="Base.Theme.RecipeBook" />
 </resources>
