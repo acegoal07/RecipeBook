@@ -6,8 +6,8 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.recipebook.util.handlers.DBHandler;
 import com.example.recipebook.util.classes.RecipeDetails;
+import com.example.recipebook.util.handlers.DBHandler;
 import com.example.recipebook.util.handlers.ToastHandler;
 
 import java.util.Objects;

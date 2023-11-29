@@ -1,15 +1,15 @@
 package com.example.recipebook;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.example.recipebook.util.handlers.DBHandler;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.recipebook.util.classes.RecipeDetails;
+import com.example.recipebook.util.handlers.DBHandler;
 import com.example.recipebook.util.handlers.ToastHandler;
 import com.example.recipebook.util.recycleViewers.recipeView.RecipeAdapterView;
 

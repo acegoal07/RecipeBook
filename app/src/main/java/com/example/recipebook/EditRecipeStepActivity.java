@@ -11,9 +11,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.recipebook.util.handlers.DBHandler;
 import com.example.recipebook.util.classes.RecipeSteps;
 import com.example.recipebook.util.classes.StepInfo;
+import com.example.recipebook.util.handlers.DBHandler;
 import com.example.recipebook.util.handlers.ToastHandler;
 
 import java.util.ArrayList;
@@ -43,7 +43,6 @@ public class EditRecipeStepActivity extends AppCompatActivity implements Adapter
         EditText cookTemperatureInput = findViewById(R.id.editRecipeStepCookTemperatureInput);
         Spinner cookTemperatureSymbolSpinner = findViewById(R.id.editRecipeStepCookTemperatureSymbolSpinner);
         Spinner stepPositionSpinner = findViewById(R.id.editRecipeStepPositionSpinner);
-        TextView stepPositionTextView = findViewById(R.id.editRecipeStepPositionTextView);
 
         // Get Spinner data
         int stepCount = recipe.getStepCount();

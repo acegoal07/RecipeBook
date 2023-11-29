@@ -15,7 +15,6 @@ public class ViewHolderView extends RecyclerView.ViewHolder {
     LinearLayout NormalStepView;
     TextView NormalStepCounter;
     TextView NormalStep;
-
     LinearLayout CookStepView;
     TextView CookStepCounter;
     TextView CookTime;
