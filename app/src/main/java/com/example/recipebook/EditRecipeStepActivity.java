@@ -21,7 +21,9 @@ import java.util.ArrayList;
 public class EditRecipeStepActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private int ID;
+    private RecipeSteps recipeSteps;
     private final DBHandler DBHandler = new DBHandler(this);
+    private final ToastHandler ToastHandler = new ToastHandler(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +33,9 @@ public class EditRecipeStepActivity extends AppCompatActivity implements Adapter
         // Set ID
         ID = getIntent().getIntExtra("recipeId", 0);
         // Get recipe data
-        RecipeSteps recipe = DBHandler.getRecipeByID(ID).getRecipe();
+        recipeSteps = DBHandler.getRecipeByID(ID).getRecipe();
         // Get steps data
-        ArrayList<StepInfo> steps = recipe.getSteps();
+        ArrayList<StepInfo> steps = recipeSteps.getSteps();
 
         // Get inputs/output
         Spinner stepSpinner = findViewById(R.id.editRecipeStepSpinner);
@@ -45,7 +47,7 @@ public class EditRecipeStepActivity extends AppCompatActivity implements Adapter
         Spinner stepPositionSpinner = findViewById(R.id.editRecipeStepPositionSpinner);
 
         // Get Spinner data
-        int stepCount = recipe.getStepCount();
+        int stepCount = recipeSteps.getStepCount();
         ArrayList<String> stepCounter = new ArrayList<>();
         for (int i = 1; i <= stepCount; i++) {
             stepCounter.add("Step " + i);
@@ -73,19 +75,19 @@ public class EditRecipeStepActivity extends AppCompatActivity implements Adapter
             if (steps.get(stepSpinner.getSelectedItemPosition()).getStepType() == StepInfo.RecipeStepType.NORMAL) {
                 // add a check to see if any changes have been made
                 if (stepEditText.getText().toString().equals(steps.get(stepSpinner.getSelectedItemPosition()).getStep()) && stepPositionSpinner.getSelectedItemPosition() == stepSpinner.getSelectedItemPosition()) {
-                    new ToastHandler(this).showLongToast("No changes have been made");
+                    ToastHandler.showLongToast("No changes have been made");
                     return;
                 }
 
                 // Check if the step input is empty and display a toast if it is
                 if (stepEditText.getText().toString().isEmpty()) {
-                    new ToastHandler(this).showLongToast("Please enter a step");
+                    ToastHandler.showLongToast("Please enter a step");
                     return;
                 }
 
                 // Check if the step input is empty and display a toast if it is
                 if (stepEditText.getText().toString().matches("[^A-Za-z0-9]")) {
-                    new ToastHandler(this).showLongToast("Step contains special characters which are not allowed");
+                    ToastHandler.showLongToast("Step contains special characters which are not allowed");
                     return;
                 }
 
@@ -99,25 +101,25 @@ public class EditRecipeStepActivity extends AppCompatActivity implements Adapter
                         cookTemperatureInput.getText().toString().equals(steps.get(stepSpinner.getSelectedItemPosition()).getCookStepInfo().getTemperature()) &&
                         cookTemperatureSymbolSpinner.getSelectedItemPosition() == Integer.parseInt(steps.get(stepSpinner.getSelectedItemPosition()).getCookStepInfo().getCookTemperatureSymbolPosition()) &&
                         stepPositionSpinner.getSelectedItemPosition() == stepSpinner.getSelectedItemPosition()) {
-                    new ToastHandler(this).showLongToast("No changes have been made");
+                    ToastHandler.showLongToast("No changes have been made");
                     return;
                 }
 
                 // Check if the cook time hour and minute inputs are empty and display a toast if they are
                 if (cookTimeHourInput.getText().toString().isEmpty() || cookTimeMinuteInput.getText().toString().isEmpty()) {
-                    new ToastHandler(this).showLongToast("Please enter a cook time");
+                    ToastHandler.showLongToast("Please enter a cook time");
                     return;
                 }
 
                 // Checks if the cook temperature input is empty and display a toast if it is
                 if (cookTemperatureInput.getText().toString().isEmpty()) {
-                    new ToastHandler(this).showLongToast("Please enter a cook temperature");
+                    ToastHandler.showLongToast("Please enter a cook temperature");
                     return;
                 }
 
                 // Checks hour and minute time inputs are valid
                 if (Integer.parseInt(cookTimeHourInput.getText().toString().isEmpty() ? "0" : cookTimeHourInput.getText().toString()) > 23 || Integer.parseInt(cookTimeMinuteInput.getText().toString().isEmpty() ? "0" : cookTimeMinuteInput.getText().toString()) > 59) {
-                    new ToastHandler(this).showLongToast("Please enter a valid cook time");
+                    ToastHandler.showLongToast("Please enter a valid cook time");
                     return;
                 }
 
@@ -166,9 +168,9 @@ public class EditRecipeStepActivity extends AppCompatActivity implements Adapter
 
     public void refreshView(int position) {
         // Get recipe data
-        RecipeSteps recipe = DBHandler.getRecipeByID(ID).getRecipe();
+        recipeSteps = DBHandler.getRecipeByID(ID).getRecipe();
         // Get steps data
-        ArrayList<StepInfo> steps = recipe.getSteps();
+        ArrayList<StepInfo> steps = recipeSteps.getSteps();
 
         // Get views
         findViewById(R.id.editRecipeStepNormalView).setVisibility(View.GONE);

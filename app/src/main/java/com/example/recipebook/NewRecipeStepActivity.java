@@ -18,6 +18,7 @@ public class NewRecipeStepActivity extends AppCompatActivity implements AdapterV
 
     private int ID;
     private final DBHandler DBHandler = new DBHandler(this);
+    private final ToastHandler ToastHandler = new ToastHandler(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +47,7 @@ public class NewRecipeStepActivity extends AppCompatActivity implements AdapterV
         symbolSpinner.setAdapter(symbolSpinnerArrayAdapter);
 
         // Get save button
-        findViewById(R.id.newRecipeStepSaveButton).setOnClickListener(click -> {
+        findViewById(R.id.newRecipeStepCreateButton).setOnClickListener(click -> {
             // Get raw step info
             String info = DBHandler.getRecipeByID(ID).getRecipe().getRawStepsString();
             // Create a string builder
@@ -56,13 +57,13 @@ public class NewRecipeStepActivity extends AppCompatActivity implements AdapterV
             if (stepTypeSpinner.getSelectedItemPosition() == 0) {
                 // Check if the step input is empty and display a toast if it is
                 if (stepInput.getText().toString().isEmpty()) {
-                    new ToastHandler(this).showLongToast("Please enter a step");
+                    ToastHandler.showLongToast("Please enter a step");
                     return;
                 }
 
                 // Check if there are any special characters and display a toast if there are
                 if (stepInput.getText().toString().matches("[^A-Za-z0-9]")) {
-                    new ToastHandler(this).showLongToast("Step contains special characters which are not allowed");
+                    ToastHandler.showLongToast("Step contains special characters which are not allowed");
                     return;
                 }
 
@@ -82,19 +83,31 @@ public class NewRecipeStepActivity extends AppCompatActivity implements AdapterV
             } else if (stepTypeSpinner.getSelectedItemPosition() == 1) {
                 // Check if the cook time hour and minute inputs are empty and display a toast if they are
                 if (cookTimeHourInput.getText().toString().isEmpty() && cookTimeMinuteInput.getText().toString().isEmpty()) {
-                    new ToastHandler(this).showLongToast("Please enter a cook time");
+                    ToastHandler.showLongToast("Please enter a cook time");
+                    return;
+                }
+
+                // Check how many characters are in the cook time hour and minute inputs and display a toast if there are too many
+                if (cookTimeHourInput.getText().toString().length() > 2 || cookTimeMinuteInput.getText().toString().length() > 2) {
+                    ToastHandler.showLongToast("Cook time contains too many characters");
+                    return;
+                }
+
+                // Check if there are any special characters and display a toast if there are
+                if (cookTimeHourInput.getText().toString().matches("[^0-9]") || cookTimeMinuteInput.getText().toString().matches("[^0-9]") || cookTemperatureInput.getText().toString().matches("[^0-9]")) {
+                    ToastHandler.showLongToast("Cook time contains special characters which are not allowed");
                     return;
                 }
 
                 // Checks if the cook temperature input is empty and display a toast if it is
                 if (cookTemperatureInput.getText().toString().isEmpty()) {
-                    new ToastHandler(this).showLongToast("Please enter a cook temperature");
+                    ToastHandler.showLongToast("Please enter a cook temperature");
                     return;
                 }
 
                 // Checks hour and minute time inputs are valid
                 if (Integer.parseInt(cookTimeHourInput.getText().toString().isEmpty() ? "0" : cookTimeHourInput.getText().toString()) > 23 || Integer.parseInt(cookTimeMinuteInput.getText().toString().isEmpty() ? "0" : cookTimeMinuteInput.getText().toString()) > 59) {
-                    new ToastHandler(this).showLongToast("Please enter a valid cook time");
+                    ToastHandler.showLongToast("Please enter a valid cook time");
                     return;
                 }
 

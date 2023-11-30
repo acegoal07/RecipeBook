@@ -87,4 +87,13 @@ public class CookStepInfo {
             return "0";
         }
     }
+
+    /**
+     * Gets the full display
+     *
+     * @return The full display
+     */
+    public String getFullDisplay() {
+        return "Cook for " + getDisplayTime() + " at " + getDisplayTemperature();
+    }
 }

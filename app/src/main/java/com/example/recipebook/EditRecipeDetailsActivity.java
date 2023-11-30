@@ -16,6 +16,7 @@ public class EditRecipeDetailsActivity extends AppCompatActivity {
 
     private int ID;
     private final DBHandler DBHandler = new DBHandler(this);
+    private final ToastHandler ToastHandler = new ToastHandler(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,7 @@ public class EditRecipeDetailsActivity extends AppCompatActivity {
             // Check if any changes were made
             if (titleInput.getText().toString().equals(tempTitle) && descriptionInput.getText().toString().equals(tempDescription)) {
                 // Send Toast message
-                new ToastHandler(this).showLongToast("No changes made");
+                ToastHandler.showLongToast("No changes made");
                 return;
             } else {
                 // Check if title was changed
@@ -51,21 +52,21 @@ public class EditRecipeDetailsActivity extends AppCompatActivity {
                     // Make sure title is not empty
                     if (titleInput.getText().toString().isEmpty()) {
                         // Send Toast message
-                        new ToastHandler(this).showLongToast("Please fill in the title field");
+                        ToastHandler.showLongToast("Please fill in the title field");
                         return;
                     }
 
                     // Check length of title
                     if (titleInput.getText().toString().length() > 24) {
                         // Send Toast message
-                        new ToastHandler(this).showLongToast("Title must be 24 characters long or less");
+                        ToastHandler.showLongToast("Title must be 24 characters long or less");
                         return;
                     }
 
                     // Check if there are any special characters and display a toast if there are
                     if (titleInput.getText().toString().matches("[^A-Za-z0-9]")) {
                         // Send Toast message
-                        new ToastHandler(this).showLongToast("Title contains special characters which are not allowed");
+                        ToastHandler.showLongToast("Title contains special characters which are not allowed");
                         return;
                     }
 
@@ -77,13 +78,13 @@ public class EditRecipeDetailsActivity extends AppCompatActivity {
                     // Check length of description
                     if (descriptionInput.getText().toString().length() > 50) {
                         // Send Toast message
-                        new ToastHandler(this).showLongToast("Description must be 50 characters long or less");
+                        ToastHandler.showLongToast("Description must be 50 characters long or less");
                         return;
                     }
                     // Check if there are any special characters and display a toast if there are
                     if (descriptionInput.getText().toString().matches("[^A-Za-z0-9]")) {
                         // Send Toast message
-                        new ToastHandler(this).showLongToast("Description contains special characters which are not allowed");
+                        ToastHandler.showLongToast("Description contains special characters which are not allowed");
                         return;
                     }
                     // Update database
@@ -91,7 +92,7 @@ public class EditRecipeDetailsActivity extends AppCompatActivity {
                 }
             }
             // Send toast
-            new ToastHandler(this).showLongToast("Changes Saved");
+            ToastHandler.showLongToast("Changes Saved");
             // Go back to main activity
             finish();
         });
@@ -110,7 +111,7 @@ public class EditRecipeDetailsActivity extends AppCompatActivity {
                     // Delete recipe
                     DBHandler.removeRecipeById(ID);
                     // Send toast
-                    new ToastHandler(this).showLongToast("Recipe Deleted");
+                    ToastHandler.showLongToast("Recipe Deleted");
                     // Go back to main activity
                     finish();
                 })

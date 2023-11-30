@@ -58,8 +58,8 @@ public class RecipeAdapterMain extends RecyclerView.Adapter<ViewHolderMain> {
         RecipeDetails recipeDetails = RecipeDetails.get(position);
         holder.Title.setText(recipeDetails.getTitle());
         if (!recipeDetails.getDescription().isEmpty()) {
-            holder.Description.setVisibility(RecyclerView.VISIBLE);
             holder.Description.setText(recipeDetails.getDescription());
+            holder.Description.setVisibility(RecyclerView.VISIBLE);
         }
         // Set click listener for delete button
         holder.DeleteButton.setOnClickListener(v -> {

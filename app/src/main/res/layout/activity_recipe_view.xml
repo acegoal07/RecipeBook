@@ -17,6 +17,18 @@
         android:theme="?attr/actionBarTheme">
 
         <Button
+            android:id="@+id/recipeViewShareButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorSecondary"
+            android:text="Share"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="24sp"
+            app:icon="@drawable/share"
+            app:iconSize="24dp"
+            app:iconTint="@color/primaryTextColor" />
+
+        <Button
             android:id="@+id/recipeViewReturnButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
