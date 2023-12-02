@@ -37,6 +37,12 @@ public class EditRecipeStepActivity extends AppCompatActivity implements Adapter
         // Get steps data
         ArrayList<StepInfo> steps = recipeSteps.getSteps();
 
+        // Make move step setting visible if there is more than one step 
+        if (steps.size() > 1) {
+            // Set step spinner
+            findViewById(R.id.editRecipeStepMoveStepView).setVisibility(View.VISIBLE);
+        }
+
         // Get inputs/output
         Spinner stepSpinner = findViewById(R.id.editRecipeStepSpinner);
         EditText stepEditText = findViewById(R.id.editRecipeStepNormalInput);

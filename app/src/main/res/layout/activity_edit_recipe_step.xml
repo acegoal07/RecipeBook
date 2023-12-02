@@ -143,48 +143,58 @@
             android:layout_height="20dp"
             android:layout_weight="0" />
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Move step:"
-            android:textColorHighlight="@color/primaryTextColor"
-            android:textSize="34sp" />
-
         <LinearLayout
+            android:id="@+id/editRecipeStepMoveStepView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <TextView
-                android:id="@+id/editRecipeStepPositionTextView"
+                android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_weight="0"
-                android:text="TextView"
+                android:text="Move step:"
                 android:textColorHighlight="@color/primaryTextColor"
-                android:textSize="24sp" />
+                android:textSize="34sp" />
 
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:drawableEnd="@drawable/arrow_forward"
-                android:textSize="24sp" />
+                android:orientation="horizontal">
 
-            <Spinner
-                android:id="@+id/editRecipeStepPositionSpinner"
+                <TextView
+                    android:id="@+id/editRecipeStepPositionTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:layout_weight="0"
+                    android:text="TextView"
+                    android:textColorHighlight="@color/primaryTextColor"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:drawableEnd="@drawable/arrow_forward"
+                    android:textSize="24sp" />
+
+                <Spinner
+                    android:id="@+id/editRecipeStepPositionSpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|center_horizontal"
+                    android:layout_weight="0" />
+
+            </LinearLayout>
+
+            <Space
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|center_horizontal"
-                android:layout_weight="0" />
+                android:layout_height="20dp" />
+
         </LinearLayout>
-
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="20dp" />
 
         <LinearLayout
             android:layout_width="match_parent"

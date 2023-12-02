@@ -55,17 +55,13 @@ public class RecipeAdapterView extends RecyclerView.Adapter<ViewHolderView> {
             return;
         }
         String stepCounterText = "Step " + (position + 1) + ": ";
+        holder.StepCounter.setText(stepCounterText);
         switch (RecipeSteps.get(position).getStepType()) {
             case NORMAL:
-                holder.NormalStepView.setVisibility(RecyclerView.VISIBLE);
-                holder.NormalStepCounter.setText(stepCounterText);
-                holder.NormalStep.setText(RecipeSteps.get(position).getStep());
+                holder.StepContent.setText(RecipeSteps.get(position).getStep());
                 break;
             case COOK:
-                holder.CookStepView.setVisibility(RecyclerView.VISIBLE);
-                holder.CookStepCounter.setText(stepCounterText);
-                holder.CookTime.setText(RecipeSteps.get(position).getCookStepInfo().getDisplayTime());
-                holder.CookTemperature.setText(RecipeSteps.get(position).getCookStepInfo().getDisplayTemperature());
+                holder.StepContent.setText(RecipeSteps.get(position).getCookStepInfo().getFullDisplay());
                 break;
         }
     }
