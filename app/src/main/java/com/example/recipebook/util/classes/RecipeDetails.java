@@ -1,9 +1,12 @@
 package com.example.recipebook.util.classes;
 
+import static com.example.recipebook.util.classes.RecipeTypeEnum.VEGAN;
+
 public class RecipeDetails {
 
     private int id;
     private String title;
+    private RecipeTypeEnum recipeType;
     private String description;
     private RecipeSteps recipe;
 
@@ -15,9 +18,10 @@ public class RecipeDetails {
      * @param description The description of the recipe collection
      * @param recipe      The recipe of the recipe collection
      */
-    public RecipeDetails(int id, String title, String description, RecipeSteps recipe) {
+    public RecipeDetails(int id, String title, RecipeTypeEnum type, String description, RecipeSteps recipe) {
         this.id = id;
         this.title = title;
+        this.recipeType = type;
         this.description = description;
         this.recipe = recipe;
     }
@@ -37,7 +41,30 @@ public class RecipeDetails {
      * @return The title
      */
     public String getTitle() {
+        if (this.recipeType == VEGAN) {
+            return this.title + " (Ve)";
+        }
+        if (this.recipeType == RecipeTypeEnum.VEGETARIAN) {
+            return this.title + " (V)";
+        }
         return this.title;
+    }
+
+    /**
+     * Gets the title of the recipe collection
+     *
+     * @return The title
+     */
+    public String getRawTitle() {
+        return this.title;
+    }
+    /**
+     * Gets the type of the recipe collection
+     *
+     * @return The type
+     */
+    public RecipeTypeEnum getType() {
+        return this.recipeType;
     }
 
     /**

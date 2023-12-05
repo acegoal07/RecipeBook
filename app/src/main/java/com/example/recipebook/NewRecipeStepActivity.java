@@ -13,12 +13,14 @@ import com.example.recipebook.util.handlers.DBHandler;
 import com.example.recipebook.util.handlers.ToastHandler;
 
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 public class NewRecipeStepActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private int ID;
     private final DBHandler DBHandler = new DBHandler(this);
     private final ToastHandler ToastHandler = new ToastHandler(this);
+    private final Pattern pattern = Pattern.compile("[a-zA-Z0-9]*");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +55,6 @@ public class NewRecipeStepActivity extends AppCompatActivity implements AdapterV
             // Create a string builder
             StringBuilder stepString = new StringBuilder(info != null ? info : "");
             // Type specific checks
-
             if (stepTypeSpinner.getSelectedItemPosition() == 0) {
                 // Check if the step input is empty and display a toast if it is
                 if (stepInput.getText().toString().isEmpty()) {
@@ -62,7 +63,7 @@ public class NewRecipeStepActivity extends AppCompatActivity implements AdapterV
                 }
 
                 // Check if there are any special characters and display a toast if there are
-                if (stepInput.getText().toString().matches("[^A-Za-z0-9]")) {
+                if (!pattern.matcher(stepInput.getText().toString()).matches()) {
                     ToastHandler.showLongToast("Step contains special characters which are not allowed");
                     return;
                 }
@@ -90,12 +91,6 @@ public class NewRecipeStepActivity extends AppCompatActivity implements AdapterV
                 // Check how many characters are in the cook time hour and minute inputs and display a toast if there are too many
                 if (cookTimeHourInput.getText().toString().length() > 2 || cookTimeMinuteInput.getText().toString().length() > 2) {
                     ToastHandler.showLongToast("Cook time contains too many characters");
-                    return;
-                }
-
-                // Check if there are any special characters and display a toast if there are
-                if (cookTimeHourInput.getText().toString().matches("[^0-9]") || cookTimeMinuteInput.getText().toString().matches("[^0-9]") || cookTemperatureInput.getText().toString().matches("[^0-9]")) {
-                    ToastHandler.showLongToast("Cook time contains special characters which are not allowed");
                     return;
                 }
 

@@ -11,12 +11,14 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.recipebook.util.classes.RecipeStepTypeEnum;
 import com.example.recipebook.util.classes.RecipeSteps;
 import com.example.recipebook.util.classes.StepInfo;
 import com.example.recipebook.util.handlers.DBHandler;
 import com.example.recipebook.util.handlers.ToastHandler;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class EditRecipeStepActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -24,6 +26,7 @@ public class EditRecipeStepActivity extends AppCompatActivity implements Adapter
     private RecipeSteps recipeSteps;
     private final DBHandler DBHandler = new DBHandler(this);
     private final ToastHandler ToastHandler = new ToastHandler(this);
+    private final Pattern pattern = Pattern.compile("[a-zA-Z0-9]*");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +81,7 @@ public class EditRecipeStepActivity extends AppCompatActivity implements Adapter
 
         // Listener for save button
         findViewById(R.id.editRecipeStepSaveButton).setOnClickListener(click -> {
-            if (steps.get(stepSpinner.getSelectedItemPosition()).getStepType() == StepInfo.RecipeStepType.NORMAL) {
+            if (steps.get(stepSpinner.getSelectedItemPosition()).getStepType() == RecipeStepTypeEnum.NORMAL) {
                 // add a check to see if any changes have been made
                 if (stepEditText.getText().toString().equals(steps.get(stepSpinner.getSelectedItemPosition()).getStep()) && stepPositionSpinner.getSelectedItemPosition() == stepSpinner.getSelectedItemPosition()) {
                     ToastHandler.showLongToast("No changes have been made");
@@ -92,14 +95,14 @@ public class EditRecipeStepActivity extends AppCompatActivity implements Adapter
                 }
 
                 // Check if the step input is empty and display a toast if it is
-                if (stepEditText.getText().toString().matches("[^A-Za-z0-9]")) {
+                if (!pattern.matcher(stepEditText.getText().toString()).matches()) {
                     ToastHandler.showLongToast("Step contains special characters which are not allowed");
                     return;
                 }
 
                 // Update step
                 DBHandler.updateRecipeStep(ID, stepSpinner.getSelectedItemPosition(), "0::" + stepEditText.getText().toString());
-            } else if (steps.get(stepSpinner.getSelectedItemPosition()).getStepType() == StepInfo.RecipeStepType.COOK) {
+            } else if (steps.get(stepSpinner.getSelectedItemPosition()).getStepType() == RecipeStepTypeEnum.COOK) {
 
                 // Check if any changes have been made
                 if (cookTimeHourInput.getText().toString().equals(steps.get(stepSpinner.getSelectedItemPosition()).getCookStepInfo().getHour()) &&
@@ -199,10 +202,10 @@ public class EditRecipeStepActivity extends AppCompatActivity implements Adapter
         stepPositionSpinner.setSelection(position);
 
         // Stored data to view
-        if (steps.get(position).getStepType() == StepInfo.RecipeStepType.NORMAL) {
+        if (steps.get(position).getStepType() == RecipeStepTypeEnum.NORMAL) {
             findViewById(R.id.editRecipeStepNormalView).setVisibility(View.VISIBLE);
             stepEditText.setText(steps.get(position).getStep());
-        } else if (steps.get(position).getStepType() == StepInfo.RecipeStepType.COOK) {
+        } else if (steps.get(position).getStepType() == RecipeStepTypeEnum.COOK) {
             findViewById(R.id.editRecipeStepCookView).setVisibility(View.VISIBLE);
             cookTimeHourInput.setText(steps.get(position).getCookStepInfo().getHour());
             cookTimeMinuteInput.setText(steps.get(position).getCookStepInfo().getMinute());

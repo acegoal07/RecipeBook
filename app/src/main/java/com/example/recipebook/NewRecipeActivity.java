@@ -5,13 +5,18 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.recipebook.util.classes.RecipeTypeEnum;
 import com.example.recipebook.util.handlers.DBHandler;
 import com.example.recipebook.util.handlers.ToastHandler;
+
+import java.util.regex.Pattern;
 
 public class NewRecipeActivity extends AppCompatActivity {
 
     private final DBHandler DBHandler = new DBHandler(this);
     private final ToastHandler ToastHandler = new ToastHandler(this);
+    private RecipeTypeEnum recipeType = RecipeTypeEnum.DEFAULT;
+    private final Pattern pattern = Pattern.compile("[a-zA-Z0-9]*");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,19 +52,19 @@ public class NewRecipeActivity extends AppCompatActivity {
             }
 
             // Check if there are any special characters and display a toast if there are
-            if (titleInput.getText().toString().matches("[^A-Za-z0-9]")) {
+            if (!pattern.matcher(titleInput.getText().toString()).matches()) {
                 // Send Toast message
                 ToastHandler.showLongToast("Title contains special characters which are not allowed");
                 return;
             }
-            if (descriptionInput.getText().toString().matches("[^A-Za-z0-9]")) {
+            if (!pattern.matcher(descriptionInput.getText().toString()).matches()) {
                 // Send Toast message
                 ToastHandler.showLongToast("Description contains special characters which are not allowed");
                 return;
             }
 
             // Add new recipe
-            DBHandler.addNewRecipe(titleInput.getText().toString(), descriptionInput.getText().toString());
+            DBHandler.addNewRecipe(titleInput.getText().toString(), recipeType.toString() ,descriptionInput.getText().toString());
 
             // Send Toast message
             ToastHandler.showLongToast("Recipe Created");
@@ -67,6 +72,11 @@ public class NewRecipeActivity extends AppCompatActivity {
             // Go back to main activity
             finish();
         });
+
+        // Add click listeners to all radio buttons
+        findViewById(R.id.newRecipeDefaultRadioButton).setOnClickListener(click -> recipeType = RecipeTypeEnum.DEFAULT);
+        findViewById(R.id.newRecipeVegetarianRadioButton).setOnClickListener(click -> recipeType = RecipeTypeEnum.VEGETARIAN);
+        findViewById(R.id.newRecipeVeganRadioButton).setOnClickListener(click -> recipeType = RecipeTypeEnum.VEGAN);
 
         // Add click listener to cancel button
         findViewById(R.id.newRecipeCancelButton).setOnClickListener(click -> {

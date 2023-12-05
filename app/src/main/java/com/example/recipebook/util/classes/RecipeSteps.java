@@ -22,7 +22,7 @@ public class RecipeSteps {
         ArrayList<StepInfo> returnSteps = new ArrayList<>();
         for (String step : getRawSteps()) {
             String[] stepInfo = step.split("::");
-            returnSteps.add(new StepInfo(stepInfo[1], StepInfo.convertIntToType(Integer.parseInt(stepInfo[0]))));
+            returnSteps.add(new StepInfo(stepInfo[1], RecipeStepTypeEnum.convertIntToType(Integer.parseInt(stepInfo[0]))));
         }
         return returnSteps;
     }

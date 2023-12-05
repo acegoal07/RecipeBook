@@ -2,20 +2,15 @@ package com.example.recipebook.util.classes;
 
 public class StepInfo {
 
-    private RecipeStepType StepType;
+    private RecipeStepTypeEnum StepType;
     private String step;
-
-    public enum RecipeStepType {
-        NORMAL,
-        COOK
-    }
 
     /**
      * Constructor for StepInfo
      *
      * @param step The step
      */
-    public StepInfo(String step, RecipeStepType type) {
+    public StepInfo(String step, RecipeStepTypeEnum type) {
         this.step = step;
         this.StepType = type;
     }
@@ -34,7 +29,7 @@ public class StepInfo {
      *
      * @return The step type
      */
-    public RecipeStepType getStepType() {
+    public RecipeStepTypeEnum getStepType() {
         return this.StepType;
     }
 
@@ -44,22 +39,9 @@ public class StepInfo {
      * @return The cook step info
      */
     public CookStepInfo getCookStepInfo() {
-        if (this.StepType != RecipeStepType.COOK) {
+        if (this.StepType != RecipeStepTypeEnum.COOK) {
             return null;
         }
         return new CookStepInfo(this.step);
-    }
-
-    /**
-     * Converts a into type to an stepType
-     *
-     * @param num The int
-     * @return The step type
-     */
-    public static RecipeStepType convertIntToType(int num) {
-        if (num == 1) {
-            return RecipeStepType.COOK;
-        }
-        return RecipeStepType.NORMAL;
     }
 }

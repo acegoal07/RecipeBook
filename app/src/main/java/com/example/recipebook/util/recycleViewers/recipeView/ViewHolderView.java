@@ -2,7 +2,6 @@ package com.example.recipebook.util.recycleViewers.recipeView;
 
 import android.content.Context;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;

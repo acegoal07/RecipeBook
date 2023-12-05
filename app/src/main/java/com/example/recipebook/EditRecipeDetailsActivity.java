@@ -3,20 +3,25 @@ package com.example.recipebook;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.widget.EditText;
+import android.widget.RadioButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.recipebook.util.classes.RecipeDetails;
+import com.example.recipebook.util.classes.RecipeTypeEnum;
 import com.example.recipebook.util.handlers.DBHandler;
 import com.example.recipebook.util.handlers.ToastHandler;
 
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 public class EditRecipeDetailsActivity extends AppCompatActivity {
 
     private int ID;
     private final DBHandler DBHandler = new DBHandler(this);
     private final ToastHandler ToastHandler = new ToastHandler(this);
+    private RecipeTypeEnum recipeType;
+    private final Pattern pattern = Pattern.compile("[a-zA-Z0-9]*");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +34,12 @@ public class EditRecipeDetailsActivity extends AppCompatActivity {
         // Get recipe info
         RecipeDetails recipeDetails = DBHandler.getRecipeByID(ID);
 
+        // Get recipe type
+        recipeType = recipeDetails.getType();
+
         // Get title input
         EditText titleInput = findViewById(R.id.editRecipeDetailsTitleInput);
-        String tempTitle = recipeDetails.getTitle();
+        String tempTitle = recipeDetails.getRawTitle();
         titleInput.setText(tempTitle);
 
         // Get description input
@@ -39,10 +47,25 @@ public class EditRecipeDetailsActivity extends AppCompatActivity {
         String tempDescription = recipeDetails.getDescription();
         descriptionInput.setText(tempDescription);
 
+        // get radio buttons
+        RadioButton defaultRecipeTypeButton = findViewById(R.id.editRecipeDetailsDefaultRadioButton);
+        RadioButton vegetarianRecipeTypeButton = findViewById(R.id.editRecipeDetailsVegetarianRadioButton);
+        RadioButton veganRecipeTypeButton = findViewById(R.id.editRecipeDetailsVeganRadioButton);
+
+        if (recipeDetails.getType() == RecipeTypeEnum.DEFAULT) {
+            defaultRecipeTypeButton.setChecked(true);
+        } else if (recipeDetails.getType() == RecipeTypeEnum.VEGETARIAN) {
+            vegetarianRecipeTypeButton.setChecked(true);
+        } else if (recipeDetails.getType() == RecipeTypeEnum.VEGAN) {
+            veganRecipeTypeButton.setChecked(true);
+        }
+
         // Add click listener to save button
         findViewById(R.id.editRecipeDetailsSaveButton).setOnClickListener(click -> {
             // Check if any changes were made
-            if (titleInput.getText().toString().equals(tempTitle) && descriptionInput.getText().toString().equals(tempDescription)) {
+            if (titleInput.getText().toString().equals(tempTitle) &&
+                    descriptionInput.getText().toString().equals(tempDescription) &&
+                    recipeDetails.getType() == recipeType) {
                 // Send Toast message
                 ToastHandler.showLongToast("No changes made");
                 return;
@@ -64,7 +87,7 @@ public class EditRecipeDetailsActivity extends AppCompatActivity {
                     }
 
                     // Check if there are any special characters and display a toast if there are
-                    if (titleInput.getText().toString().matches("[^A-Za-z0-9]")) {
+                    if (!pattern.matcher(titleInput.getText().toString()).matches()) {
                         // Send Toast message
                         ToastHandler.showLongToast("Title contains special characters which are not allowed");
                         return;
@@ -82,13 +105,18 @@ public class EditRecipeDetailsActivity extends AppCompatActivity {
                         return;
                     }
                     // Check if there are any special characters and display a toast if there are
-                    if (descriptionInput.getText().toString().matches("[^A-Za-z0-9]")) {
+                    if (!pattern.matcher(descriptionInput.getText().toString()).matches()) {
                         // Send Toast message
                         ToastHandler.showLongToast("Description contains special characters which are not allowed");
                         return;
                     }
                     // Update database
                     DBHandler.updateRecipeDescription(ID, descriptionInput.getText().toString());
+                }
+                // Check if recipe type was changed
+                if (recipeDetails.getType() != recipeType) {
+                    // Update database
+                    DBHandler.updateRecipeType(ID, recipeType.toString());
                 }
             }
             // Send toast
@@ -102,6 +130,11 @@ public class EditRecipeDetailsActivity extends AppCompatActivity {
             // Go back to main activity
             finish();
         });
+
+        // Add click listeners to all radio buttons
+        findViewById(R.id.editRecipeDetailsDefaultRadioButton).setOnClickListener(click -> recipeType = RecipeTypeEnum.DEFAULT);
+        findViewById(R.id.editRecipeDetailsVegetarianRadioButton).setOnClickListener(click -> recipeType = RecipeTypeEnum.VEGETARIAN);
+        findViewById(R.id.editRecipeDetailsVeganRadioButton).setOnClickListener(click -> recipeType = RecipeTypeEnum.VEGAN);
 
         // Add click listener to delete button
         findViewById(R.id.editRecipeDetailsDeleteButton).setOnClickListener(click -> new AlertDialog.Builder(this)

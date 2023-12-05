@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.recipebook.util.classes.RecipeDetails;
+import com.example.recipebook.util.classes.RecipeStepTypeEnum;
 import com.example.recipebook.util.classes.StepInfo;
 import com.example.recipebook.util.handlers.DBHandler;
 import com.example.recipebook.util.handlers.ToastHandler;
@@ -46,7 +47,7 @@ public class RecipeViewActivity extends AppCompatActivity {
         }
 
         // Check if there is recipe data and if not, return else refresh view
-        if (recipeDetails.getRecipe() != null) {
+        if (recipeDetails.getRecipe().getRawStepsString() != null) {
             refreshView();
         }
 
@@ -99,12 +100,12 @@ public class RecipeViewActivity extends AppCompatActivity {
             }
             int counter = 1;
             for (StepInfo step : recipeDetails.getRecipe().getSteps()) {
-                if (step.getStepType() == StepInfo.RecipeStepType.NORMAL) {
+                if (step.getStepType() == RecipeStepTypeEnum.NORMAL) {
                     steps.append("Step ")
                             .append(counter)
                             .append(" : ")
                             .append(step.getStep());
-                } else if (step.getStepType() == StepInfo.RecipeStepType.COOK) {
+                } else if (step.getStepType() == RecipeStepTypeEnum.COOK) {
                     steps.append("Step ")
                             .append(counter)
                             .append(" : ")
@@ -130,16 +131,17 @@ public class RecipeViewActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         recipeDetails = DBHandler.getRecipeByID(ID);
-        refreshView();
+        if (recipeDetails == null) {
+            finish();
+        } else {
+            refreshView();
+        }
     }
 
     private void refreshView() {
         RecyclerView recyclerView = findViewById(R.id.recipeViewRecipeRecycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new RecipeAdapterView(getApplicationContext(), DBHandler.readRecipeStepInfo(ID)));
-
-        // Get recipe info
-        RecipeDetails recipeDetails = DBHandler.getRecipeByID(ID);
 
         // Get the recipe title and set it
         TextView titleTextView = findViewById(R.id.recipeViewTitle);

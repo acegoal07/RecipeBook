@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.recipebook.util.classes.RecipeDetails;
 import com.example.recipebook.util.classes.RecipeSteps;
+import com.example.recipebook.util.classes.RecipeTypeEnum;
 import com.example.recipebook.util.classes.StepInfo;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class DBHandler extends SQLiteOpenHelper {
         private static final String TABLE_NAME = "recipes";
         private static final String KEY_ID = "id";
         private static final String KEY_NAME = "name";
+        private static final String KEY_RECIPE_TYPE = "recipe_type";
         private static final String KEY_DESCRIPTION = "description";
         private static final String KEY_RECIPE = "recipe";
     }
@@ -36,7 +38,7 @@ public class DBHandler extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + DB_INFO.TABLE_NAME + "(" + DB_INFO.KEY_ID + " INTEGER PRIMARY KEY," + DB_INFO.KEY_NAME + " TEXT," + DB_INFO.KEY_DESCRIPTION + " TEXT, " + DB_INFO.KEY_RECIPE + " TEXT" + ")");
+        db.execSQL("CREATE TABLE " + DB_INFO.TABLE_NAME + "(" + DB_INFO.KEY_ID + " INTEGER PRIMARY KEY," + DB_INFO.KEY_NAME + " TEXT," + DB_INFO.KEY_RECIPE_TYPE + " TEXT," + DB_INFO.KEY_DESCRIPTION + " TEXT, " + DB_INFO.KEY_RECIPE + " TEXT" + ")");
     }
 
     /**
@@ -60,10 +62,11 @@ public class DBHandler extends SQLiteOpenHelper {
      * @param title       The title of the recipe
      * @param description The description of the recipe
      */
-    public void addNewRecipe(String title, String description) {
+    public void addNewRecipe(String title, String recipeType, String description) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(DB_INFO.KEY_NAME, title);
+        values.put(DB_INFO.KEY_RECIPE_TYPE, recipeType);
         values.put(DB_INFO.KEY_DESCRIPTION, description);
         db.insert(DB_INFO.TABLE_NAME, null, values);
         db.close();
@@ -91,12 +94,13 @@ public class DBHandler extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT * FROM " + DB_INFO.TABLE_NAME, null);
         while (cursor.moveToNext()) {
             recipeDetailsArrayList.add(
-                    new RecipeDetails(
-                            cursor.getInt(0),
-                            cursor.getString(1),
-                            cursor.getString(2),
-                            new RecipeSteps(cursor.getString(3))
-                    )
+                new RecipeDetails(
+                        cursor.getInt(0),
+                        cursor.getString(1),
+                        RecipeTypeEnum.fromString(cursor.getString(2)),
+                        cursor.getString(3),
+                        new RecipeSteps(cursor.getString(4))
+                )
             );
         }
         cursor.close();
@@ -113,15 +117,16 @@ public class DBHandler extends SQLiteOpenHelper {
     public RecipeDetails getRecipeByID(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + DB_INFO.TABLE_NAME + " WHERE " + DB_INFO.KEY_ID + " = ?", new String[]{String.valueOf(id)});
-        cursor.moveToFirst();
         if (cursor.getCount() == 0) {
             return null;
         }
+        cursor.moveToFirst();
         RecipeDetails recipeDetails = new RecipeDetails(
-                cursor.getInt(0),
-                cursor.getString(1),
-                cursor.getString(2),
-                new RecipeSteps(cursor.getString(3))
+            cursor.getInt(0),
+            cursor.getString(1),
+            RecipeTypeEnum.fromString(cursor.getString(2)),
+            cursor.getString(3),
+            new RecipeSteps(cursor.getString(4))
         );
         cursor.close();
         db.close();
@@ -138,6 +143,20 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(DB_INFO.KEY_NAME, newTitle);
+        db.update(DB_INFO.TABLE_NAME, values, DB_INFO.KEY_ID + " = ?", new String[]{String.valueOf(id)});
+        db.close();
+    }
+
+    /**
+     * Updates the type of a recipe
+     *
+     * @param id      The id of the recipe to update
+     * @param newType The new type
+     */
+    public void updateRecipeType(int id, String newType) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(DB_INFO.KEY_RECIPE_TYPE, newType);
         db.update(DB_INFO.TABLE_NAME, values, DB_INFO.KEY_ID + " = ?", new String[]{String.valueOf(id)});
         db.close();
     }
