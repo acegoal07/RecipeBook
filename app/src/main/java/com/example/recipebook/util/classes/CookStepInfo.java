@@ -1,12 +1,16 @@
 package com.example.recipebook.util.classes;
 
 public class CookStepInfo {
+    private final String hour;
+    private final String minute;
+    private final String temperature;
+    private final String temperatureUnit;
 
-    private String hour;
-    private String minute;
-    private String temperature;
-    private String temperatureUnit;
-
+    /**
+     * Constructor for CookStepInfo
+     *
+     * @param step The step
+     */
     public CookStepInfo(String step) {
         String[] splitStep = step.split("%%");
         this.hour = splitStep[0];

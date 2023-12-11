@@ -16,7 +16,6 @@ import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class NewRecipeStepActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-
     private int ID;
     private final DBHandler DBHandler = new DBHandler(this);
     private final ToastHandler ToastHandler = new ToastHandler(this);

@@ -8,7 +8,7 @@ import android.widget.RadioButton;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.recipebook.util.classes.RecipeDetails;
-import com.example.recipebook.util.classes.RecipeTypeEnum;
+import com.example.recipebook.util.enums.RecipeTypeEnum;
 import com.example.recipebook.util.handlers.DBHandler;
 import com.example.recipebook.util.handlers.ToastHandler;
 
@@ -16,7 +16,6 @@ import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class EditRecipeDetailsActivity extends AppCompatActivity {
-
     private int ID;
     private final DBHandler DBHandler = new DBHandler(this);
     private final ToastHandler ToastHandler = new ToastHandler(this);

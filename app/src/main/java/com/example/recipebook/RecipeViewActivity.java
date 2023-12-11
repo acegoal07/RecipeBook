@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.recipebook.util.classes.RecipeDetails;
-import com.example.recipebook.util.classes.RecipeStepTypeEnum;
+import com.example.recipebook.util.enums.RecipeStepTypeEnum;
 import com.example.recipebook.util.classes.StepInfo;
 import com.example.recipebook.util.handlers.DBHandler;
 import com.example.recipebook.util.handlers.ToastHandler;
@@ -18,7 +18,6 @@ import com.example.recipebook.util.recycleViewers.recipeView.RecipeAdapterView;
 import java.util.Objects;
 
 public class RecipeViewActivity extends AppCompatActivity {
-
     private int ID;
     private RecipeDetails recipeDetails;
     private final DBHandler DBHandler = new DBHandler(this);

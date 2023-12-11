@@ -1,14 +1,15 @@
 package com.example.recipebook.util.classes;
 
-import static com.example.recipebook.util.classes.RecipeTypeEnum.VEGAN;
+import static com.example.recipebook.util.enums.RecipeTypeEnum.VEGAN;
+
+import com.example.recipebook.util.enums.RecipeTypeEnum;
 
 public class RecipeDetails {
-
-    private int id;
-    private String title;
-    private RecipeTypeEnum recipeType;
-    private String description;
-    private RecipeSteps recipe;
+    private final int id;
+    private final String title;
+    private final RecipeTypeEnum recipeType;
+    private final String description;
+    private final RecipeSteps recipe;
 
     /**
      * Constructor for RecipeCollection
@@ -58,6 +59,7 @@ public class RecipeDetails {
     public String getRawTitle() {
         return this.title;
     }
+
     /**
      * Gets the type of the recipe collection
      *

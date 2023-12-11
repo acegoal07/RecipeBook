@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.recipebook.util.classes.RecipeStepTypeEnum;
+import com.example.recipebook.util.enums.RecipeStepTypeEnum;
 import com.example.recipebook.util.classes.RecipeSteps;
 import com.example.recipebook.util.classes.StepInfo;
 import com.example.recipebook.util.handlers.DBHandler;
@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 public class EditRecipeStepActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-
     private int ID;
     private RecipeSteps recipeSteps;
     private final DBHandler DBHandler = new DBHandler(this);

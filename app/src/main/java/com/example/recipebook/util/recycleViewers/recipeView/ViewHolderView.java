@@ -14,6 +14,11 @@ public class ViewHolderView extends RecyclerView.ViewHolder {
     TextView StepCounter;
     TextView StepContent;
 
+    /**
+     * Constructor for ViewHolderView
+     *
+     * @param view The view
+     */
     public ViewHolderView(@NonNull View view) {
         super(view);
         // Set context

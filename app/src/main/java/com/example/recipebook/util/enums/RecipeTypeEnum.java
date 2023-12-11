@@ -1,4 +1,4 @@
-package com.example.recipebook.util.classes;
+package com.example.recipebook.util.enums;
 
 public enum RecipeTypeEnum {
     DEFAULT,

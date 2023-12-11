@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.recipebook.util.classes.RecipeDetails;
 import com.example.recipebook.util.classes.RecipeSteps;
-import com.example.recipebook.util.classes.RecipeTypeEnum;
+import com.example.recipebook.util.enums.RecipeTypeEnum;
 import com.example.recipebook.util.classes.StepInfo;
 
 import java.util.ArrayList;
@@ -27,6 +27,11 @@ public class DBHandler extends SQLiteOpenHelper {
 
 ///////// MAIN DB HANDLERS //////////
 
+    /**
+     * Constructor for DBHandler
+     *
+     * @param context The context
+     */
     public DBHandler(Context context) {
         super(context, DB_INFO.DB_NAME, null, DB_INFO.DB_VERSION);
     }

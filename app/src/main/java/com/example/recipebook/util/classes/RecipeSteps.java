@@ -1,11 +1,17 @@
 package com.example.recipebook.util.classes;
 
+import com.example.recipebook.util.enums.RecipeStepTypeEnum;
+
 import java.util.ArrayList;
 
 public class RecipeSteps {
+    private final String steps;
 
-    private String steps;
-
+    /**
+     * Constructor for RecipeSteps
+     *
+     * @param steps The steps
+     */
     public RecipeSteps(String steps) {
         this.steps = steps;
     }
@@ -22,7 +28,7 @@ public class RecipeSteps {
         ArrayList<StepInfo> returnSteps = new ArrayList<>();
         for (String step : getRawSteps()) {
             String[] stepInfo = step.split("::");
-            returnSteps.add(new StepInfo(stepInfo[1], RecipeStepTypeEnum.convertIntToType(Integer.parseInt(stepInfo[0]))));
+            returnSteps.add(new StepInfo(stepInfo[1], RecipeStepTypeEnum.fromInt(Integer.parseInt(stepInfo[0]))));
         }
         return returnSteps;
     }

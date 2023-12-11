@@ -1,9 +1,10 @@
 package com.example.recipebook.util.classes;
 
-public class StepInfo {
+import com.example.recipebook.util.enums.RecipeStepTypeEnum;
 
-    private RecipeStepTypeEnum StepType;
-    private String step;
+public class StepInfo {
+    private final RecipeStepTypeEnum StepType;
+    private final String step;
 
     /**
      * Constructor for StepInfo

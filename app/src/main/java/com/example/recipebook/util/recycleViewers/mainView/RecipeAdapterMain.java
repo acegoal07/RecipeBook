@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RecipeAdapterMain extends RecyclerView.Adapter<ViewHolderMain> {
-    private Context context;
+    private final Context context;
     private static final String TAG = "RecipeAdaptorMain";
     public List<RecipeDetails> RecipeDetails;
 

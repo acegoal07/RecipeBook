@@ -16,6 +16,11 @@ public class ViewHolderMain extends RecyclerView.ViewHolder {
     TextView Description;
     ImageButton DeleteButton;
 
+    /**
+     * Constructor for ViewHolderMain
+     *
+     * @param view The view
+     */
     public ViewHolderMain(@NonNull View view) {
         super(view);
         context = view.getContext();

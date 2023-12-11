@@ -6,9 +6,13 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ToastHandler extends AppCompatActivity {
+    private final Context context;
 
-    private Context context;
-
+    /**
+     * Constructor for ToastHandler
+     *
+     * @param context The context
+     */
     public ToastHandler(Context context) {
         this.context = context;
     }

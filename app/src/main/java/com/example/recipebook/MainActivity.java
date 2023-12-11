@@ -11,7 +11,6 @@ import com.example.recipebook.util.handlers.DBHandler;
 import com.example.recipebook.util.recycleViewers.mainView.RecipeAdapterMain;
 
 public class MainActivity extends AppCompatActivity {
-
     private final DBHandler dbHandler = new DBHandler(this);
 
     @Override
