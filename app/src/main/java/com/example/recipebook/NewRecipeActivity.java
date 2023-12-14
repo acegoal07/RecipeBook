@@ -15,7 +15,7 @@ public class NewRecipeActivity extends AppCompatActivity {
     private final DBHandler DBHandler = new DBHandler(this);
     private final ToastHandler ToastHandler = new ToastHandler(this);
     private RecipeTypeEnum recipeType = RecipeTypeEnum.DEFAULT;
-    private final Pattern pattern = Pattern.compile("[a-zA-Z0-9]*");
+    private final Pattern pattern = Pattern.compile("[a-zA-Z0-9\\s]*");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

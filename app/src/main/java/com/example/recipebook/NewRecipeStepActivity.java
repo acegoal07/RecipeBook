@@ -19,7 +19,7 @@ public class NewRecipeStepActivity extends AppCompatActivity implements AdapterV
     private int ID;
     private final DBHandler DBHandler = new DBHandler(this);
     private final ToastHandler ToastHandler = new ToastHandler(this);
-    private final Pattern pattern = Pattern.compile("[a-zA-Z0-9]*");
+    private final Pattern pattern = Pattern.compile("[a-zA-Z0-9\\s]*");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
