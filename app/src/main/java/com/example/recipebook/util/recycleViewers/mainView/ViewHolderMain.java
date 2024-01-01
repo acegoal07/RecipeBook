@@ -14,7 +14,7 @@ public class ViewHolderMain extends RecyclerView.ViewHolder {
     Context context;
     TextView Title;
     TextView Description;
-    ImageButton DeleteButton;
+    ImageButton EditButton;
 
     /**
      * Constructor for ViewHolderMain
@@ -26,6 +26,6 @@ public class ViewHolderMain extends RecyclerView.ViewHolder {
         context = view.getContext();
         Title = view.findViewById(R.id.recipeRecyclerMainTitle);
         Description = view.findViewById(R.id.recipeRecyclerMainDescription);
-        DeleteButton = view.findViewById(R.id.recipeRecyclerMainEditButton);
+        EditButton = view.findViewById(R.id.recipeRecyclerMainEditButton);
     }
 }

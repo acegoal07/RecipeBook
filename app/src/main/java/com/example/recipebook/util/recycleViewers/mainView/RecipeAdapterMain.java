@@ -62,7 +62,7 @@ public class RecipeAdapterMain extends RecyclerView.Adapter<ViewHolderMain> {
             holder.Description.setVisibility(RecyclerView.VISIBLE);
         }
         // Set click listener for delete button
-        holder.DeleteButton.setOnClickListener(v -> {
+        holder.EditButton.setOnClickListener(v -> {
             Intent Intent = new Intent(v.getContext(), EditRecipeDetailsActivity.class);
             Intent.putExtra("recipeId", recipeDetails.getId());
             Intent.setFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK);
