@@ -1,5 +1,6 @@
 package com.example.recipebook;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.View;
@@ -174,6 +175,7 @@ public class EditRecipeStepActivity extends AppCompatActivity implements Adapter
     public void onNothingSelected(AdapterView<?> parent) {
     }
 
+    @SuppressLint("SetTextI18n")
     public void refreshView(int position) {
         // Get recipe data
         recipeSteps = DBHandler.getRecipeByID(ID).getRecipe();
