@@ -10,21 +10,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.recipebook.R;
 
 public class ViewHolderView extends RecyclerView.ViewHolder {
-    Context context;
-    TextView StepCounter;
-    TextView StepContent;
+   Context context;
+   TextView StepCounter;
+   TextView StepContent;
 
-    /**
-     * Constructor for ViewHolderView
-     *
-     * @param view The view
-     */
-    public ViewHolderView(@NonNull View view) {
-        super(view);
-        // Set context
-        context = view.getContext();
-        // Set normal step view
-        StepCounter = view.findViewById(R.id.recipeRecyclerViewStepCounter);
-        StepContent = view.findViewById(R.id.recipeRecyclerViewStepInfo);
-    }
+   /**
+    * Constructor for ViewHolderView
+    *
+    * @param view The view
+    */
+   public ViewHolderView(@NonNull View view) {
+      super(view);
+      // Set context
+      context = view.getContext();
+      // Set normal step view
+      StepCounter = view.findViewById(R.id.recipeRecyclerViewStepCounter);
+      StepContent = view.findViewById(R.id.recipeRecyclerViewStepInfo);
+   }
 }

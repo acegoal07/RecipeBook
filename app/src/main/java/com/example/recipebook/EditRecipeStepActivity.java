@@ -22,196 +22,196 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 public class EditRecipeStepActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    private int ID;
-    private RecipeSteps recipeSteps;
-    private final DBHandler DBHandler = new DBHandler(this);
-    private final ToastHandler ToastHandler = new ToastHandler(this);
-    private final Pattern pattern = Pattern.compile("[a-zA-Z0-9\\s]*");
+   private int ID;
+   private RecipeSteps recipeSteps;
+   private final DBHandler DBHandler = new DBHandler(this);
+   private final ToastHandler ToastHandler = new ToastHandler(this);
+   private final Pattern pattern = Pattern.compile("[a-zA-Z0-9\\s]*");
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_recipe_step);
+   @Override
+   protected void onCreate(Bundle savedInstanceState) {
+      super.onCreate(savedInstanceState);
+      setContentView(R.layout.activity_edit_recipe_step);
 
-        // Set ID
-        ID = getIntent().getIntExtra("recipeId", 0);
-        // Get recipe data
-        recipeSteps = DBHandler.getRecipeByID(ID).getRecipe();
-        // Get steps data
-        ArrayList<StepInfo> steps = recipeSteps.getSteps();
+      // Set ID
+      ID = getIntent().getIntExtra("recipeId", 0);
+      // Get recipe data
+      recipeSteps = DBHandler.getRecipeByID(ID).getRecipe();
+      // Get steps data
+      ArrayList<StepInfo> steps = recipeSteps.getSteps();
 
-        // Make move step setting visible if there is more than one step
-        if (steps.size() > 1) {
-            // Set step spinner
-            findViewById(R.id.editRecipeStepMoveStepView).setVisibility(View.VISIBLE);
-        }
+      // Make move step setting visible if there is more than one step
+      if (steps.size() > 1) {
+         // Set step spinner
+         findViewById(R.id.editRecipeStepMoveStepView).setVisibility(View.VISIBLE);
+      }
 
-        // Get inputs/output
-        Spinner stepSpinner = findViewById(R.id.editRecipeStepSpinner);
-        EditText stepEditText = findViewById(R.id.editRecipeStepNormalInput);
-        EditText cookTimeHourInput = findViewById(R.id.editRecipeStepCookHourInput);
-        EditText cookTimeMinuteInput = findViewById(R.id.editRecipeStepCookMinuteInput);
-        EditText cookTemperatureInput = findViewById(R.id.editRecipeStepCookTemperatureInput);
-        Spinner cookTemperatureSymbolSpinner = findViewById(R.id.editRecipeStepCookTemperatureSymbolSpinner);
-        Spinner stepPositionSpinner = findViewById(R.id.editRecipeStepPositionSpinner);
+      // Get inputs/output
+      Spinner stepSpinner = findViewById(R.id.editRecipeStepSpinner);
+      EditText stepEditText = findViewById(R.id.editRecipeStepNormalInput);
+      EditText cookTimeHourInput = findViewById(R.id.editRecipeStepCookHourInput);
+      EditText cookTimeMinuteInput = findViewById(R.id.editRecipeStepCookMinuteInput);
+      EditText cookTemperatureInput = findViewById(R.id.editRecipeStepCookTemperatureInput);
+      Spinner cookTemperatureSymbolSpinner = findViewById(R.id.editRecipeStepCookTemperatureSymbolSpinner);
+      Spinner stepPositionSpinner = findViewById(R.id.editRecipeStepPositionSpinner);
 
-        // Get Spinner data
-        int stepCount = recipeSteps.getStepCount();
-        ArrayList<String> stepCounter = new ArrayList<>();
-        for (int i = 1; i <= stepCount; i++) {
-            stepCounter.add("Step " + i);
-        }
+      // Get Spinner data
+      int stepCount = recipeSteps.getStepCount();
+      ArrayList<String> stepCounter = new ArrayList<>();
+      for (int i = 1; i <= stepCount; i++) {
+         stepCounter.add("Step " + i);
+      }
 
-        // Set Spinners
-        stepSpinner.setOnItemSelectedListener(this);
-        ArrayAdapter<String> stepSpinnerArrayAdapter = new ArrayAdapter<>(this, R.layout.spinner, stepCounter);
-        stepSpinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
-        stepSpinner.setAdapter(stepSpinnerArrayAdapter);
+      // Set Spinners
+      stepSpinner.setOnItemSelectedListener(this);
+      ArrayAdapter<String> stepSpinnerArrayAdapter = new ArrayAdapter<>(this, R.layout.spinner, stepCounter);
+      stepSpinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
+      stepSpinner.setAdapter(stepSpinnerArrayAdapter);
 
-        ArrayAdapter<CharSequence> cookTemperatureSymbolSpinnerArrayAdapter = ArrayAdapter.createFromResource(this, R.array.temperature_symbols, R.layout.spinner);
-        cookTemperatureSymbolSpinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
-        cookTemperatureSymbolSpinner.setAdapter(cookTemperatureSymbolSpinnerArrayAdapter);
+      ArrayAdapter<CharSequence> cookTemperatureSymbolSpinnerArrayAdapter = ArrayAdapter.createFromResource(this, R.array.temperature_symbols, R.layout.spinner);
+      cookTemperatureSymbolSpinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
+      cookTemperatureSymbolSpinner.setAdapter(cookTemperatureSymbolSpinnerArrayAdapter);
 
-        ArrayAdapter<String> stepPositionSpinnerArrayAdapter = new ArrayAdapter<>(this, R.layout.spinner, stepCounter);
-        stepPositionSpinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
-        stepPositionSpinner.setAdapter(stepPositionSpinnerArrayAdapter);
+      ArrayAdapter<String> stepPositionSpinnerArrayAdapter = new ArrayAdapter<>(this, R.layout.spinner, stepCounter);
+      stepPositionSpinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
+      stepPositionSpinner.setAdapter(stepPositionSpinnerArrayAdapter);
 
-        // Refresh view
-        refreshView(0);
+      // Refresh view
+      refreshView(0);
 
-        // Listener for save button
-        findViewById(R.id.editRecipeStepSaveButton).setOnClickListener(click -> {
-            if (steps.get(stepSpinner.getSelectedItemPosition()).getStepType() == RecipeStepTypeEnum.NORMAL) {
-                // add a check to see if any changes have been made
-                if (stepEditText.getText().toString().equals(steps.get(stepSpinner.getSelectedItemPosition()).getStep()) && stepPositionSpinner.getSelectedItemPosition() == stepSpinner.getSelectedItemPosition()) {
-                    ToastHandler.showLongToast("No changes have been made");
-                    return;
-                }
-
-                // Check if the step input is empty and display a toast if it is
-                if (stepEditText.getText().toString().isEmpty()) {
-                    ToastHandler.showLongToast("Please enter a step");
-                    return;
-                }
-
-                // Check if the step input is empty and display a toast if it is
-                if (!pattern.matcher(stepEditText.getText().toString()).matches()) {
-                    ToastHandler.showLongToast("Step contains special characters which are not allowed");
-                    return;
-                }
-
-                // Update step
-                DBHandler.updateRecipeStep(ID, stepSpinner.getSelectedItemPosition(), "0::" + stepEditText.getText().toString());
-            } else if (steps.get(stepSpinner.getSelectedItemPosition()).getStepType() == RecipeStepTypeEnum.COOK) {
-
-                // Check if any changes have been made
-                if (cookTimeHourInput.getText().toString().equals(steps.get(stepSpinner.getSelectedItemPosition()).getCookStepInfo().getHour()) &&
-                        cookTimeMinuteInput.getText().toString().equals(steps.get(stepSpinner.getSelectedItemPosition()).getCookStepInfo().getMinute()) &&
-                        cookTemperatureInput.getText().toString().equals(steps.get(stepSpinner.getSelectedItemPosition()).getCookStepInfo().getTemperature()) &&
-                        cookTemperatureSymbolSpinner.getSelectedItemPosition() == Integer.parseInt(steps.get(stepSpinner.getSelectedItemPosition()).getCookStepInfo().getCookTemperatureSymbolPosition()) &&
-                        stepPositionSpinner.getSelectedItemPosition() == stepSpinner.getSelectedItemPosition()) {
-                    ToastHandler.showLongToast("No changes have been made");
-                    return;
-                }
-
-                // Check if the cook time hour and minute inputs are empty and display a toast if they are
-                if (cookTimeHourInput.getText().toString().isEmpty() || cookTimeMinuteInput.getText().toString().isEmpty()) {
-                    ToastHandler.showLongToast("Please enter a cook time");
-                    return;
-                }
-
-                // Checks if the cook temperature input is empty and display a toast if it is
-                if (cookTemperatureInput.getText().toString().isEmpty()) {
-                    ToastHandler.showLongToast("Please enter a cook temperature");
-                    return;
-                }
-
-                // Checks hour and minute time inputs are valid
-                if (Integer.parseInt(cookTimeHourInput.getText().toString().isEmpty() ? "0" : cookTimeHourInput.getText().toString()) > 23 || Integer.parseInt(cookTimeMinuteInput.getText().toString().isEmpty() ? "0" : cookTimeMinuteInput.getText().toString()) > 59) {
-                    ToastHandler.showLongToast("Please enter a valid cook time");
-                    return;
-                }
-
-                // Update step
-                DBHandler.updateRecipeStep(ID, stepSpinner.getSelectedItemPosition(), "1" + "::" + (cookTimeHourInput.getText().toString().isEmpty() ? "0" : cookTimeHourInput.getText()) + "%%" + (cookTimeMinuteInput.getText().toString().isEmpty() ? "0" : cookTimeMinuteInput.getText()) + "%%" + cookTemperatureInput.getText() + "%%" + cookTemperatureSymbolSpinner.getSelectedItem());
+      // Listener for save button
+      findViewById(R.id.editRecipeStepSaveButton).setOnClickListener(click -> {
+         if (steps.get(stepSpinner.getSelectedItemPosition()).getStepType() == RecipeStepTypeEnum.NORMAL) {
+            // add a check to see if any changes have been made
+            if (stepEditText.getText().toString().equals(steps.get(stepSpinner.getSelectedItemPosition()).getStep()) && stepPositionSpinner.getSelectedItemPosition() == stepSpinner.getSelectedItemPosition()) {
+               ToastHandler.showLongToast("No changes have been made");
+               return;
             }
 
-            // Update step position
-            if (stepPositionSpinner.getSelectedItemPosition() != stepSpinner.getSelectedItemPosition()) {
-                DBHandler.moveRecipeStep(ID, stepSpinner.getSelectedItemPosition(), stepPositionSpinner.getSelectedItemPosition());
+            // Check if the step input is empty and display a toast if it is
+            if (stepEditText.getText().toString().isEmpty()) {
+               ToastHandler.showLongToast("Please enter a step");
+               return;
             }
 
-            // Finish activity
-            finish();
-        });
+            // Check if the step input is empty and display a toast if it is
+            if (!pattern.matcher(stepEditText.getText().toString()).matches()) {
+               ToastHandler.showLongToast("Step contains special characters which are not allowed");
+               return;
+            }
 
-        // Listener for delete button
-        findViewById(R.id.editRecipeStepDeleteStepButton).setOnClickListener(click -> new AlertDialog.Builder(this)
-                .setTitle("Delete Step")
-                .setMessage("Are you sure you want to delete this Step?")
-                .setPositiveButton("Yes", (dialog, which) -> {
-                    // Get selected step
-                    int selectedStep = stepSpinner.getSelectedItemPosition();
-                    // Delete step
-                    DBHandler.removeRecipeStep(ID, selectedStep);
-                    // Finish activity
-                    finish();
-                })
-                .setNegativeButton("No", (dialog, which) -> {
-                })
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .show());
+            // Update step
+            DBHandler.updateRecipeStep(ID, stepSpinner.getSelectedItemPosition(), "0::" + stepEditText.getText().toString());
+         } else if (steps.get(stepSpinner.getSelectedItemPosition()).getStepType() == RecipeStepTypeEnum.COOK) {
 
-        // Listener for cancel button
-        findViewById(R.id.editRecipeStepCancelButton).setOnClickListener(click -> finish());
-    }
+            // Check if any changes have been made
+            if (cookTimeHourInput.getText().toString().equals(steps.get(stepSpinner.getSelectedItemPosition()).getCookStepInfo().getHour()) &&
+                    cookTimeMinuteInput.getText().toString().equals(steps.get(stepSpinner.getSelectedItemPosition()).getCookStepInfo().getMinute()) &&
+                    cookTemperatureInput.getText().toString().equals(steps.get(stepSpinner.getSelectedItemPosition()).getCookStepInfo().getTemperature()) &&
+                    cookTemperatureSymbolSpinner.getSelectedItemPosition() == Integer.parseInt(steps.get(stepSpinner.getSelectedItemPosition()).getCookStepInfo().getCookTemperatureSymbolPosition()) &&
+                    stepPositionSpinner.getSelectedItemPosition() == stepSpinner.getSelectedItemPosition()) {
+               ToastHandler.showLongToast("No changes have been made");
+               return;
+            }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        refreshView(position);
-    }
+            // Check if the cook time hour and minute inputs are empty and display a toast if they are
+            if (cookTimeHourInput.getText().toString().isEmpty() || cookTimeMinuteInput.getText().toString().isEmpty()) {
+               ToastHandler.showLongToast("Please enter a cook time");
+               return;
+            }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-    }
+            // Checks if the cook temperature input is empty and display a toast if it is
+            if (cookTemperatureInput.getText().toString().isEmpty()) {
+               ToastHandler.showLongToast("Please enter a cook temperature");
+               return;
+            }
 
-    @SuppressLint("SetTextI18n")
-    public void refreshView(int position) {
-        // Get recipe data
-        recipeSteps = DBHandler.getRecipeByID(ID).getRecipe();
-        // Get steps data
-        ArrayList<StepInfo> steps = recipeSteps.getSteps();
+            // Checks hour and minute time inputs are valid
+            if (Integer.parseInt(cookTimeHourInput.getText().toString().isEmpty() ? "0" : cookTimeHourInput.getText().toString()) > 23 || Integer.parseInt(cookTimeMinuteInput.getText().toString().isEmpty() ? "0" : cookTimeMinuteInput.getText().toString()) > 59) {
+               ToastHandler.showLongToast("Please enter a valid cook time");
+               return;
+            }
 
-        // Get views
-        findViewById(R.id.editRecipeStepNormalView).setVisibility(View.GONE);
-        findViewById(R.id.editRecipeStepCookView).setVisibility(View.GONE);
+            // Update step
+            DBHandler.updateRecipeStep(ID, stepSpinner.getSelectedItemPosition(), "1" + "::" + (cookTimeHourInput.getText().toString().isEmpty() ? "0" : cookTimeHourInput.getText()) + "%%" + (cookTimeMinuteInput.getText().toString().isEmpty() ? "0" : cookTimeMinuteInput.getText()) + "%%" + cookTemperatureInput.getText() + "%%" + cookTemperatureSymbolSpinner.getSelectedItem());
+         }
 
-        // Get step edit text
-        EditText stepEditText = findViewById(R.id.editRecipeStepNormalInput);
-        stepEditText.setText("");
-        EditText cookTimeHourInput = findViewById(R.id.editRecipeStepCookHourInput);
-        cookTimeHourInput.setText("");
-        EditText cookTimeMinuteInput = findViewById(R.id.editRecipeStepCookMinuteInput);
-        cookTimeMinuteInput.setText("");
-        EditText cookTemperatureInput = findViewById(R.id.editRecipeStepCookTemperatureInput);
-        cookTemperatureInput.setText("");
-        Spinner cookTemperatureSymbolSpinner = findViewById(R.id.editRecipeStepCookTemperatureSymbolSpinner);
-        cookTemperatureSymbolSpinner.setSelection(0);
-        TextView stepPositionTextView = findViewById(R.id.editRecipeStepPositionTextView);
-        stepPositionTextView.setText("Step " + (position + 1));
-        Spinner stepPositionSpinner = findViewById(R.id.editRecipeStepPositionSpinner);
-        stepPositionSpinner.setSelection(position);
+         // Update step position
+         if (stepPositionSpinner.getSelectedItemPosition() != stepSpinner.getSelectedItemPosition()) {
+            DBHandler.moveRecipeStep(ID, stepSpinner.getSelectedItemPosition(), stepPositionSpinner.getSelectedItemPosition());
+         }
 
-        // Stored data to view
-        if (steps.get(position).getStepType() == RecipeStepTypeEnum.NORMAL) {
-            findViewById(R.id.editRecipeStepNormalView).setVisibility(View.VISIBLE);
-            stepEditText.setText(steps.get(position).getStep());
-        } else if (steps.get(position).getStepType() == RecipeStepTypeEnum.COOK) {
-            findViewById(R.id.editRecipeStepCookView).setVisibility(View.VISIBLE);
-            cookTimeHourInput.setText(steps.get(position).getCookStepInfo().getHour());
-            cookTimeMinuteInput.setText(steps.get(position).getCookStepInfo().getMinute());
-            cookTemperatureInput.setText(steps.get(position).getCookStepInfo().getTemperature());
-            cookTemperatureSymbolSpinner.setSelection(Integer.parseInt(steps.get(position).getCookStepInfo().getCookTemperatureSymbolPosition()));
-        }
-    }
+         // Finish activity
+         finish();
+      });
+
+      // Listener for delete button
+      findViewById(R.id.editRecipeStepDeleteStepButton).setOnClickListener(click -> new AlertDialog.Builder(this)
+              .setTitle("Delete Step")
+              .setMessage("Are you sure you want to delete this Step?")
+              .setPositiveButton("Yes", (dialog, which) -> {
+                 // Get selected step
+                 int selectedStep = stepSpinner.getSelectedItemPosition();
+                 // Delete step
+                 DBHandler.removeRecipeStep(ID, selectedStep);
+                 // Finish activity
+                 finish();
+              })
+              .setNegativeButton("No", (dialog, which) -> {
+              })
+              .setIcon(android.R.drawable.ic_dialog_alert)
+              .show());
+
+      // Listener for cancel button
+      findViewById(R.id.editRecipeStepCancelButton).setOnClickListener(click -> finish());
+   }
+
+   @Override
+   public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+      refreshView(position);
+   }
+
+   @Override
+   public void onNothingSelected(AdapterView<?> parent) {
+   }
+
+   @SuppressLint("SetTextI18n")
+   public void refreshView(int position) {
+      // Get recipe data
+      recipeSteps = DBHandler.getRecipeByID(ID).getRecipe();
+      // Get steps data
+      ArrayList<StepInfo> steps = recipeSteps.getSteps();
+
+      // Get views
+      findViewById(R.id.editRecipeStepNormalView).setVisibility(View.GONE);
+      findViewById(R.id.editRecipeStepCookView).setVisibility(View.GONE);
+
+      // Get step edit text
+      EditText stepEditText = findViewById(R.id.editRecipeStepNormalInput);
+      stepEditText.setText("");
+      EditText cookTimeHourInput = findViewById(R.id.editRecipeStepCookHourInput);
+      cookTimeHourInput.setText("");
+      EditText cookTimeMinuteInput = findViewById(R.id.editRecipeStepCookMinuteInput);
+      cookTimeMinuteInput.setText("");
+      EditText cookTemperatureInput = findViewById(R.id.editRecipeStepCookTemperatureInput);
+      cookTemperatureInput.setText("");
+      Spinner cookTemperatureSymbolSpinner = findViewById(R.id.editRecipeStepCookTemperatureSymbolSpinner);
+      cookTemperatureSymbolSpinner.setSelection(0);
+      TextView stepPositionTextView = findViewById(R.id.editRecipeStepPositionTextView);
+      stepPositionTextView.setText("Step " + (position + 1));
+      Spinner stepPositionSpinner = findViewById(R.id.editRecipeStepPositionSpinner);
+      stepPositionSpinner.setSelection(position);
+
+      // Stored data to view
+      if (steps.get(position).getStepType() == RecipeStepTypeEnum.NORMAL) {
+         findViewById(R.id.editRecipeStepNormalView).setVisibility(View.VISIBLE);
+         stepEditText.setText(steps.get(position).getStep());
+      } else if (steps.get(position).getStepType() == RecipeStepTypeEnum.COOK) {
+         findViewById(R.id.editRecipeStepCookView).setVisibility(View.VISIBLE);
+         cookTimeHourInput.setText(steps.get(position).getCookStepInfo().getHour());
+         cookTimeMinuteInput.setText(steps.get(position).getCookStepInfo().getMinute());
+         cookTemperatureInput.setText(steps.get(position).getCookStepInfo().getTemperature());
+         cookTemperatureSymbolSpinner.setSelection(Integer.parseInt(steps.get(position).getCookStepInfo().getCookTemperatureSymbolPosition()));
+      }
+   }
 }
